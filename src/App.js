@@ -4,13 +4,17 @@ import Loadable from 'react-loadable';
 import PageA from './component/PageA';
 import PageB from './component/PageB';
 import PageC from './component/PageC';
+import PageD from './component/PageD';
+import PageE from './component/PageE';
+import PageF from './component/PageF';
 import PageHeader from './component/lib/PageHeader';
 
 import './css/lib/reset.css';
 import './css/lib/common.css';
 import './css/lib/pageheader.css';
 import './App.css';
-
+import { Menu, Icon,Layout } from 'antd';
+const { Header, Content, Footer } = Layout;
 const PageAComponent = Loadable({
 	loader: () => import('./component/PageA'),
 	loading: PageA,
@@ -23,25 +27,28 @@ const PageCComponent = Loadable({
 	loader: () => import('./component/PageC'),
 	loading: PageC,
 });
+const PageDComponent = Loadable({
+    loader: () => import('./component/PageD'),
+    loading: PageD,
+});
+const PageEComponent = Loadable({
+    loader: () => import('./component/PageE'),
+    loading: PageE,
+});
+const PageFComponent = Loadable({
+    loader: () => import('./component/PageF'),
+    loading: PageF,
+});
 const HomeComponent = () => {
-	return (<div>
-		<PageHeader closeBrowser={true} title={'首页'}></PageHeader>
-		<div className="list">
-			<div className="list-row box box-pack-center">
-				<NavLink to="/page-a">Link-To-PageA</NavLink>
-			</div>
-			<div className="list-row box box-pack-center">
-				<NavLink to="/page-b">Link-To-PageB</NavLink>
-			</div>
-			<div className="list-row box box-pack-center">
-				<NavLink to="/page-c">Link-To-PageC</NavLink>
-			</div>
-		</div>
+	return (
+		<div>
+			<PageHeader closeBrowser={true} title={'首页'}></PageHeader>
 
 		<div className="App">
 			Hi React
 		</div>
-	</div>);
+
+		</div>);
 }
 
 class App extends Component {
@@ -53,6 +60,9 @@ class App extends Component {
 					<Route path='/page-a' component={PageAComponent}></Route>
 					<Route path='/page-b' component={PageBComponent}></Route>
 					<Route path='/page-c' component={PageCComponent}></Route>
+					<Route path='/page-d' component={PageDComponent}></Route>
+					<Route path='/page-e' component={PageEComponent}></Route>
+					<Route path='/page-f' component={PageFComponent}></Route>
 					<Redirect to={{
 						pathname: '/',
 						search: '?utm=your+face'

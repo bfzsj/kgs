@@ -17,11 +17,7 @@ class PageC extends Component {
 		return (
 			<div>
 				<PageHeader  title={'Page C'}></PageHeader>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
-				<br/>
+
 				<div className="test">
 					React Page C
 				</div>

@@ -17,14 +17,7 @@ class PageA extends Component {
 		return (
 			<div>
 				<PageHeader  title={'Page A'}></PageHeader>
-				<div className="list">
-					<div className="list-row box box-pack-center">
-						<NavLink to="/page-b">Link-To-PageB</NavLink>
-					</div>
-					<div className="list-row box box-pack-center">
-						<NavLink to="/page-c">Link-To-PageC</NavLink>
-					</div>
-				</div>
+
 				<div className="test">
 					React Page A
 				</div>
