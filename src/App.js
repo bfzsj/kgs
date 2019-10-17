@@ -42,7 +42,7 @@ const PageFComponent = Loadable({
 const HomeComponent = () => {
 	return (
 		<div>
-			<PageHeader closeBrowser={true} title={'首页'}></PageHeader>
+			{/*<PageHeader closeBrowser={true} title={'首页'}></PageHeader>*/}
 
 		<div className="App">
 			Hi React
@@ -55,20 +55,27 @@ class App extends Component {
 	render() {
 		return (
 			<div>
-				<Switch>
-					<Route path='/' exact component={HomeComponent}></Route>
-					<Route path='/page-a' component={PageAComponent}></Route>
-					<Route path='/page-b' component={PageBComponent}></Route>
-					<Route path='/page-c' component={PageCComponent}></Route>
-					<Route path='/page-d' component={PageDComponent}></Route>
-					<Route path='/page-e' component={PageEComponent}></Route>
-					<Route path='/page-f' component={PageFComponent}></Route>
-					<Redirect to={{
-						pathname: '/',
-						search: '?utm=your+face'
-					}}/>
-				</Switch>
-
+				<Layout>
+					<Header className="header">
+						<PageHeader closeBrowser={true} title={'首页'}></PageHeader>
+					</Header>
+					<Content style={{ padding: '0 50px' }}>
+						<Switch>
+							<Route path='/' exact component={HomeComponent}></Route>
+							<Route path='/page-a' component={PageAComponent}></Route>
+							<Route path='/page-b' component={PageBComponent}></Route>
+							<Route path='/page-c' component={PageCComponent}></Route>
+							<Route path='/page-d' component={PageDComponent}></Route>
+							<Route path='/page-e' component={PageEComponent}></Route>
+							<Route path='/page-f' component={PageFComponent}></Route>
+							<Redirect to={{
+								pathname: '/',
+								search: '?utm=your+face'
+							}}/>
+						</Switch>
+					</Content>
+					<Footer style={{ textAlign: 'center',position: 'fixed', zIndex: 1, bottom:0,width:'100%' }}>ZhiLian Technology Center ©2018 Created by Sxd</Footer>
+				</Layout>
 			</div>
 		);
 	}

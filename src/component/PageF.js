@@ -16,7 +16,7 @@ class PageF extends Component {
 	render() {
 		return (
 			<div>
-				<PageHeader  title={'Page F'}></PageHeader>
+				{/*<PageHeader  title={'Page F'}></PageHeader>*/}
 
 				<div className="test">
 					React Page F

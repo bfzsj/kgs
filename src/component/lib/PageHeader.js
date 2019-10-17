@@ -21,6 +21,7 @@ class PageHeader extends Component {
 
     handleClick = e => {
         console.log('click ', e);
+        document.title=e.key;
         this.setState({
             current: e.key,
         });
@@ -32,14 +33,14 @@ class PageHeader extends Component {
 	//渲染
 	render() {
 		return (
-			<Menu onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal" theme="dark">
+			<Menu onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal" theme="dark" style={{ lineHeight: '64px' }}>
 				<Menu.Item key="mail">
 					<Icon type="mail" />
 					ZTC
 				</Menu.Item>
 				<Menu.Item key="index">
-					<Icon type="appstore" />
-					首页
+
+					<NavLink to="/"><Icon type="appstore" />首页</NavLink>
 				</Menu.Item>
 				<Menu.Item key="Debug">
 					<NavLink to="/page-a">Debug model</NavLink>
@@ -48,7 +49,7 @@ class PageHeader extends Component {
 					<NavLink to="/page-b">CV_JD相似度</NavLink>
 				</Menu.Item>
 				<Menu.Item key="QueryNorm">
-					<NavLink to="/page-b">QueryNorm白名单</NavLink>
+					<NavLink to="/page-c">QueryNorm白名单</NavLink>
 				</Menu.Item>
 				<Menu.Item key="JD_CV Embedding">
 					<NavLink to="/page-d">JD_CV Embedding</NavLink>
