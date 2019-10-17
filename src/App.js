@@ -14,7 +14,7 @@ import './css/lib/common.css';
 import './css/lib/pageheader.css';
 import './App.css';
 import { Menu, Icon,Layout } from 'antd';
-const { Header, Content, Footer } = Layout;
+const { Header, Content, Footer,Sider } = Layout;
 const PageAComponent = Loadable({
 	loader: () => import('./component/PageA'),
 	loading: PageA,
@@ -39,6 +39,8 @@ const PageFComponent = Loadable({
     loader: () => import('./component/PageF'),
     loading: PageF,
 });
+
+
 const HomeComponent = () => {
 	return (
 		<div>
@@ -51,13 +53,39 @@ const HomeComponent = () => {
 		</div>);
 }
 
+
 class App extends Component {
+
+	state={
+		cv:window.innerHeight
+	}
+    componentDidMount() {
+
+        window.addEventListener('resize', this.handleResize.bind(this)) //监听窗口大小改变
+    }
+
+    componentWillUnmount() { //一定要最后移除监听器，以防多个组件之间导致this的指向紊乱
+        window.removeEventListener('resize', this.handleResize.bind(this))
+    }
+
+    handleResize = e => {
+        this.state.cv= e.target.innerHeight
+        console.log('浏览器窗口大小改变事件', e.target.innerHeight)
+    }
+
 	render() {
+    	const min={
+    		minHeight:this.state.cv
+		}
 		return (
 			<div>
-				<Layout>
-					<Header className="header">
+				<Layout style={min}>
+					<Sider>
 						<PageHeader closeBrowser={true} title={'首页'}></PageHeader>
+					</Sider>
+					<Layout>
+					<Header className="header">
+						{/*<PageHeader closeBrowser={true} title={'首页'}></PageHeader>*/}
 					</Header>
 					<Content style={{ padding: '0 50px' }}>
 						<Switch>
@@ -75,6 +103,7 @@ class App extends Component {
 						</Switch>
 					</Content>
 					<Footer style={{ textAlign: 'center',position: 'fixed', zIndex: 1, bottom:0,width:'100%' }}>ZhiLian Technology Center ©2018 Created by Sxd</Footer>
+					</Layout>
 				</Layout>
 			</div>
 		);

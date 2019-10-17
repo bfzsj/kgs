@@ -13,7 +13,7 @@ class PageHeader extends Component {
 
 	// 组件装载之后调用
 	componentDidMount() {
-
+		console.log(window.innerHeight)
 	}
     state = {
         current: 'mail',
@@ -33,8 +33,8 @@ class PageHeader extends Component {
 	//渲染
 	render() {
 		return (
-			<Menu onClick={this.handleClick} selectedKeys={[this.state.current]} mode="horizontal" theme="dark" style={{ lineHeight: '64px' }}>
-				<Menu.Item key="mail">
+			<Menu onClick={this.handleClick} defaultOpenKeys={['B']} selectedKeys={[this.state.current]} mode="inline" theme="dark" style={{ lineHeight: '64px' }}>
+				{/*<Menu.Item key="mail">
 					<Icon type="mail" />
 					ZTC
 				</Menu.Item>
@@ -59,7 +59,54 @@ class PageHeader extends Component {
 				</Menu.Item>
 				<Menu.Item key="related_search">
 					<NavLink to="/page-f">related_search</NavLink>
-				</Menu.Item>
+				</Menu.Item>*/}
+				<SubMenu
+					key="B"
+					title={
+						<span>
+						  <Icon type="mail" />
+						  <span>B端</span>
+						</span>
+								}
+							>
+
+						<Menu.Item key="1">abc</Menu.Item>
+						<Menu.Item key="2">abc</Menu.Item>
+
+						<Menu.Item key="3">abc</Menu.Item>
+						<Menu.Item key="4">abc</Menu.Item>
+
+				</SubMenu>
+				<SubMenu
+					key="C"
+					title={
+						<span>
+						  <Icon type="appstore" />
+						  <span>C端</span>
+						</span>
+								}
+							>
+					<Menu.Item key="5">abc</Menu.Item>
+					<Menu.Item key="6">abc</Menu.Item>
+
+					<Menu.Item key="7">abc</Menu.Item>
+					<Menu.Item key="8">abc</Menu.Item>
+				</SubMenu>
+				<SubMenu
+					key="NLP"
+					title={
+						<span>
+						  <Icon type="setting" />
+						  <span>NLP</span>
+						</span>
+								}
+							>
+					<Menu.Item key="9">abc</Menu.Item>
+					<Menu.Item key="10">abc</Menu.Item>
+
+					<Menu.Item key="11">abc</Menu.Item>
+					<Menu.Item key="12">abc</Menu.Item>
+				</SubMenu>
 			</Menu>
 		);
 	}
