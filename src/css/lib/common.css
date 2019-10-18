@@ -4,5 +4,12 @@
 
 }
 .ant-layout-header{
-    background: #c3c5c8!important;
+    background: #ced0d3 !important;
 }
+/*
+.ant-table-tbody tr:nth-child(2n+1) {
+    background-color: rgba(155, 227, 249, 0.29);
+}
+.ant-table-tbody tr:nth-child(2n) {
+    background-color: rgba(122, 192, 214, 0.29);
+}*/

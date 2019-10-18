@@ -13,7 +13,7 @@ import './css/lib/reset.css';
 import './css/lib/common.css';
 import './css/lib/pageheader.css';
 import './App.css';
-import { Menu, Icon,Layout } from 'antd';
+import { Menu, Icon,Layout,Breadcrumb } from 'antd';
 const { Header, Content, Footer,Sider } = Layout;
 const PageAComponent = Loadable({
 	loader: () => import('./component/PageA'),
@@ -57,7 +57,10 @@ const HomeComponent = () => {
 class App extends Component {
 
 	state={
-		cv:window.innerHeight
+		sHeight:window.innerHeight,
+		height:window.innerHeight,
+		title:document.title,
+		group:"首页"
 	}
     componentDidMount() {
 
@@ -69,25 +72,37 @@ class App extends Component {
     }
 
     handleResize = e => {
-        this.state.cv= e.target.innerHeight
-        console.log('浏览器窗口大小改变事件', e.target.innerHeight)
+		this.setState({
+            sHeight:window.innerHeight,
+            height:window.innerHeight
+		})
     }
 
+    fn(data){
+		this.setState({
+            title:data.title,
+            group:data.group
+		})
+	}
 	render() {
-    	const min={
-    		minHeight:this.state.cv
-		}
 		return (
 			<div>
-				<Layout style={min}>
+				<Layout style={{
+                    minHeight:this.state.sHeight,
+                    height:this.state.height
+                }}>
 					<Sider>
-						<PageHeader closeBrowser={true} title={'首页'}></PageHeader>
+						<PageHeader closeBrowser={true} title={'首页'} pfn={this.fn.bind(this)}></PageHeader>
 					</Sider>
 					<Layout>
-					<Header className="header">
-						{/*<PageHeader closeBrowser={true} title={'首页'}></PageHeader>*/}
+					<Header className="header" style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
+						<Breadcrumb style={{ margin: '16px 0',lineHeight:"32px" ,fontSize:"16px"}}>
+							<Breadcrumb.Item>ZTC</Breadcrumb.Item>
+							<Breadcrumb.Item>{this.state.group}</Breadcrumb.Item>
+							<Breadcrumb.Item>{this.state.title}</Breadcrumb.Item>
+						</Breadcrumb>
 					</Header>
-					<Content style={{ padding: '0 50px' }}>
+					<Content style={{ padding: '0 50px' , marginTop: 64 }}>
 						<Switch>
 							<Route path='/' exact component={HomeComponent}></Route>
 							<Route path='/page-a' component={PageAComponent}></Route>
@@ -102,7 +117,7 @@ class App extends Component {
 							}}/>
 						</Switch>
 					</Content>
-					<Footer style={{ textAlign: 'center',position: 'fixed', zIndex: 1, bottom:0,width:'100%' }}>ZhiLian Technology Center ©2018 Created by Sxd</Footer>
+					<Footer style={{background: '#ced0d3', textAlign: 'center',position: 'fixed', zIndex: 1, bottom:0,width:'100%' }}>ZhiLian Technology Center ©2018 Created by Sxd</Footer>
 					</Layout>
 				</Layout>
 			</div>
