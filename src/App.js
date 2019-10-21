@@ -96,7 +96,7 @@ class App extends Component {
 					</Sider>
 					<Layout>
 					<Header className="header" style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
-						<Breadcrumb style={{ margin: '16px 0',lineHeight:"32px" ,fontSize:"16px"}}>
+						<Breadcrumb style={{ margin: '16px 0',lineHeight:"32px" ,fontSize:"16px"}} separator=">">
 							<Breadcrumb.Item>ZTC</Breadcrumb.Item>
 							<Breadcrumb.Item>{this.state.group}</Breadcrumb.Item>
 							<Breadcrumb.Item>{this.state.title}</Breadcrumb.Item>

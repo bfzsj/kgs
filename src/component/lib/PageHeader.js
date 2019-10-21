@@ -82,7 +82,15 @@ class PageHeader extends Component {
 						</Menu.Item>
 
 						<Menu.Item key="3">abc</Menu.Item>
-						<Menu.Item key="4">abc</Menu.Item>
+						<Menu.Item key="JD_CV Embedding">
+							<NavLink to="/page-d">JD_CV Embedding</NavLink>
+						</Menu.Item>
+						<Menu.Item key="JD_CV Graph Embedding">
+							<NavLink to="/page-e">JD_CV Graph Embedding</NavLink>
+						</Menu.Item>
+					<Menu.Item key="related_search">
+						<NavLink to="/page-f">related_search</NavLink>
+					</Menu.Item>
 
 				</SubMenu>
 				<SubMenu
