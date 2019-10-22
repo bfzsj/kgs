@@ -2,10 +2,13 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f0aab331-9197-450d-ac7e-af1e6c543bdb" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App.js" afterPath="$PROJECT_DIR$/src/App.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/component/PageC.js" afterPath="$PROJECT_DIR$/src/component/PageC.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/component/lib/PageHeader.js" afterPath="$PROJECT_DIR$/src/component/lib/PageHeader.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/component/PageA.js" afterPath="$PROJECT_DIR$/src/component/B端/PageA.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/component/PageB.js" afterPath="$PROJECT_DIR$/src/component/B端/PageB.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/component/PageC.js" afterPath="$PROJECT_DIR$/src/component/B端/PageC.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/component/PageD.js" afterPath="$PROJECT_DIR$/src/component/B端/PageD.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/component/PageE.js" afterPath="$PROJECT_DIR$/src/component/B端/PageE.js" />
+      <change type="MOVED" beforePath="$PROJECT_DIR$/src/component/PageF.js" afterPath="$PROJECT_DIR$/src/component/B端/PageF.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -21,7 +24,7 @@
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
       <file leaf-file-name="PageD.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/component/PageD.js">
+        <entry file="file://$PROJECT_DIR$/src/component/B端/PageD.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="2299">
               <caret line="126" column="1" lean-forward="false" selection-start-line="126" selection-start-column="1" selection-end-line="126" selection-end-column="1" />
@@ -33,7 +36,7 @@
         </entry>
       </file>
       <file leaf-file-name="PageE.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/component/PageE.js">
+        <entry file="file://$PROJECT_DIR$/src/component/B端/PageE.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1843">
               <caret line="102" column="27" lean-forward="false" selection-start-line="102" selection-start-column="27" selection-end-line="102" selection-end-column="27" />
@@ -45,7 +48,7 @@
         </entry>
       </file>
       <file leaf-file-name="PageC.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/component/PageC.js">
+        <entry file="file://$PROJECT_DIR$/src/component/B端/PageC.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="1539">
               <caret line="86" column="49" lean-forward="false" selection-start-line="86" selection-start-column="49" selection-end-line="86" selection-end-column="49" />
@@ -67,7 +70,7 @@
         </entry>
       </file>
       <file leaf-file-name="PageB.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/component/PageB.js">
+        <entry file="file://$PROJECT_DIR$/src/component/B端/PageB.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="437">
               <caret line="28" column="23" lean-forward="false" selection-start-line="28" selection-start-column="23" selection-end-line="28" selection-end-column="23" />
@@ -101,7 +104,7 @@
         </entry>
       </file>
       <file leaf-file-name="PageF.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/component/PageF.js">
+        <entry file="file://$PROJECT_DIR$/src/component/B端/PageF.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="494">
               <caret line="31" column="23" lean-forward="false" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
@@ -113,7 +116,7 @@
         </entry>
       </file>
       <file leaf-file-name="PageA.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/component/PageA.js">
+        <entry file="file://$PROJECT_DIR$/src/component/B端/PageA.js">
           <provider selected="true" editor-type-id="text-editor">
             <state relative-caret-position="969">
               <caret line="56" column="5" lean-forward="false" selection-start-line="56" selection-start-column="5" selection-end-line="56" selection-end-column="5" />
@@ -279,6 +282,10 @@
               <option name="myItemId" value="component" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="lib" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
           </PATH>
           <PATH>
             <PATH_ELEMENT>
@@ -298,7 +305,7 @@
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
             <PATH_ELEMENT>
-              <option name="myItemId" value="lib" />
+              <option name="myItemId" value="B端" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -384,12 +391,13 @@
     <property name="JavaScriptWeakerCompletionTypeGuess" value="false" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\reactwork\kgs\src\component" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\reactwork\kgs\src\component" />
       <recent name="D:\reactwork\kgs\src\component\lib" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\reactwork\kgs\src\component\B端" />
+      <recent name="D:\reactwork\kgs\src\component" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -526,12 +534,12 @@
       <workItem from="1571642537348" duration="1279000" />
       <workItem from="1571644329444" duration="10562000" />
       <workItem from="1571712992522" duration="5516000" />
-      <workItem from="1571732097226" duration="20000" />
+      <workItem from="1571732097226" duration="421000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="65624000" />
+    <option name="totallyTimeSpent" value="66025000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
@@ -566,7 +574,7 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/src/component/PageA.js">
+    <entry file="file://$PROJECT_DIR$/src/component/B端/PageA.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="950">
           <caret line="50" column="26" lean-forward="false" selection-start-line="50" selection-start-column="26" selection-end-line="50" selection-end-column="26" />
@@ -590,7 +598,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/PageB.js">
+    <entry file="file://$PROJECT_DIR$/src/component/B端/PageB.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="380">
           <caret line="20" column="5" lean-forward="true" selection-start-line="20" selection-start-column="5" selection-end-line="20" selection-end-column="5" />
@@ -610,7 +618,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/PageD.js">
+    <entry file="file://$PROJECT_DIR$/src/component/B端/PageD.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="532">
           <caret line="31" column="0" lean-forward="true" selection-start-line="31" selection-start-column="0" selection-end-line="31" selection-end-column="0" />
@@ -659,7 +667,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/PageA.js">
+    <entry file="file://$PROJECT_DIR$/src/component/B端/PageA.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="190">
           <caret line="13" column="5" lean-forward="true" selection-start-line="13" selection-start-column="5" selection-end-line="13" selection-end-column="5" />
@@ -845,7 +853,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/PageF.js">
+    <entry file="file://$PROJECT_DIR$/src/component/B端/PageF.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="494">
           <caret line="31" column="23" lean-forward="false" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="23" />
@@ -855,7 +863,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/PageD.js">
+    <entry file="file://$PROJECT_DIR$/src/component/B端/PageD.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="2299">
           <caret line="126" column="1" lean-forward="false" selection-start-line="126" selection-start-column="1" selection-end-line="126" selection-end-column="1" />
@@ -875,7 +883,7 @@
         <state />
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/PageE.js">
+    <entry file="file://$PROJECT_DIR$/src/component/B端/PageE.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1843">
           <caret line="102" column="27" lean-forward="false" selection-start-line="102" selection-start-column="27" selection-end-line="102" selection-end-column="27" />
@@ -885,7 +893,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/PageA.js">
+    <entry file="file://$PROJECT_DIR$/src/component/B端/PageA.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="969">
           <caret line="56" column="5" lean-forward="false" selection-start-line="56" selection-start-column="5" selection-end-line="56" selection-end-column="5" />
@@ -916,7 +924,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/PageB.js">
+    <entry file="file://$PROJECT_DIR$/src/component/B端/PageB.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="437">
           <caret line="28" column="23" lean-forward="false" selection-start-line="28" selection-start-column="23" selection-end-line="28" selection-end-column="23" />
@@ -934,7 +942,7 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/PageC.js">
+    <entry file="file://$PROJECT_DIR$/src/component/B端/PageC.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1539">
           <caret line="86" column="49" lean-forward="false" selection-start-line="86" selection-start-column="49" selection-end-line="86" selection-end-column="49" />

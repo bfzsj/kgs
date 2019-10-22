@@ -1,13 +1,13 @@
 import React, {Component} from 'react';
-import PageHeader from './lib/PageHeader';
+import PageHeader from '../lib/PageHeader';
 import {NavLink} from 'react-router-dom'
-import '../App.css';
+import '../../App.css';
 import { Form, Icon, Input, Button ,Table} from 'antd';
 import axios from 'axios';
 function hasErrors(fieldsError) {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
 }
-class PageE extends React.Component {
+class PageD extends React.Component {
     constructor(props) {
         super(props)
     }
@@ -30,7 +30,7 @@ class PageE extends React.Component {
         });
         let {searchword1,searchword2,topK}=val;
         var _this=this;
-        axios.get("get_cvjdembedding_graph",{
+        axios.get("get_cvjdembedding",{
             params:{
                 "searchword1":searchword1,
                 "searchword2":searchword2,
@@ -78,11 +78,11 @@ class PageE extends React.Component {
 				<Form layout="inline" style={{textAlign:'center'}} onSubmit={this.handleSubmit}>
 					<Form.Item validateStatus={usernameError ? 'error' : ''} help={usernameError || ''}>
                         {getFieldDecorator('searchword1', {
-                            rules: [{ required: true, message: '请输入CV编号' }],
+                            rules: [{ required: true, message: '请输入UserID' }],
                         })(
 							<Input
 								style={{width:'255px'}}
-								placeholder="请输入CV编号"
+								placeholder="请输入UserID"
 							/>,
                         )}
 					</Form.Item>
@@ -126,4 +126,4 @@ class PageE extends React.Component {
     }
 }
 
-export default Form.create()(PageE);
+export default Form.create()(PageD);

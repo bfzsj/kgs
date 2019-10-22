@@ -1,12 +1,12 @@
 import React, {Component} from 'react';
 import {Route, Switch, NavLink, Redirect, withRouter, Link} from 'react-router-dom'
 import Loadable from 'react-loadable';
-import PageA from './component/PageA';
-import PageB from './component/PageB';
-import PageC from './component/PageC';
-import PageD from './component/PageD';
-import PageE from './component/PageE';
-import PageF from './component/PageF';
+import PageA from './component/B端/PageA';
+import PageB from './component/B端/PageB';
+import PageC from './component/B端/PageC';
+import PageD from './component/B端/PageD';
+import PageE from './component/B端/PageE';
+import PageF from './component/B端/PageF';
 import PageHeader from './component/lib/PageHeader';
 
 import './css/lib/reset.css';
