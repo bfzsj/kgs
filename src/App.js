@@ -60,7 +60,7 @@ class App extends Component {
 		sHeight:window.innerHeight,
 		height:window.innerHeight,
 		title:document.title,
-		group:"首页"
+		group:null
 	}
     componentDidMount() {
 
