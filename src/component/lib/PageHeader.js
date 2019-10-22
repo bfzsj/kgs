@@ -90,9 +90,12 @@ class PageHeader extends Component {
 						<Menu.Item key="JD_CV Graph Embedding">
 							<NavLink to="/page-e">JD_CV Graph Embedding</NavLink>
 						</Menu.Item>
-					<Menu.Item key="related_search">
-						<NavLink to="/page-f">related_search</NavLink>
-					</Menu.Item>
+						<Menu.Item key="related_search">
+							<NavLink to="/page-f">related_search</NavLink>
+						</Menu.Item>
+						<Menu.Item key="CvList">
+							<NavLink to="/Cv-List">CvList</NavLink>
+						</Menu.Item>
 
 				</SubMenu>
 				<SubMenu

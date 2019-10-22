@@ -7,6 +7,7 @@ import PageC from './component/B端/PageC';
 import PageD from './component/B端/PageD';
 import PageE from './component/B端/PageE';
 import PageF from './component/B端/PageF';
+import CvList from  './component/B端/CvList'
 import PageHeader from './component/lib/PageHeader';
 
 import './css/lib/reset.css';
@@ -16,28 +17,32 @@ import './App.css';
 import { Menu, Icon,Layout,Breadcrumb } from 'antd';
 const { Header, Content, Footer,Sider } = Layout;
 const PageAComponent = Loadable({
-	loader: () => import('./component/PageA'),
+	loader: () => import('./component/B端/PageA'),
 	loading: PageA,
 });
 const PageBComponent = Loadable({
-	loader: () => import('./component/PageB'),
+	loader: () => import('./component/B端/PageB'),
 	loading: PageB,
 });
 const PageCComponent = Loadable({
-	loader: () => import('./component/PageC'),
+	loader: () => import('./component/B端/PageC'),
 	loading: PageC,
 });
 const PageDComponent = Loadable({
-    loader: () => import('./component/PageD'),
+    loader: () => import('./component/B端/PageD'),
     loading: PageD,
 });
 const PageEComponent = Loadable({
-    loader: () => import('./component/PageE'),
+    loader: () => import('./component/B端/PageE'),
     loading: PageE,
 });
 const PageFComponent = Loadable({
-    loader: () => import('./component/PageF'),
+    loader: () => import('./component/B端/PageF'),
     loading: PageF,
+});
+const CvListComponent = Loadable({
+    loader: () => import('./component/B端/CvList'),
+    loading: CvList,
 });
 
 
@@ -111,6 +116,7 @@ class App extends Component {
 							<Route path='/page-d' component={PageDComponent}></Route>
 							<Route path='/page-e' component={PageEComponent}></Route>
 							<Route path='/page-f' component={PageFComponent}></Route>
+							<Route path='/Cv-List' component={CvListComponent}></Route>
 							<Redirect to={{
 								pathname: '/',
 								search: '?utm=your+face'
