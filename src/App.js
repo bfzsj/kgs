@@ -100,7 +100,7 @@ class App extends Component {
 						<PageHeader closeBrowser={true} title={'首页'} pfn={this.fn.bind(this)}></PageHeader>
 					</Sider>
 					<Layout>
-					<Header className="header" style={{ position: 'fixed', zIndex: 1, width: '100%' }}>
+					<Header className="header" style={{ position: 'fixed', zIndex: 1, width: '100%',backgroundColor:'#ced0d3' }}>
 						<Breadcrumb style={{ margin: '16px 0',lineHeight:"32px" ,fontSize:"16px"}} separator=">">
 							<Breadcrumb.Item>ZTC</Breadcrumb.Item>
 							<Breadcrumb.Item>{this.state.group}</Breadcrumb.Item>

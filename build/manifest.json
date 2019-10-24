@@ -1,25 +1,15 @@
 {
-  "short_name": "React App",
-  "name": "Create React App Sample",
-  "icons": [
-    {
-      "src": "favicon.ico",
-      "sizes": "64x64 32x32 24x24 16x16",
-      "type": "image/x-icon"
-    },
-    {
-      "src": "logo192.png",
-      "type": "image/png",
-      "sizes": "192x192"
-    },
-    {
-      "src": "logo512.png",
-      "type": "image/png",
-      "sizes": "512x512"
-    }
-  ],
-  "start_url": ".",
-  "display": "standalone",
-  "theme_color": "#000000",
-  "background_color": "#ffffff"
+  "main.css": "./static/css/main.3cc1e39e.chunk.css",
+  "main.js": "./static/js/main.8b70eb95.chunk.js",
+  "main.js.map": "./static/js/main.8b70eb95.chunk.js.map",
+  "runtime~main.js": "./static/js/runtime~main.d653cc00.js",
+  "runtime~main.js.map": "./static/js/runtime~main.d653cc00.js.map",
+  "static/css/2.a216ca4c.chunk.css": "./static/css/2.a216ca4c.chunk.css",
+  "static/js/2.9132785a.chunk.js": "./static/js/2.9132785a.chunk.js",
+  "static/js/2.9132785a.chunk.js.map": "./static/js/2.9132785a.chunk.js.map",
+  "index.html": "./index.html",
+  "precache-manifest.bae363f2d8fdaf485729586b2ad31286.js": "./precache-manifest.bae363f2d8fdaf485729586b2ad31286.js",
+  "service-worker.js": "./service-worker.js",
+  "static/css/2.a216ca4c.chunk.css.map": "./static/css/2.a216ca4c.chunk.css.map",
+  "static/css/main.3cc1e39e.chunk.css.map": "./static/css/main.3cc1e39e.chunk.css.map"
 }

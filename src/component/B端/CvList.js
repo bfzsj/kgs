@@ -49,7 +49,7 @@ class CvList extends React.Component {
 
                             >
                                 <List.Item.Meta
-                                    avatar={<Avatar src={item.avatar} />}
+                                    avatar={<Avatar src={item.avatar} style={{minWidth:'50px',minHeight:'50px'}}/>}
                                     title={<a href={item.href}>{item.title}</a>}
                                     description={item.description}
                                 />
