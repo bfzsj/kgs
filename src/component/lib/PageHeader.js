@@ -96,6 +96,9 @@ class PageHeader extends Component {
 						<Menu.Item key="CvList">
 							<NavLink to="/Cv-List">CvList</NavLink>
 						</Menu.Item>
+						<Menu.Item key="Wordbreaker">
+							<NavLink to="/Wordbreaker">Wordbreaker</NavLink>
+						</Menu.Item>
 
 				</SubMenu>
 				<SubMenu

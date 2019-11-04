@@ -151,8 +151,7 @@ class PageC extends React.Component {
                         })
                     } else if (item.indexOf("=") > -1) {
 
-                        var temp = item.replace(/\&amp;/g, "").replace(/\&/g, "");
-                        temp = temp.split("=");
+                        temp = item.split("&=&");
                         var tempjson = "";
                         if (temp.length == 3) {
                             //tempjson=temp[2].replace(/\{/g,"<tr ><td>").replace(/\:/g,": </td><td>").replace(/\,/g,"</td></tr><tr><td>").replace(/\[/g,"<table class='table table-bordered'>").replace(/\}/g,"</td></tr>").replace(/\]/g,"</table>");
@@ -271,6 +270,13 @@ class PageC extends React.Component {
                                     <Button type="primary" htmlType="button"  onClick={this.normAlization.bind(this,5)} >
                                         删除NormAlization
                                     </Button>
+                                    </Tooltip>
+                                </Form.Item>
+                                <Form.Item>
+                                    <Tooltip placement="bottom" title={"增加输入框在NormAliaztion中的值" }>
+                                        <Button type="primary" htmlType="button"  onClick={this.normAlization.bind(this,6)} >
+                                            增加rewrite黑名单
+                                        </Button>
                                     </Tooltip>
                                 </Form.Item>
                             </Form>
