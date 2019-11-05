@@ -33,7 +33,7 @@ class Wordbreaker extends React.Component {
         let {searchword1}=val;
         var _this=this;
         console.log(searchword1)
-        axios.get("http://172.30.25.201:8888/KgApi/nlp",{
+        axios.get("WordBreaker",{
             params:{
                 "content":searchword1 == undefined? "跟单教管照护吧员java开发工程师":searchword1
             }
