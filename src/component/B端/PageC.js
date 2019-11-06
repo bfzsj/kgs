@@ -139,7 +139,7 @@ class PageC extends React.Component {
                 data[i].className = resopnse.data.dataList[i].className;
                 data[i].table=[];
                 data[i].entityId=resopnse.data.dataList[i].entityId;
-                //data[i].name = 'jdInput:result_$date.txt<br>filterDictFile:StopWords.txt<br>frontDoor:frontdoor.txt<br>jdTitleFile:jdTitleFile.txt<br>inputFile:cv_jd_name_count_over_1_list.txt<br>jdtitle_length_cut:2<br>filterRegDict:StopReg.txt<br>synonymBlackList:rewrite_black_list.txt<br>synonymWhiteList:rewrite_white_list.txt<br>cvJobNameCountList:cv_jd_name_count_over_1_list.checked.unique<br>redis_port:6379<br>redis_auth:""<br>editorialBlackList:editorialBlackList.txt<br>redis_host:172.30.29.10<br>redis_hosts:172.30.29.10,172.30.29.11,172.30.29.12,172.30.29.13,172.30.29.14,172.30.29.15<br>prefix:Normalized_jd_title_V2_<br>titleBlackList:title_black_list.txt<br>outputFile:jdtitleWithTag_$date.txt<br>synonymList:click_pair_190906.tsv<br>php研发工程师&amp;=&amp;Normalized_jd_title_V6_cGhw56CU5Y+R5bel56iL5biI&amp;=&amp;{"results":[{"normResult":"php","rewriteVersion":"v0","score":10000}],"srcTitle":"php研发工程师"}<br>';
+                //data[i].name = 'jdInput:result_$date.txt<br>filterDictFile:StopWords.txt<br>frontDoor:frontdoor.txt<br>jdTitleFile:jdTitleFile.txt<br>inputFile:cv_jd_name_count_over_1_list.txt<br>jdtitle_length_cut:2<br>filterRegDict:StopReg.txt<br>synonymBlackList:rewrite_black_list.txt<br>synonymWhiteList:rewrite_white_list.txt<br>cvJobNameCountList:cv_jd_name_count_over_1_list.checked.unique<br>redis_port:6379<br>redis_auth:""<br>editorialBlackList:editorialBlackList.txt<br>redis_host:172.30.29.10<br>redis_hosts:172.30.29.10,172.30.29.11,172.30.29.12,172.30.29.13,172.30.29.14,172.30.29.15<br>prefix:Normalized_jd_title_V2_<br>titleBlackList:title_black_list.txt<br>outputFile:jdtitleWithTag_$date.txt<br>synonymList:click_pair_190906.tsv<br>php研发工程师&=&Normalized_jd_title_V6_cGhw56CU5Y+R5bel56iL5biI&=&{"results":[{"normResult":"php","rewriteVersion":"v0","score":10000}],"srcTitle":"php研发工程师"}<br>';
                 data[i].name=resopnse.data.dataList[i].name;
                 let names = data[i].name.split("<br>");
                 names.forEach(function (item, p2, p3) {
@@ -158,7 +158,11 @@ class PageC extends React.Component {
                             tempjson = _this.syntaxHighlight("" + temp[2] + "");
                             data[i].table.push({
                                 keys: temp[1],
-                                value: <pre>{tempjson}</pre>
+                                value: null
+                            })
+                            data[i].table.push({
+                                keys: <pre>{tempjson}</pre>,
+                                value: null
                             })
 
                         } else {
@@ -188,6 +192,18 @@ class PageC extends React.Component {
                 title: 'keys',
                 dataIndex: 'keys',
                 key: 'keys',
+                render:(text,row,index)=>{
+                    if(row.value==null){
+                        return {
+                            children:text,
+                            props:{
+                                colSpan:2
+                            }
+                        }
+
+                    }
+                    return text
+                }
             },
             {
                 title: 'value',
