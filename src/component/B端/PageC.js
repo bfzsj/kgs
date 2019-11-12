@@ -209,6 +209,18 @@ class PageC extends React.Component {
                 title: 'value',
                 dataIndex: 'value',
                 key: 'value',
+                render:(text,row,index)=>{
+                    if(row.value==null){
+                        return {
+                            children:text,
+                            props:{
+                                colSpan:0
+                            }
+                        }
+
+                    }
+                    return text
+                }
             }
         ]
         const back={
