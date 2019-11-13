@@ -1,13 +1,11 @@
-import React, {Component} from 'react';
-import PageHeader from '../lib/PageHeader';
-import {NavLink} from 'react-router-dom'
+import React from 'react';
 import '../../App.css';
-import { Form, Icon, Input, Button ,Table} from 'antd';
+import { Form, Input, Button ,Table} from 'antd';
 import axios from 'axios';
 function hasErrors(fieldsError) {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
 }
-class PageE extends React.Component {
+class PageB extends React.Component {
     constructor(props) {
         super(props)
     }
@@ -30,13 +28,13 @@ class PageE extends React.Component {
         });
         let {searchword1,searchword2,topK}=val;
         var _this=this;
-        axios.get("get_cvjdembedding_graph",{
+        axios.get("get_cvjdsim",{
             params:{
                 "searchword1":searchword1,
                 "searchword2":searchword2,
                 "page":1,
                 "selectClassEntityId": "1",
-                "topK":topK
+				"topK":topK
             }
         }).then(function (resopnse) {
             console.log(resopnse)
@@ -78,27 +76,28 @@ class PageE extends React.Component {
 				<Form layout="inline" style={{textAlign:'center'}} onSubmit={this.handleSubmit}>
 					<Form.Item validateStatus={usernameError ? 'error' : ''} help={usernameError || ''}>
                         {getFieldDecorator('searchword1', {
-                            rules: [{ required: true, message: '请输入CV编号' }],
+                            rules: [{ required: true, message: '请输入关键词1' }],
                         })(
 							<Input
 								style={{width:'255px'}}
-								placeholder="请输入CV编号"
+								placeholder="请输入关键词1"
 							/>,
                         )}
 					</Form.Item>
 					<Form.Item validateStatus={passwordError ? 'error' : ''} help={passwordError || ''}>
                         {getFieldDecorator('searchword2', {
-                            rules: [{ required: true, message: '请输入JD编号' }],
+                            rules: [{ required: true, message: '请输入关键词2' }],
                         })(
 							<Input
 								style={{width:'255px'}}
 
-								placeholder="请输入JD编号"
+								placeholder="请输入关键词2"
 							/>,
                         )}
 					</Form.Item>
 					<Form.Item validateStatus={topError ? 'error' : ''} help={topError || ''}>
                         {getFieldDecorator('topK', {
+                            initialValue:10,
                             rules: [{ required: true, message: '关键词个数 int类型 默认为10' }],
                         })(
 							<Input
@@ -126,4 +125,4 @@ class PageE extends React.Component {
     }
 }
 
-export default Form.create()(PageE);
+export default Form.create()(PageB);

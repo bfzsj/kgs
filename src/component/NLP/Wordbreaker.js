@@ -1,24 +1,16 @@
-import React, {Component} from 'react';
-import PageHeader from '../lib/PageHeader';
-import {NavLink} from 'react-router-dom'
+import React from 'react';
 import '../../App.css';
-import { Form, Icon,Avatar,List, Input, Button,Row, Col ,Tag} from 'antd';
+import { Form,List, Input, Button,Row, Col } from 'antd';
 import axios from 'axios';
 function hasErrors(fieldsError) {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
 }
-class CvList extends React.Component {
+class Wordbreaker extends React.Component {
     constructor(props) {
         super(props)
-        this.get_cv_list=this.get_cv_list.bind(this)
     }
 
     state={
-        search:'',
-        title:{
-            jdtitle:'',
-            SOU_CONTENT:''
-        },
         list:[],
     }
 
@@ -38,55 +30,29 @@ class CvList extends React.Component {
         });
         let {searchword1}=val;
         var _this=this;
-        this.setState({
-            search:searchword1
-        })
-        this.returnData("get_JdInList",searchword1,(response)=>{
-            _this.setState({
-                title:response.data
-            })
-        })
-        this.get_cv_list(searchword1)
-       // http://industryjobclassify.zpidc.com/KgApi/nlp?content=%E8%B7%9F%E5%8D%95%E6%95%99%E7%AE%A1%E7%85%A7%E6%8A%A4%E5%90%A7%E5%91%98java%E5%BC%80%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88
-    };
-
-    returnData(url,searchword1,callback){
-        var _this=this;
-        axios.get(url,{
-            params:{
-                "jdNumber":searchword1,
-            }
-        }).then(function (response) {
-            callback(response);
-        })
-    }
-
-    get_cv_list(searchword1){
-        let _this=this;
         console.log(searchword1)
-        this.returnData("get_CVList",searchword1,(response)=>{
-           /* _this.setState({
-                list:response.data
-            })*/
-            let data=response.data;
-            let listData=[]
-            data.forEach((item)=>{
-                let keys = Object.keys(item);
-                let temp=[];
-                item[keys[0]].forEach((tesxd)=>{
-                    temp.push(<Tag color="magenta">{tesxd}</Tag>)
-                })
-                listData.push({
-                    title:keys[0],
-                    content: <pre>{temp}</pre>,
+        axios.get("WordBreaker",{
+            params:{
+                "content":searchword1 == undefined? "跟单教管照护吧员java开发工程师":searchword1
+            }
+        }).then(function (resopnse) {
+            console.log(resopnse)
+            let data=[]
+            let keys = Object.keys(resopnse.data);
+            keys.forEach((item)=>{
+                data.push({
+                    title:item,
+                    content:resopnse.data[item]
                 })
             });
             _this.setState({
-                list:listData
+                list:data
             })
-
         })
-    }
+       // http://industryjobclassify.zpidc.com/KgApi/nlp?content=%E8%B7%9F%E5%8D%95%E6%95%99%E7%AE%A1%E7%85%A7%E6%8A%A4%E5%90%A7%E5%91%98java%E5%BC%80%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88
+    };
+
+
     //渲染
     render() {
 
@@ -94,6 +60,17 @@ class CvList extends React.Component {
 
         // Only show error after a field is touched.
         const usernameError = isFieldTouched('searchword1') && getFieldError('searchword1');
+        const sxd={
+            href: 'http://ant.design',
+            title: `ant design part `,
+            avatar: 'https://zos.alipayobjects.com/rmsportal/ODTLcjxAfvqbxHnVXCYX.png',
+            description:
+                'Ant Design, a design language for background applications, is refined by Ant UED Team.',
+            content:
+                'We supply a series of design principles, practical patterns and high quality design resources (Sketch and Axure)',
+        };
+        const data=[];
+        data.push(sxd);
         return (
             <div>
                 <Row>
@@ -107,7 +84,6 @@ class CvList extends React.Component {
                                     <Input
                                         style={{width:'255px'}}
                                         placeholder="请输入关键词1"
-                                        defaultValue="CC675145330J00333981006"
                                     />,
                                 )}
                             </Form.Item>
@@ -118,18 +94,6 @@ class CvList extends React.Component {
 
                             </Form.Item>
                         </Form>
-                    </Col>
-                    <Col span={4}></Col>
-                </Row>
-                <Row>
-                    <Col span={4}></Col>
-                    <Col span={16}>
-                        <div className="cvList-page-header">
-                            <h1 style={{fontSize:'36px'}}>{this.state.title.jdtitle}
-                                <small style={{float: 'right',marginRight: '1em'}}><Button type="primary" htmlType="button" onClick={this.get_cv_list.bind(this,this.state.search)}>推荐</Button></small>
-                            </h1>
-                        </div>
-                        <p>{this.state.title.SOU_CONTENT}</p>
                     </Col>
                     <Col span={4}></Col>
                 </Row>
@@ -152,9 +116,7 @@ class CvList extends React.Component {
 
                                     >
                                         <List.Item.Meta
-                                            avatar={<Avatar src={item.avatar} style={{minWidth:'50px',minHeight:'50px'}}/>}
-                                            title={<a href={item.href}>{item.title}</a>}
-                                            description={item.description}
+                                            title={<a >{item.title}</a>}
                                         />
                                         {item.content}
                                     </List.Item>
@@ -173,9 +135,5 @@ class CvList extends React.Component {
 
     }
 }
-/*<List.Item.Meta
-    avatar={<Avatar src={item.avatar} style={{minWidth:'50px',minHeight:'50px'}}/>}
-    title={<a href={item.href}>{item.title}</a>}
-    description={item.description}
-/>*/
-export default Form.create()(CvList);
+
+export default Form.create()(Wordbreaker);

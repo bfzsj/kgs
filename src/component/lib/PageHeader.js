@@ -37,7 +37,7 @@ class PageHeader extends Component {
 	//渲染
 	render() {
 		return (
-			<Menu onClick={this.handleClick} defaultOpenKeys={['B端']} selectedKeys={[this.state.current]} mode="inline" theme="dark" style={{ lineHeight: '64px' }}>
+			<Menu onClick={this.handleClick} defaultOpenKeys={['B端','NLP']} selectedKeys={[this.state.current]} mode="inline" theme="dark" style={{ lineHeight: '64px' }}>
 				<Menu.Item key="ZTC">
 					<Icon type="mail" />
 					<NavLink to="" style={{display:'inline'}}>ZTC</NavLink>
@@ -77,28 +77,17 @@ class PageHeader extends Component {
 						<Menu.Item key="Debug model" >
 								<NavLink to="/page-a">Debug model</NavLink>
 						</Menu.Item>
-						<Menu.Item key="CV_JD相似度">
-							<NavLink to="/page-b">CV_JD相似度</NavLink>
-						</Menu.Item>
+
 
 						<Menu.Item key="QueryNorm白名单">
 							<NavLink to="/page-c">QueryNorm白名单</NavLink>
 						</Menu.Item>
-						<Menu.Item key="JD_CV Embedding">
-							<NavLink to="/page-d">JD_CV Embedding</NavLink>
-						</Menu.Item>
-						<Menu.Item key="JD_CV Graph Embedding">
-							<NavLink to="/page-e">JD_CV Graph Embedding</NavLink>
-						</Menu.Item>
+
+
 						<Menu.Item key="related_search">
 							<NavLink to="/page-f">related_search</NavLink>
 						</Menu.Item>
-						<Menu.Item key="CvList">
-							<NavLink to="/Cv-List">CvList</NavLink>
-						</Menu.Item>
-						<Menu.Item key="Wordbreaker">
-							<NavLink to="/Wordbreaker">Wordbreaker</NavLink>
-						</Menu.Item>
+
 
 				</SubMenu>
 				<SubMenu
@@ -125,11 +114,21 @@ class PageHeader extends Component {
 						</span>
 								}
 							>
-					<Menu.Item key="9">abc</Menu.Item>
-					<Menu.Item key="10">abc</Menu.Item>
-
-					<Menu.Item key="11">abc</Menu.Item>
-					<Menu.Item key="12">abc</Menu.Item>
+					<Menu.Item key="CV_JD相似度">
+						<NavLink to="/page-b">CV_JD相似度</NavLink>
+					</Menu.Item>
+					<Menu.Item key="JD_CV Embedding">
+						<NavLink to="/page-d">JD_CV Embedding</NavLink>
+					</Menu.Item>
+					<Menu.Item key="JD_CV Graph Embedding">
+						<NavLink to="/page-e">JD_CV Graph Embedding</NavLink>
+					</Menu.Item>
+					<Menu.Item key="CvList">
+						<NavLink to="/Cv-List">CvList</NavLink>
+					</Menu.Item>
+					<Menu.Item key="Wordbreaker">
+						<NavLink to="/Wordbreaker">Wordbreaker</NavLink>
+					</Menu.Item>
 				</SubMenu>
 			</Menu>
 		);

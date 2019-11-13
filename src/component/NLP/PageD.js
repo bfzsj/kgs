@@ -99,6 +99,7 @@ class PageD extends React.Component {
 					</Form.Item>
 					<Form.Item validateStatus={topError ? 'error' : ''} help={topError || ''}>
                         {getFieldDecorator('topK', {
+                            initialValue:10,
                             rules: [{ required: true, message: '关键词个数 int类型 默认为10' }],
                         })(
 							<Input

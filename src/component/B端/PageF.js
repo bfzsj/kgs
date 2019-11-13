@@ -1,8 +1,6 @@
-import React, {Component} from 'react';
-import PageHeader from '../lib/PageHeader';
-import {NavLink} from 'react-router-dom'
+import React from 'react';
 import '../../App.css';
-import { Form, Icon, Input, Button ,Table} from 'antd';
+import { Form, Input, Button ,Table} from 'antd';
 import axios from 'axios';
 function hasErrors(fieldsError) {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
@@ -96,6 +94,7 @@ class PageF extends React.Component {
 
 					<Form.Item validateStatus={topError ? 'error' : ''} help={topError || ''}>
                         {getFieldDecorator('topK', {
+                            initialValue:10,
                             rules: [{ required: true, message: '关键词个数 int类型 默认为10' }],
                         })(
 							<Input

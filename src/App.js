@@ -2,13 +2,13 @@ import React, {Component} from 'react';
 import {Route, Switch, NavLink, Redirect, withRouter, Link} from 'react-router-dom'
 import Loadable from 'react-loadable';
 import PageA from './component/B端/PageA';
-import PageB from './component/B端/PageB';
+import PageB from './component/NLP/PageB';
 import PageC from './component/B端/PageC';
-import PageD from './component/B端/PageD';
-import PageE from './component/B端/PageE';
+import PageD from './component/NLP/PageD';
+import PageE from './component/NLP/PageE';
 import PageF from './component/B端/PageF';
-import CvList from  './component/B端/CvList'
-import Wordbreaker from './component/B端/Wordbreaker'
+import CvList from  './component/NLP/CvList'
+import Wordbreaker from './component/NLP/Wordbreaker'
 import PageHeader from './component/lib/PageHeader';
 
 import './css/lib/reset.css';
@@ -22,7 +22,7 @@ const PageAComponent = Loadable({
 	loading: PageA,
 });
 const PageBComponent = Loadable({
-	loader: () => import('./component/B端/PageB'),
+	loader: () => import('./component/NLP/PageB'),
 	loading: PageB,
 });
 const PageCComponent = Loadable({
@@ -30,11 +30,11 @@ const PageCComponent = Loadable({
 	loading: PageC,
 });
 const PageDComponent = Loadable({
-    loader: () => import('./component/B端/PageD'),
+    loader: () => import('./component/NLP/PageD'),
     loading: PageD,
 });
 const PageEComponent = Loadable({
-    loader: () => import('./component/B端/PageE'),
+    loader: () => import('./component/NLP/PageE'),
     loading: PageE,
 });
 const PageFComponent = Loadable({
@@ -42,11 +42,11 @@ const PageFComponent = Loadable({
     loading: PageF,
 });
 const CvListComponent = Loadable({
-    loader: () => import('./component/B端/CvList'),
+    loader: () => import('./component/NLP/CvList'),
     loading: CvList,
 });
 const WordbreakerComponent=Loadable({
-	loader:()=> import('./component/B端/Wordbreaker'),
+	loader:()=> import('./component/NLP/Wordbreaker'),
 	loading:Wordbreaker
 })
 
