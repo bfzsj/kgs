@@ -37,13 +37,13 @@ class PageA extends React.Component {
 	returnData(url,searchword1,searchword2,index){
         var _this=this;
 		for(let i=1;i<=index;i++){
-            axios.get(url,{
-                params:{
-                    "searchword1":searchword1,
-                    "searchword2":searchword2,
-                    "page":1,
-                    "selectClassEntityId": i
-                }
+            axios.post(url,{
+
+                    "searchword1": searchword1,
+                    "searchword2": searchword2,
+                    "page": 1,
+                    "selectClassEntityId": ""+i+""
+
             }).then(function (resopnse) {
             	console.log(resopnse)
                 _this.setState((prevState)=>({
