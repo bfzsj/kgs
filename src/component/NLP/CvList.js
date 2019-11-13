@@ -14,8 +14,8 @@ class CvList extends React.Component {
     state={
         search:'',
         title:{
-            jdtitle:'',
-            SOU_CONTENT:''
+            jobName:'',
+            content:''
         },
         list:[],
     }
@@ -123,11 +123,11 @@ class CvList extends React.Component {
                     <Col span={4}></Col>
                     <Col span={16}>
                         <div className="cvList-page-header">
-                            <h1 style={{fontSize:'36px'}}>{this.state.title.jdtitle}
+                            <h1 style={{fontSize:'36px'}}>{this.state.title.jobName}
                                 <small style={{float: 'right',marginRight: '1em'}}><Button type="primary" htmlType="button" onClick={this.get_cv_list.bind(this,this.state.search)}>推荐</Button></small>
                             </h1>
                         </div>
-                        <p>{this.state.title.SOU_CONTENT}</p>
+                        <p>{this.state.title.content}</p>
                     </Col>
                     <Col span={4}></Col>
                 </Row>

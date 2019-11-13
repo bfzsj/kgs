@@ -2,12 +2,10 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f0aab331-9197-450d-ac7e-af1e6c543bdb" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/index.html" afterPath="$PROJECT_DIR$/build/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/manifest.json" afterPath="$PROJECT_DIR$/build/manifest.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/service-worker.js" afterPath="$PROJECT_DIR$/build/service-worker.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/component/B端/PageA.js" afterPath="$PROJECT_DIR$/src/component/B端/PageA.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/component/lib/PageHeader.js" afterPath="$PROJECT_DIR$/src/component/lib/PageHeader.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/component/NLP/CvList.js" afterPath="$PROJECT_DIR$/src/component/NLP/CvList.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -22,6 +20,18 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file leaf-file-name="CvList.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/component/NLP/CvList.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="437">
+              <caret line="122" column="40" lean-forward="false" selection-start-line="122" selection-start-column="40" selection-end-line="122" selection-end-column="40" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
       <file leaf-file-name="PageA.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/component/B端/PageA.js">
           <provider selected="true" editor-type-id="text-editor">
@@ -44,11 +54,11 @@
           </provider>
         </entry>
       </file>
-      <file leaf-file-name="PageHeader.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="PageHeader.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/component/lib/PageHeader.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="684">
-              <caret line="81" column="75" lean-forward="false" selection-start-line="81" selection-start-column="75" selection-end-line="81" selection-end-column="75" />
+            <state relative-caret-position="1007">
+              <caret line="83" column="16" lean-forward="false" selection-start-line="83" selection-start-column="16" selection-end-line="83" selection-end-column="16" />
               <folding>
                 <element signature="e#0#39#0" expanded="true" />
               </folding>
@@ -87,6 +97,7 @@
       <find>list</find>
       <find>127.0.</find>
       <find>127</find>
+      <find>title</find>
     </findStrings>
     <replaceStrings>
       <replace>'searchword2'</replace>
@@ -125,11 +136,11 @@
         <option value="$PROJECT_DIR$/src/component/NLP/Wordbreaker.js" />
         <option value="$PROJECT_DIR$/src/component/NLP/PageB.js" />
         <option value="$PROJECT_DIR$/src/component/NLP/PageE.js" />
-        <option value="$PROJECT_DIR$/src/component/NLP/CvList.js" />
         <option value="$PROJECT_DIR$/src/component/B端/PageF.js" />
         <option value="$PROJECT_DIR$/src/component/B端/PageC.js" />
         <option value="$PROJECT_DIR$/src/component/lib/PageHeader.js" />
         <option value="$PROJECT_DIR$/src/component/B端/PageA.js" />
+        <option value="$PROJECT_DIR$/src/component/NLP/CvList.js" />
       </list>
     </option>
   </component>
@@ -151,8 +162,8 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="372" />
-    <option name="y" value="279" />
+    <option name="x" value="137" />
+    <option name="y" value="263" />
     <option name="width" value="1936" />
     <option name="height" value="1176" />
   </component>
@@ -213,6 +224,10 @@
             </PATH_ELEMENT>
             <PATH_ELEMENT>
               <option name="myItemId" value="component" />
+              <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
+            </PATH_ELEMENT>
+            <PATH_ELEMENT>
+              <option name="myItemId" value="NLP" />
               <option name="myItemType" value="com.intellij.ide.projectView.impl.nodes.PsiDirectoryNode" />
             </PATH_ELEMENT>
           </PATH>
@@ -454,19 +469,18 @@
       <workItem from="1573007599805" duration="273000" />
       <workItem from="1573550530359" duration="1609000" />
       <workItem from="1573555986535" duration="68000" />
-      <workItem from="1573613361000" duration="8478000" />
+      <workItem from="1573613361000" duration="10092000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="129611000" />
+    <option name="totallyTimeSpent" value="131225000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="372" y="279" width="1936" height="1176" extended-state="0" />
-    <editor active="true" />
+    <frame x="137" y="263" width="1936" height="1176" extended-state="1" />
     <layout>
       <window_info id="TypeScript" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="-1" side_tool="false" content_ui="tabs" />
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.122395836" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="true" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.122395836" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295238" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.32072073" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
@@ -772,14 +786,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/NLP/CvList.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-304">
-          <caret line="2" column="15" lean-forward="false" selection-start-line="2" selection-start-column="15" selection-end-line="2" selection-end-column="15" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/component/B端/PageF.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-1414">
@@ -828,10 +834,20 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/component/lib/PageHeader.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="684">
-          <caret line="81" column="75" lean-forward="false" selection-start-line="81" selection-start-column="75" selection-end-line="81" selection-end-column="75" />
+        <state relative-caret-position="1007">
+          <caret line="83" column="16" lean-forward="false" selection-start-line="83" selection-start-column="16" selection-end-line="83" selection-end-column="16" />
           <folding>
             <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/component/NLP/CvList.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="437">
+          <caret line="122" column="40" lean-forward="false" selection-start-line="122" selection-start-column="40" selection-end-line="122" selection-end-column="40" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
           </folding>
         </state>
       </provider>
