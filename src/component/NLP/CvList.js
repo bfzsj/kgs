@@ -1,6 +1,7 @@
 import React from 'react';
 import '../../App.css';
 import { Form, Avatar,List, Input, Button,Row, Col ,Tag} from 'antd';
+import {NavLink} from 'react-router-dom'
 import axios from 'axios';
 function hasErrors(fieldsError) {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
@@ -100,12 +101,12 @@ class CvList extends React.Component {
                         <Form layout="inline" style={{textAlign:'center'}} onSubmit={this.handleSubmit}>
                             <Form.Item validateStatus={usernameError ? 'error' : ''} help={usernameError || ''}>
                                 {getFieldDecorator('searchword1', {
+                                    initialValue:"CC201426236J90250807000",
                                     rules: [{ required: true, message: '请输入关键词1' }],
                                 })(
                                     <Input
                                         style={{width:'255px'}}
                                         placeholder="请输入关键词1"
-                                        defaultValue="CC675145330J00333981006"
                                     />,
                                 )}
                             </Form.Item>
@@ -151,7 +152,7 @@ class CvList extends React.Component {
                                     >
                                         <List.Item.Meta
                                             avatar={<Avatar src={item.avatar} style={{minWidth:'50px',minHeight:'50px'}}/>}
-                                            title={<a href={item.href}>{item.title}</a>}
+                                            title={<NavLink to={'/caption/'+item.title}>{item.title}</NavLink>}
                                             description={item.description}
                                         />
                                         {item.content}
@@ -164,7 +165,7 @@ class CvList extends React.Component {
                 </Row>
             </div>
         );
-    }
+    }//<NavLink to="" style={{display:'inline'}}>ZTC</NavLink>
 
     // 组件被卸载
     componentWillUnmount() {

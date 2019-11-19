@@ -10,6 +10,7 @@ import PageF from './component/B端/PageF';
 import CvList from  './component/NLP/CvList'
 import Wordbreaker from './component/NLP/Wordbreaker'
 import PageHeader from './component/lib/PageHeader';
+import Caption from './component/lib/Caption'
 
 import './css/lib/reset.css';
 import './css/lib/common.css';
@@ -48,6 +49,10 @@ const CvListComponent = Loadable({
 const WordbreakerComponent=Loadable({
 	loader:()=> import('./component/NLP/Wordbreaker'),
 	loading:Wordbreaker
+})
+const CaptionComponent=Loadable({
+    loader:()=> import('./component/lib/Caption'),
+    loading:Caption
 })
 
 
@@ -123,6 +128,7 @@ class App extends Component {
 							<Route path='/page-f' component={PageFComponent}></Route>
 							<Route path='/Cv-List' component={CvListComponent}></Route>
 							<Route path='/Wordbreaker' component={WordbreakerComponent}></Route>
+							<Route path='/caption/:id' component={CaptionComponent}></Route>
 							<Redirect to={{
 								pathname: '/',
 								search: '?utm=your+face'

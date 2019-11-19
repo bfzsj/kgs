@@ -96,7 +96,6 @@ class PageC extends React.Component {
             } else if (/null/.test(match)) {
                 cls = 'null';
             }
-            console.log(match)
             return '' + match + '';
         });
     };
