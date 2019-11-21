@@ -11,7 +11,6 @@ import CvList from  './component/NLP/CvList'
 import Wordbreaker from './component/NLP/Wordbreaker'
 import PageHeader from './component/lib/PageHeader';
 import Caption from './component/lib/Caption'
-
 import './css/lib/reset.css';
 import './css/lib/common.css';
 import './css/lib/pageheader.css';
@@ -78,8 +77,7 @@ class App extends Component {
 		group:null
 	}
     componentDidMount() {
-
-        window.addEventListener('resize', this.handleResize.bind(this)) //监听窗口大小改变
+		window.addEventListener('resize', this.handleResize.bind(this)) //监听窗口大小改变
     }
 
     componentWillUnmount() { //一定要最后移除监听器，以防多个组件之间导致this的指向紊乱

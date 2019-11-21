@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../App.css';
-import { Form,  Input, Button ,Table,List, Avatar,Layout,Tooltip} from 'antd';
+import {message, Form,  Input, Button ,Table,List, Avatar,Layout,Tooltip} from 'antd';
 import axios from 'axios';
 const { Header, Content, Footer,Sider } = Layout;
 function hasErrors(fieldsError) {
@@ -16,10 +16,53 @@ class PageC extends React.Component {
 
     state={
         list:[],
-		formItems:[]
+		formItems:[],
+        isShow:false
+    };
+
+    ip_local()
+    {
+        let that=this;
+        var ip = false;
+        window.RTCPeerConnection = window.RTCPeerConnection || window.mozRTCPeerConnection || window.webkitRTCPeerConnection || false;
+
+        if (window.RTCPeerConnection)
+        {
+            ip = [];
+            var pc = new RTCPeerConnection({iceServers:[]}), noop = function(){};
+            pc.createDataChannel('');
+            pc.createOffer(pc.setLocalDescription.bind(pc), noop);
+
+            pc.onicecandidate = function(event)
+            {
+                if (event && event.candidate && event.candidate.candidate)
+                {
+                    var s = event.candidate.candidate.split('\n');
+                    ip.push(s[0].split(' ')[4]);
+                    axios.get("./write.json")
+                        .then(function (res) {
+                            let data=res.data;
+                            data.forEach((item) => {
+                               if(ip[0]==item.ip){
+                                   that.setState({
+                                       isShow:true
+                                   });
+                                   message.info("欢迎"+item.name);
+                                   return;
+                               }
+                            });
+                        })
+                }
+            }
+        }
+
+        return ip;
     }
     // 组件装载之后调用
     componentDidMount() {
+        let ip=this.ip_local();
+        console.log(ip);
+
         this.props.form.validateFields();
         let newArray=this.state.formItems;
         newArray.push({
@@ -283,27 +326,59 @@ class PageC extends React.Component {
                                     </Button>
                                     </Tooltip>
                                 </Form.Item>
-                                <Form.Item>
-                                    <Tooltip placement="bottom" title={"更新输入框在NormAlization中的key" }>
-                                    <Button type="primary" htmlType="button" onClick={this.normAlization.bind(this,4)} >
-                                        更新NormAlization
-                                    </Button>
-                                    </Tooltip>
-                                </Form.Item>
-                                <Form.Item>
-                                    <Tooltip placement="bottom" title={"删除输入框在NormAlization中的key" }>
-                                    <Button type="primary" htmlType="button"  onClick={this.normAlization.bind(this,5)} >
-                                        删除NormAlization
-                                    </Button>
-                                    </Tooltip>
-                                </Form.Item>
-                                <Form.Item>
-                                    <Tooltip placement="bottom" title={"增加输入框在NormAliaztion中的值" }>
-                                        <Button type="primary" htmlType="button"  onClick={this.normAlization.bind(this,6)} >
-                                            增加rewrite黑名单
+                                {
+                                    this.state.isShow?(
+                                    <Form.Item>
+                                        <Tooltip placement="bottom" title={"更新输入框在NormAlization中的key" }>
+                                            <Button type="primary" htmlType="button"
+                                                    onClick={this.normAlization.bind(this, 4)}>
+                                                更新NormAlization
+                                            </Button>
+                                        </Tooltip>
+                                    </Form.Item>):(
+                                        <Form.Item>
+                                            <Tooltip placement="bottom" title={"您没有此权限" }>
+                                                <Button type="primary" htmlType="button"
+                                                       disabled="disabled">
+                                                    更新NormAlization
+                                                </Button>
+                                            </Tooltip>
+                                        </Form.Item>)
+                                }
+                                {
+                                    this.state.isShow?(
+                                    <Form.Item>
+                                        <Tooltip placement="bottom" title={"删除输入框在NormAlization中的key" }>
+                                        <Button type="primary" htmlType="button"  onClick={this.normAlization.bind(this,5)} >
+                                            删除NormAlization
                                         </Button>
-                                    </Tooltip>
-                                </Form.Item>
+                                        </Tooltip>
+                                    </Form.Item>):(
+                                        <Form.Item>
+                                            <Tooltip placement="bottom" title={"您没有此权限" }>
+                                                <Button type="primary" htmlType="button"   disabled="disabled" >
+                                                    删除NormAlization
+                                                </Button>
+                                            </Tooltip>
+                                        </Form.Item>)
+                                }
+                                {
+                                    this.state.isShow?(
+                                    <Form.Item>
+                                        <Tooltip placement="bottom" title={"增加输入框在NormAliaztion中的值" }>
+                                            <Button type="primary" htmlType="button"  onClick={this.normAlization.bind(this,6)} >
+                                                增加rewrite黑名单
+                                            </Button>
+                                        </Tooltip>
+                                    </Form.Item>):(
+                                        <Form.Item>
+                                            <Tooltip placement="bottom" title={"您没有此权限" }>
+                                                <Button type="primary" htmlType="button"  disabled="disabled" >
+                                                    增加rewrite黑名单
+                                                </Button>
+                                            </Tooltip>
+                                        </Form.Item>)
+                                }
                             </Form>
                         </Header>
                         <Content>

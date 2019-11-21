@@ -79,7 +79,7 @@ class PageHeader extends Component {
 						</Menu.Item>
 
 
-						<Menu.Item key="QueryNorm白名单" style={{display:"none"}}>
+						<Menu.Item key="QueryNorm白名单">
 							<NavLink to="/page-c">QueryNorm白名单</NavLink>
 						</Menu.Item>
 
