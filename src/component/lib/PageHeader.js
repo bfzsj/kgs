@@ -129,6 +129,9 @@ class PageHeader extends Component {
 					<Menu.Item key="Wordbreaker">
 						<NavLink to="/Wordbreaker">Wordbreaker</NavLink>
 					</Menu.Item>
+					<Menu.Item key="JD提取">
+						<NavLink to="/JDContent">JD提取</NavLink>
+					</Menu.Item>
 				</SubMenu>
 			</Menu>
 		);
