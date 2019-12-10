@@ -12,6 +12,7 @@ import JDContent from  './component/NLP/JDContent'
 import Wordbreaker from './component/NLP/Wordbreaker'
 import PageHeader from './component/lib/PageHeader';
 import Caption from './component/lib/Caption'
+import captionRatio from './component/B端/captionRatio';
 import './css/lib/reset.css';
 import './css/lib/common.css';
 import './css/lib/pageheader.css';
@@ -57,6 +58,10 @@ const CaptionComponent=Loadable({
 const JDContentComponent=Loadable({
     loader:()=> import('./component/NLP/JDContent'),
     loading:JDContent
+})
+const captionRatioComponent=Loadable({
+    loader:()=> import('./component/B端/captionRatio'),
+    loading:captionRatio
 })
 
 
@@ -133,6 +138,7 @@ class App extends Component {
 							<Route path='/Wordbreaker' component={WordbreakerComponent}></Route>
 							<Route path='/caption/:id' component={CaptionComponent}></Route>
 							<Route path='/JDContent' component={JDContentComponent}></Route>
+							<Route path='/captionRatio' component={captionRatioComponent}></Route>
 							<Redirect to={{
 								pathname: '/',
 								search: '?utm=your+face'

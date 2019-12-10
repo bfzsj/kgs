@@ -88,6 +88,10 @@ class PageHeader extends Component {
 							<NavLink to="/page-f">related_search</NavLink>
 						</Menu.Item>
 
+						<Menu.Item key="简历对比">
+							<NavLink to="/captionRatio">简历对比</NavLink>
+						</Menu.Item>
+
 
 				</SubMenu>
 				<SubMenu
