@@ -118,29 +118,27 @@ class captionRatio extends React.Component {
         })
         let firstDataObj=this.getURLParamsObj(data,this.state.first)
         this.returnData("http://zpsearch.zhaopin.com/talents?",firstDataObj,(response) => {
-            this.setState({
-                firstUrl:this.getUrl(response.config.url,response.config.params)
-            })
             let temp=[]
+            console.log(response.data.results)
             for (let i = 0; i < response.data.results.length; i++) {
                 let dataObj = ParamUtil.resume(response.data.results[i]);
                 temp.push(dataObj);
             }
+            console.log(temp)
             this.setState({
+                firstUrl:this.getUrl(response.config.url,response.config.params),
                 firstData:temp
             })
         })
         let secondDataObj=this.getURLParamsObj(data,this.state.second)
         this.returnData("http://zpsearch.zhaopin.com/talents?",secondDataObj,(response) => {
-            this.setState({
-                secondUrl:this.getUrl(response.config.url,response.config.params)
-            })
             let temp=[]
             for (let i = 0; i < response.data.results.length; i++) {
                 let dataObj = ParamUtil.resume(response.data.results[i]);
                 temp.push(dataObj);
             }
             this.setState({
+                secondUrl:this.getUrl(response.config.url,response.config.params),
                 secondData:temp
             })
         })
@@ -156,10 +154,12 @@ class captionRatio extends React.Component {
             }
             if(num==="first"){
                 this.setState({
+                    firstUrl:this.getUrl(response.config.url,response.config.params),
                     firstData:temp
                 })
             }else if(num==="second"){
                 this.setState({
+                    secondUrl:this.getUrl(response.config.url,response.config.params),
                     secondData:temp
                 })
             }
