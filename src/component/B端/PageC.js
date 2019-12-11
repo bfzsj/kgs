@@ -1,11 +1,8 @@
 import React from 'react';
 import '../../App.css';
-import {message, Form,  Input, Button ,Table,List, Avatar,Layout,Tooltip} from 'antd';
+import {message, Form,  Input, Button ,Table,List,Layout,Tooltip} from 'antd';
 import axios from 'axios';
-const { Header, Content, Footer,Sider } = Layout;
-function hasErrors(fieldsError) {
-    return Object.keys(fieldsError).some(field => fieldsError[field]);
-}
+const { Header, Content,Sider } = Layout;
 class PageC extends React.Component {
     constructor(props) {
         super(props)
@@ -43,7 +40,7 @@ class PageC extends React.Component {
                         .then(function (res) {
                             let data=res.data;
                             data.forEach((item) => {
-                               if(ip[0]==item.ip){
+                               if(ip[0]===item.ip){
                                    that.setState({
                                        isShow:true
                                    });
@@ -119,7 +116,7 @@ class PageC extends React.Component {
 
     };
     syntaxHighlight(json) {
-        if (typeof json == 'string') {
+        if (typeof json === 'string') {
             json = JSON.parse(json);
         }
 
@@ -152,7 +149,7 @@ class PageC extends React.Component {
         });
         let searchword='';
         Object.keys(val).forEach(function (item,index) {
-            if(index==Object.keys(val).length-1){
+            if(index===Object.keys(val).length-1){
                 searchword=searchword+val[item];
             }else{
                 searchword=searchword+val[item]+'&;&';
@@ -183,7 +180,7 @@ class PageC extends React.Component {
                 data[i].name=resopnse.data.dataList[i].name;
                 let names = data[i].name.split("<br>");
                 names.forEach(function (item, p2, p3) {
-                    if (item.indexOf(":") > -1 && item.indexOf("=") == -1) {
+                    if (item.indexOf(":") > -1 && item.indexOf("=") === -1) {
                         var temp = item.split(":");
                         data[i].table.push({
                             keys: temp[0],
@@ -193,7 +190,7 @@ class PageC extends React.Component {
 
                         temp = item.split("&=&");
                         var tempjson = "";
-                        if (temp.length == 3) {
+                        if (temp.length === 3) {
                             //tempjson=temp[2].replace(/\{/g,"<tr ><td>").replace(/\:/g,": </td><td>").replace(/\,/g,"</td></tr><tr><td>").replace(/\[/g,"<table class='table table-bordered'>").replace(/\}/g,"</td></tr>").replace(/\]/g,"</table>");
                             tempjson = _this.syntaxHighlight("" + temp[2] + "");
                             data[i].table.push({
@@ -225,7 +222,7 @@ class PageC extends React.Component {
 
     //渲染
     render() {
-        const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
+        const { getFieldDecorator } = this.props.form;
 
         const columns = [
             {
@@ -233,7 +230,7 @@ class PageC extends React.Component {
                 dataIndex: 'keys',
                 key: 'keys',
                 render:(text,row,index)=>{
-                    if(row.value==null){
+                    if(row.value===null){
                         return {
                             children:text,
                             props:{
@@ -250,7 +247,7 @@ class PageC extends React.Component {
                 dataIndex: 'value',
                 key: 'value',
                 render:(text,row,index)=>{
-                    if(row.value==null){
+                    if(row.value===null){
                         return {
                             children:text,
                             props:{
@@ -294,7 +291,7 @@ class PageC extends React.Component {
                         <Header style={back}>
                             <Form layout="inline" style={{textAlign:'left'}} onSubmit={this.handleSubmit} >
                                 {
-                                    this.state.formItems.length!=0?
+                                    this.state.formItems.length!==0?
                                         <Form.Item>
                                             <Tooltip placement="bottom" title={"删除数据框" }>
                                             <Button type="danger" htmlType="button"  onClick={this.deleteInput} >

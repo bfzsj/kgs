@@ -108,10 +108,10 @@ const ParamUtil = {
         }
         const descObj = JSON.parse(data.description);
         // 图片
-        if (typeof (descObj.image) != 'undefined' && descObj.image != '*') {
+        if (typeof (descObj.image) !== 'undefined' && descObj.image != '*') {
             data.image = 'http://mypics.zhaopin.cn' + descObj.image;
         } else {
-            if (typeof (data.gender.code) != 'undefined' && data.gender.code == 1) {
+            if (typeof (data.gender.code) !== 'undefined' && data.gender.code === 1) {
                 data.image = 'http://rd-bucket.zhaopin.cn/pre/assets/portrait-boy.705548.jpg';
             } else {
                 data.image = 'http://rd-bucket.zhaopin.cn/pre/assets/portrait-girl.bb3b74.jpg';
@@ -147,11 +147,11 @@ const ParamUtil = {
             data.desireJobTypeTwo = '';
             data.desireJobTypeThree = '';
             for (let i = 0; i < desireJobTypeList.length; i++) {
-                if (desireJobTypeList[i].level == 1) {
+                if (desireJobTypeList[i].level === 1) {
                     data.desireJobTypeOne += desireJobTypeList[i].id + '-' + desireJobTypeList[i].name;
-                } else if (desireJobTypeList[i].level == 2) {
+                } else if (desireJobTypeList[i].level === 2) {
                     data.desireJobTypeTwo += desireJobTypeList[i].id + '-' + desireJobTypeList[i].name;
-                } else if (desireJobTypeList[i].level == 3) {
+                } else if (desireJobTypeList[i].level === 3) {
                     data.desireJobTypeThree += desireJobTypeList[i].id + '-' + desireJobTypeList[i].name;
                 }
             }
@@ -163,11 +163,11 @@ const ParamUtil = {
             data.desireIndustryTypeTwo = '';
             data.desireIndustryTypeThree = '';
             for (let i = 0; i < desireIndustryTypeList.length; i++) {
-                if (desireIndustryTypeList[i].level == 1) {
+                if (desireIndustryTypeList[i].level === 1) {
                     data.desireIndustryTypeOne += desireIndustryTypeList[i].id + '-' + desireIndustryTypeList[i].name;
-                } else if (desireIndustryTypeList[i].level == 2) {
+                } else if (desireIndustryTypeList[i].level === 2) {
                     data.desireIndustryTypeTwo += desireIndustryTypeList[i].id + '-' + desireIndustryTypeList[i].name;
-                } else if (desireIndustryTypeList[i].level == 3) {
+                } else if (desireIndustryTypeList[i].level === 3) {
                     data.desireIndustryTypeThree += desireIndustryTypeList[i].id + '-' + desireIndustryTypeList[i].name;
                 }
             }

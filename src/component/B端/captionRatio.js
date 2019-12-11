@@ -31,7 +31,6 @@ class captionRatio extends React.Component {
     }
 
     returnData(url,obj,callback){
-        let _this=this;
         axios.get(url,{
             params:obj
         }).then(function (response) {
@@ -175,7 +174,7 @@ class captionRatio extends React.Component {
         this.returnData("http://zpsearch.zhaopin.com/caption/captionService/get?type=jobs&format=list&",{"id":jobName},(response) => {
             let data=response.data;
             if (data.code === 200) {
-                if (data.data.status == 'NOT_FOUND') {
+                if (data.data.status === 'NOT_FOUND') {
                     message.info(data.data.status + ',未查询到该职位');
                     return;
                 }
@@ -254,12 +253,12 @@ class captionRatio extends React.Component {
                 let dataObj = ParamUtil.resume(response.data.results[i]);
                 temp.push(dataObj);
             }
-            if(num==1){
+            if(num===1){
                 this.setState({
                     firstUrl:this.getUrl(response.config.url,response.config.params),
                     firstData:temp
                 })
-            }else if(num==2){
+            }else if(num===2){
                 this.setState({
                     secondUrl:this.getUrl(response.config.url,response.config.params),
                     secondData:temp
@@ -288,7 +287,7 @@ class captionRatio extends React.Component {
             {dataIndex: 'workYearId', title: '年限', key: 'workYearId'},
 		];
 		let columsSelect = ParamUtil.ResumeSelectColumns;
-		if(columsSelect[0].title!='头像'){
+		if(columsSelect[0].title!=='头像'){
             columsSelect.unshift({title: '头像', dataIndex: 'image',key: 'image',render: (text) => {
                 return <img src={text}  height={40} alt=""/>
             }})

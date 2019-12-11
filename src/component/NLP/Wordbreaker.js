@@ -33,7 +33,7 @@ class Wordbreaker extends React.Component {
         console.log(searchword1)
         axios.get("WordBreaker",{
             params:{
-                "content":searchword1 == undefined? "跟单教管照护吧员java开发工程师":searchword1
+                "content":searchword1 === undefined? "跟单教管照护吧员java开发工程师":searchword1
             }
         }).then(function (resopnse) {
             console.log(resopnse)

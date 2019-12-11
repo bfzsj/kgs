@@ -1,11 +1,8 @@
 import React from 'react';
 import '../../App.css';
-import { Form, Avatar,List, Input, Button,Row, Col ,Tag,Table} from 'antd';
-import {NavLink} from 'react-router-dom'
+import { Form,Row, Col ,Table} from 'antd';
 import axios from 'axios';
-function hasErrors(fieldsError) {
-    return Object.keys(fieldsError).some(field => fieldsError[field]);
-}
+
 class JDContent extends React.Component {
     constructor(props) {
         super(props)

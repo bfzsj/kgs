@@ -27,7 +27,6 @@ class PageA extends React.Component {
             val=values;
         });
         let {searchword1,searchword2}=val;
-        var _this=this;
 
 		this.returnData('/get_search_new',searchword1,searchword2,9)
 		this.setState({

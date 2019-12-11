@@ -19,7 +19,7 @@ class PageF extends React.Component {
     }
     handleSubmit = e => {
         e.preventDefault();
-        var val={}
+        let val={}
         this.props.form.validateFields((err, values) => {
             if (!err) {
                 console.log('Received values of form: ', values);
@@ -27,7 +27,6 @@ class PageF extends React.Component {
             val=values;
         });
         let {searchword1,topK}=val;
-        var _this=this;
         this.returnData('/get_relatedsearch',searchword1,topK,3)
         this.setState({
             list:[]
@@ -35,7 +34,7 @@ class PageF extends React.Component {
 
     };
     returnData(url,searchword1,topK,index){
-        var _this=this;
+        let _this=this;
         for(let i=1;i<=index;i++){
             axios.get(url,{
                 params:{

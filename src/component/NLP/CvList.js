@@ -50,7 +50,6 @@ class CvList extends React.Component {
     };
 
     returnData(url,searchword1,callback){
-        var _this=this;
         axios.get(url,{
             params:{
                 "jdNumber":searchword1,
