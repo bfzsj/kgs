@@ -1,16 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="f0aab331-9197-450d-ac7e-af1e6c543bdb" name="Default" comment="">
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/component/B端/PageA.js" afterPath="$PROJECT_DIR$/src/component/B端/PageA.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/component/B端/PageC.js" afterPath="$PROJECT_DIR$/src/component/B端/PageC.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/component/B端/PageF.js" afterPath="$PROJECT_DIR$/src/component/B端/PageF.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/component/B端/captionRatio.js" afterPath="$PROJECT_DIR$/src/component/B端/captionRatio.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/component/NLP/CvList.js" afterPath="$PROJECT_DIR$/src/component/NLP/CvList.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/component/NLP/JDContent.js" afterPath="$PROJECT_DIR$/src/component/NLP/JDContent.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/component/NLP/Wordbreaker.js" afterPath="$PROJECT_DIR$/src/component/NLP/Wordbreaker.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utils/ParamUtil.js" afterPath="$PROJECT_DIR$/src/utils/ParamUtil.js" />
-    </list>
+    <list default="true" id="f0aab331-9197-450d-ac7e-af1e6c543bdb" name="Default" comment="" />
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
     <ignored path="$PROJECT_DIR$/tmp/" />
@@ -129,8 +120,8 @@
       <file leaf-file-name="JDContent.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/component/NLP/JDContent.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="418">
-              <caret line="34" column="31" lean-forward="true" selection-start-line="34" selection-start-column="31" selection-end-line="34" selection-end-column="31" />
+            <state relative-caret-position="513">
+              <caret line="39" column="8" lean-forward="true" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="8" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
               </folding>
@@ -614,12 +605,12 @@
       <workItem from="1575525382508" duration="5890000" />
       <workItem from="1575870818699" duration="28280000" />
       <workItem from="1575966492763" duration="11418000" />
-      <workItem from="1576035010691" duration="5322000" />
+      <workItem from="1576035010691" duration="5504000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="207478000" />
+    <option name="totallyTimeSpent" value="207660000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1936" height="1176" extended-state="6" />
@@ -984,8 +975,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/component/NLP/JDContent.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="418">
-          <caret line="34" column="31" lean-forward="true" selection-start-line="34" selection-start-column="31" selection-end-line="34" selection-end-column="31" />
+        <state relative-caret-position="513">
+          <caret line="39" column="8" lean-forward="true" selection-start-line="39" selection-start-column="8" selection-end-line="39" selection-end-column="8" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>
