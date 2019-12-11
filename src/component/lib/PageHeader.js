@@ -136,6 +136,10 @@ class PageHeader extends Component {
 					<Menu.Item key="JD提取">
 						<NavLink to="/JDContent">JD提取</NavLink>
 					</Menu.Item>
+					<Menu.Item key="分词器">
+						<NavLink to="/JobTypeClassifier">JobTypeClassifier</NavLink>
+					</Menu.Item>
+
 				</SubMenu>
 			</Menu>
 		);

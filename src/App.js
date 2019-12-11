@@ -8,6 +8,7 @@ import PageD from './component/NLP/PageD';
 import PageE from './component/NLP/PageE';
 import PageF from './component/B端/PageF';
 import CvList from  './component/NLP/CvList'
+import JobTypeClassifier from './component/NLP/JobTypeClassifier';
 import JDContent from  './component/NLP/JDContent'
 import Wordbreaker from './component/NLP/Wordbreaker'
 import PageHeader from './component/lib/PageHeader';
@@ -63,7 +64,10 @@ const captionRatioComponent=Loadable({
     loader:()=> import('./component/B端/captionRatio'),
     loading:captionRatio
 })
-
+const JobTypeClassifierComponent=Loadable({
+	loader:()=> import('./component/NLP/JobTypeClassifier'),
+	loading:JobTypeClassifier
+})
 
 const HomeComponent = () => {
 	return (
@@ -139,6 +143,7 @@ class App extends Component {
 							<Route path='/caption/:id' component={CaptionComponent}></Route>
 							<Route path='/JDContent' component={JDContentComponent}></Route>
 							<Route path='/captionRatio' component={captionRatioComponent}></Route>
+							<Route path='/JobTypeClassifier' component={JobTypeClassifierComponent}></Route>
 							<Redirect to={{
 								pathname: '/',
 								search: '?utm=your+face'

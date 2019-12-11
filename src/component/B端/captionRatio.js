@@ -29,7 +29,7 @@ class captionRatio extends React.Component {
             this.getPositionIDsList(response.data.data.dataList)
         })
     }
-    
+
     returnData(url,obj,callback){
         let _this=this;
         axios.get(url,{
