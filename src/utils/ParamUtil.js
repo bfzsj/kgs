@@ -204,9 +204,7 @@ const ParamUtil = {
         return eduObj;
     },
     ResumeSelectColumns: [
-        {title: '姓名', dataIndex: 'userName',key: 'userName',width:"200px"},
         {title: 'ID', dataIndex: 'id',key: 'id',width:"200px"},
-        {title: '类型', dataIndex: 'resumeType',key: 'resumeType',width:"200px"},
         {title: '工作开始时间', dataIndex: 'workYears',key: 'workYears',width:"200px"},
         {title: '工作经历1', dataIndex: 'workExp0',key: 'workExp0',width:"200px"},
         {title: '工作经历2', dataIndex: 'workExp1',key: 'workExp1',width:"200px"},

@@ -14,6 +14,7 @@ import Wordbreaker from './component/NLP/Wordbreaker'
 import PageHeader from './component/lib/PageHeader';
 import Caption from './component/lib/Caption'
 import captionRatio from './component/B端/captionRatio';
+import JDSearch from './component/NLP/JDSearch'
 import './css/lib/reset.css';
 import './css/lib/common.css';
 import './css/lib/pageheader.css';
@@ -68,6 +69,11 @@ const JobTypeClassifierComponent=Loadable({
 	loader:()=> import('./component/NLP/JobTypeClassifier'),
 	loading:JobTypeClassifier
 })
+const JDSearchComponent=Loadable({
+    loader:()=> import('./component/NLP/JDSearch'),
+    loading:JDSearch
+})
+
 
 const HomeComponent = () => {
 	return (
@@ -144,6 +150,8 @@ class App extends Component {
 							<Route path='/JDContent' component={JDContentComponent}></Route>
 							<Route path='/captionRatio' component={captionRatioComponent}></Route>
 							<Route path='/JobTypeClassifier' component={JobTypeClassifierComponent}></Route>
+							<Route path='/JDSearch' component={JDSearchComponent}></Route>
+							JDSearch
 							<Redirect to={{
 								pathname: '/',
 								search: '?utm=your+face'

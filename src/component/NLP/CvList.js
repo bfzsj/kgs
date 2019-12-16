@@ -23,7 +23,6 @@ class CvList extends React.Component {
 
     // 组件装载之后调用
     componentDidMount() {
-
     }
 
     handleSubmit = e => {
@@ -151,7 +150,7 @@ class CvList extends React.Component {
                                     >
                                         <List.Item.Meta
                                             avatar={<Avatar src={item.avatar} style={{minWidth:'50px',minHeight:'50px'}}/>}
-                                            title={<NavLink to={'/caption/'+item.title}>{item.title}</NavLink>}
+                                            title={<NavLink to={'/caption/'+item.title} target="_blank">{item.title}</NavLink>}
                                             description={item.description}
                                         />
                                         {item.content}

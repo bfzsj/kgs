@@ -34,13 +34,10 @@ class JobTypeClassifier extends React.Component {
         axios.post("/JobTypeClassifier",{
             "title":title,"desc":desc
         }).then(function (response) {
-            console.log(response);
             let data=JSON.parse(response.data)
-            console.log(data)
             _this.setState({
                 list:data
             })
-            console.log(_this.state.data)
         })
         //let data= JSON.parse("[{\"jobId3\":\"9000300230000\",\"jobId2\":\"9000300000000\",\"score\":0.31591657,\"jobId1\":\"9000000000000\",\"jobName1\":\"互联网|通信及硬件\",\"jobName2\":\"软件研发\",\"jobName3\":\"软件工程师\"},{\"jobId3\":\"9000300220000\",\"jobId2\":\"9000300000000\",\"score\":0.0854516,\"jobId1\":\"9000000000000\",\"jobName1\":\"互联网|通信及硬件\",\"jobName2\":\"软件研发\",\"jobName3\":\"嵌入式软件开发\"},{\"jobId3\":\"9000300020000\",\"jobId2\":\"9000300000000\",\"score\":0.0137648005,\"jobId1\":\"9000000000000\",\"jobName1\":\"互联网|通信及硬件\",\"jobName2\":\"软件研发\",\"jobName3\":\"C\"}]");
 

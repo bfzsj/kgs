@@ -5,6 +5,7 @@ import {ParamUtil} from '../../utils/ParamUtil'
 import axios from 'axios';
 const {Option} =Select
 const {TextArea}=Input
+
 class captionRatio extends React.Component {
     constructor(props) {
         super(props)
@@ -27,6 +28,18 @@ class captionRatio extends React.Component {
     componentDidMount() {
         this.returnData("http://zpsearch.zhaopin.com/mg/job/list?access_token=551c619ef13c45debe92a64880f5e1cdlzJv&orgId=12001997&jobState=publish&page=1",{},(response) => {
             this.getPositionIDsList(response.data.data.dataList)
+        })
+        axios.post("http://s-dp-caption.zpidc.com/caption/captionService/list",{
+        'type':'tag','format':'list','ids':['JI465130935R90500000000_1']
+        },{
+            headers : {
+                'content-type':'application/json',
+                'Host': 'zpsearch.zhaopin.com',
+                'Origin': 'http://zpsearch.zhaopin.com',
+                'Referer': 'http://zpsearch.zhaopin.com/'
+            }
+        }).then(function (response) {
+            console.log(response);
         })
     }
 
@@ -119,12 +132,11 @@ class captionRatio extends React.Component {
         let firstDataObj=this.getURLParamsObj(data,this.state.first)
         this.returnData("http://zpsearch.zhaopin.com/talents?",firstDataObj,(response) => {
             let temp=[]
-            console.log(response.data.results)
             for (let i = 0; i < response.data.results.length; i++) {
                 let dataObj = ParamUtil.resume(response.data.results[i]);
                 temp.push(dataObj);
             }
-            console.log(temp)
+            document.querySelector("#first").value=this.getUrl(response.config.url,response.config.params)
             this.setState({
                 firstUrl:this.getUrl(response.config.url,response.config.params),
                 firstData:temp
@@ -137,6 +149,7 @@ class captionRatio extends React.Component {
                 let dataObj = ParamUtil.resume(response.data.results[i]);
                 temp.push(dataObj);
             }
+            document.querySelector("#second").value=this.getUrl(response.config.url,response.config.params)
             this.setState({
                 secondUrl:this.getUrl(response.config.url,response.config.params),
                 secondData:temp
@@ -147,20 +160,13 @@ class captionRatio extends React.Component {
     handleChange(num,value) {
         let DataObj=this.getURLParamsObj(this.state.tempObj,value);
         this.returnData("http://zpsearch.zhaopin.com/talents?",DataObj,(response) => {
-            let temp=[]
-            for (let i = 0; i < response.data.results.length; i++) {
-                let dataObj = ParamUtil.resume(response.data.results[i]);
-                temp.push(dataObj);
-            }
             if(num==="first"){
                 this.setState({
-                    firstUrl:this.getUrl(response.config.url,response.config.params),
-                    firstData:temp
+                    first:value,
                 })
             }else if(num==="second"){
                 this.setState({
-                    secondUrl:this.getUrl(response.config.url,response.config.params),
-                    secondData:temp
+                    second:value,
                 })
             }
         })
@@ -247,6 +253,7 @@ class captionRatio extends React.Component {
     }
 
     handleUrl(num,e){
+        console.log(e.target[0].value)
         this.returnData(e.target[0].value,{},(response) => {
             let temp=[]
             for (let i = 0; i < response.data.results.length; i++) {
@@ -287,11 +294,6 @@ class captionRatio extends React.Component {
             {dataIndex: 'workYearId', title: '年限', key: 'workYearId'},
 		];
 		let columsSelect = ParamUtil.ResumeSelectColumns;
-		if(columsSelect[0].title!=='头像'){
-            columsSelect.unshift({title: '头像', dataIndex: 'image',key: 'image',render: (text) => {
-                return <img src={text}  height={40} alt=""/>
-            }})
-		}
         return (
             <div>
                 <Form layout="inline" style={{textAlign:'center'}} onSubmit={this.handleSubmit}>
@@ -329,11 +331,10 @@ class captionRatio extends React.Component {
                         <Form layout="inline" style={{textAlign:'center'}} onSubmit={this.handleUrl.bind(this,1)}>
                             <Form.Item >
                                 <TextArea
-                                    value={this.state.firstUrl}
-                                    defaultValue={this.state.firstUrl}
+                                    id="first"
                                     style={{width:'300px'}}
                                     placeholder="生成url"
-                                    autoSize={{minRows:4}}
+                                    autoSize={{minRows:17}}
                                 />
                             </Form.Item>
                             <Form.Item>
@@ -360,11 +361,10 @@ class captionRatio extends React.Component {
                         <Form layout="inline" style={{textAlign:'center'}} onSubmit={this.handleUrl.bind(this,2)}>
                             <Form.Item >
                                 <TextArea
-                                    value={this.state.secondUrl}
-                                    defaultValue={this.state.secondUrl}
+                                    id="second"
                                     style={{width:'300px'}}
                                     placeholder="生成url"
-                                    autoSize={{minRows:4}}
+                                    autoSize={{minRows:17}}
                                 />
                             </Form.Item>
                             <Form.Item>
@@ -391,7 +391,9 @@ class captionRatio extends React.Component {
                     <Col span={11}>
                         <Table dataSource={this.state.firstData}  bordered columns={columsSelect} pagination={{pageSize:30 ,position:"top"}} scroll={{ x: 1500}}/>
                     </Col>
-                    <Col span={2}></Col>
+                    <Col span={2}>
+
+                    </Col>
                     <Col span={11}>
                         <Table dataSource={this.state.secondData}  bordered columns={columsSelect} pagination={{pageSize:30 ,position:"top"}} scroll={{ x: 1500}}/>
 
