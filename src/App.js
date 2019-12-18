@@ -21,6 +21,11 @@ import './css/lib/pageheader.css';
 import './App.css';
 import { Menu, Icon,Layout,Breadcrumb } from 'antd';
 const { Header, Content, Footer,Sider } = Layout;
+const loadingComponent =()=>{
+    return (
+		<div>loading</div>
+    )
+}
 const PageAComponent = Loadable({
 	loader: () => import('./component/B端/PageA'),
 	loading: PageA,
@@ -72,6 +77,10 @@ const JobTypeClassifierComponent=Loadable({
 const JDSearchComponent=Loadable({
     loader:()=> import('./component/NLP/JDSearch'),
     loading:JDSearch
+})
+const CVJDComponent=Loadable({
+    loader:()=> import('./component/B端/CVJD'),
+    loading: loadingComponent
 })
 
 
@@ -151,7 +160,7 @@ class App extends Component {
 							<Route path='/captionRatio' component={captionRatioComponent}></Route>
 							<Route path='/JobTypeClassifier' component={JobTypeClassifierComponent}></Route>
 							<Route path='/JDSearch' component={JDSearchComponent}></Route>
-							JDSearch
+							<Route path='/CVJD' component={CVJDComponent}></Route>
 							<Redirect to={{
 								pathname: '/',
 								search: '?utm=your+face'

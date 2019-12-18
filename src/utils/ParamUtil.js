@@ -204,23 +204,37 @@ const ParamUtil = {
         return eduObj;
     },
     ResumeSelectColumns: [
-        {title: 'ID', dataIndex: 'id',key: 'id',width:"200px"},
-        {title: '工作开始时间', dataIndex: 'workYears',key: 'workYears',width:"200px"},
-        {title: '工作经历1', dataIndex: 'workExp0',key: 'workExp0',width:"200px"},
-        {title: '工作经历2', dataIndex: 'workExp1',key: 'workExp1',width:"200px"},
-        {title: '学习经历1', dataIndex: 'eduExp0',key: 'eduExp0',width:"200px"},
-        {title: '期望薪资', dataIndex: 'desiredSalary',key: 'desiredSalary',width:"200px"},
-        {title: '期望城市', dataIndex: 'desireCityName',key: 'desireCityName',width:"200px"},
-        {title: '最后更新', dataIndex: 'lastUpdateTime',key: 'lastUpdateTime',width:"200px"},
-        {title: '最后活跃时间', dataIndex: 'logTime', key: 'logTime',width:"200px"},
-        {title: '期望一级行业', dataIndex: 'desireIndustryTypeOne',key: 'desireIndustryTypeOne',width:"200px"},
-        {title: '期望二级行业', dataIndex: 'desireIndustryTypeTwo',key: 'desireIndustryTypeTwo',width:"200px"},
-        {title: '期望一级职类', dataIndex: 'desireJobTypeOne',key: 'desireJobTypeOne',width:"200px"},
-        {title: '期望二级职类', dataIndex: 'desireJobTypeTwo',key: 'desireJobTypeTwo',width:"200px"},
-        {title: '期望三级职类', dataIndex: 'desireJobTypeThree',key: 'desireJobTypeThree',width:"200px"},
-        {title: '召回渠道', dataIndex: 'g_query',key: 'g_query',width:"200px"},
-        {title: '二排得分', dataIndex: 'score',key: 'score',width:"200px"},
-        {title: '三排得分', dataIndex: 'ctr_score',key: 'ctr_score',width:"200px"},
+        {title: '简历ID', dataIndex: 'id',key: 'id',width:"100px",fixed:true},//0
+        {title: '工作开始时间', dataIndex: 'workYears',key: 'workYears',width:"100px"},//1
+        {title: '工作经历1', dataIndex: 'workExp0',key: 'workExp0',width:"100px"},
+        {title: '工作经历2', dataIndex: 'workExp1',key: 'workExp1',width:"100px"},
+        {title: '学习经历1', dataIndex: 'eduExp0',key: 'eduExp0',width:"100px"},
+        {title: '期望薪资', dataIndex: 'desiredSalary',key: 'desiredSalary',width:"100px"},
+        {title: '期望城市', dataIndex: 'desireCityName',key: 'desireCityName',width:"100px"},
+        {title: '最后更新', dataIndex: 'lastUpdateTime',key: 'lastUpdateTime',width:"100px"},//7
+        {title: '最后活跃时间', dataIndex: 'logTime', key: 'logTime',width:"100px"},
+        {title: '期望一级行业', dataIndex: 'desireIndustryTypeOne',key: 'desireIndustryTypeOne',width:"100px"},//9
+        {title: '期望二级行业', dataIndex: 'desireIndustryTypeTwo',key: 'desireIndustryTypeTwo',width:"100px"},
+        {title: '期望一级职类', dataIndex: 'desireJobTypeOne',key: 'desireJobTypeOne',width:"100px"},//11
+        {title: '期望二级职类', dataIndex: 'desireJobTypeTwo',key: 'desireJobTypeTwo',width:"100px"},//12
+        {title: '期望三级职类', dataIndex: 'desireJobTypeThree',key: 'desireJobTypeThree',width:"100px"},
+        {title: '召回渠道', dataIndex: 'g_query',key: 'g_query',width:"100px"},
+        {title: '二排得分', dataIndex: 'score',key: 'score',width:"100px"},
+        {title: '三排得分', dataIndex: 'ctr_score',key: 'ctr_score',width:"100px"}
     ],
+    JDColumn:[
+        {dataIndex: 'jobNumber', title: '职位ID',key: 'jobNumber',width:"100px" },
+        {dataIndex: 'jobTitle', title: '职位名称',key: 'jobTitle',width:"70px"},
+        {dataIndex: 'cityId', title: '发布地Id',key: 'cityId',width:"60px"},
+        {dataIndex: 'cityName', title: '职位发布地', key: 'cityName',width:"60px"},
+        {dataIndex: 'jobLevelCode2', title: '二级职类', key: 'jobLevelCode2',width:"100px"},
+        {dataIndex: 'jobLevelName2', title: '二级职类', key: 'jobLevelName2',width:"70px"},
+        {dataIndex: 'jobLevelCode3', title: '三级职类', key: 'jobLevelCode3',width:"100px"},
+        {dataIndex: 'jobLevelName3', title: '三级职类', key: 'jobLevelName3',width:"100px"},
+        {dataIndex: 'educationId', title: '学历要求', key: 'educationId',width:"70px"},
+        {dataIndex: 'educationName', title: '学历要求', key: 'educationName',width:"70px"},
+        {dataIndex: 'salary', title: '薪资范围', key: 'salary',width:"60px"},
+        {dataIndex: 'workYearId', title: '年限', key: 'workYearId',width:"60px"}
+    ]
 }
 export  {ParamUtil}

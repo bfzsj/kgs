@@ -91,6 +91,9 @@ class PageHeader extends Component {
 						<Menu.Item key="简历对比">
 							<NavLink to="/captionRatio">简历对比</NavLink>
 						</Menu.Item>
+						<Menu.Item key="CVJD对比">
+							<NavLink to="/CVJD">CVJD对比</NavLink>
+						</Menu.Item>
 
 
 				</SubMenu>

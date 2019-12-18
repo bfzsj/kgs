@@ -27,19 +27,13 @@ class captionRatio extends React.Component {
     // 组件装载之后调用
     componentDidMount() {
         this.returnData("http://zpsearch.zhaopin.com/mg/job/list?access_token=551c619ef13c45debe92a64880f5e1cdlzJv&orgId=12001997&jobState=publish&page=1",{},(response) => {
+            console.log(response.data.data.dataList)
             this.getPositionIDsList(response.data.data.dataList)
         })
-        axios.post("http://s-dp-caption.zpidc.com/caption/captionService/list",{
-        'type':'tag','format':'list','ids':['JI465130935R90500000000_1']
-        },{
-            headers : {
-                'content-type':'application/json',
-                'Host': 'zpsearch.zhaopin.com',
-                'Origin': 'http://zpsearch.zhaopin.com',
-                'Referer': 'http://zpsearch.zhaopin.com/'
-            }
+        axios.post("http://zhiliankg-schema.zhaopin.com/getJDCV",{
+        'type':'resume','format':'list','ids':['JI268470736R90500000000_1'].toString()
         }).then(function (response) {
-            console.log(response);
+            console.log(JSON.parse(response.data));
         })
     }
 
