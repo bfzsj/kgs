@@ -1,8 +1,9 @@
 import React from 'react';
 import '../../App.css';
-import { message,Form, Avatar,List, Input, Button,Row, Col ,Tag} from 'antd';
+import { AutoComplete ,message,Form, Avatar,List, Input, Button,Row, Col ,Tag} from 'antd';
 import {NavLink} from 'react-router-dom'
 import axios from 'axios';
+import {ParamUtil} from '../../utils/ParamUtil'
 function hasErrors(fieldsError) {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
 }
@@ -20,13 +21,30 @@ class JDSearch extends React.Component {
         },
         list:[],
         ClassList:[],
-        displayName:'none'
+        displayName:'none',
+		JDLight:[]
     }
 
     // 组件装载之后调用
     componentDidMount() {
-    }
+		axios.get("http://zpsearch.zhaopin.com/profilecenter/resumeServiceSvc/GetResumeByExtId?access_token=551c619ef13c45debe92a64880f5e1cdlzJv&versionNo=1&language=1",{
+			params:{
+			    "resumeNo":"JI119191358R90500000000"
+            }
+		}).then(function (response) {
+                console.log(JSON.parse(response.data.data))
+            })
 
+    }
+	returnCaption(url,searchword1,callback){
+        axios.get(url,{
+            params:{
+                "id":searchword1,
+            }
+        }).then(function (response) {
+            callback(response);
+        })
+    }
     handleSubmit = e => {
         e.preventDefault();
         this.setState({
@@ -44,11 +62,14 @@ class JDSearch extends React.Component {
         this.setState({
             search:searchword1
         })
-        this.returnData("/get_JdInList",searchword1,(response)=>{
+        this.returnCaption("http://zpsearch.zhaopin.com/caption/captionService/get?type=jobsCampuslist&",searchword1,(response)=>{
             _this.setState({
-                title:response.data,
-                displayName:'block'
-            })
+						title:{
+							jobName:response.data.data.value.jobName,
+							content:response.data.data.value.jobDescription
+						},
+						displayName:'block'
+					})
 			axios.post("/getKw",{
 				"title":_this.state.title.jobName,"desc":_this.state.title.content
 			}).then(function (responses) {
@@ -58,7 +79,7 @@ class JDSearch extends React.Component {
 				    let tempTitle=_this.state.title.jobName;
                     let tempContent=_this.state.title.content;
                     data.title.forEach((item)=>{
-                        tempTitle = _this.light(tempTitle, item.word, 'gray');
+                        tempTitle = _this.light(tempTitle, item.word, 'hightyellow');
                     })
 
                     /*data.desc.forEach((item)=>{
@@ -88,11 +109,20 @@ class JDSearch extends React.Component {
                 axios.post("/getJDLight",{
                     "content":_this.state.title.content
                 }).then(function (responses) {
-
+					console.log(responses)
                     let age=responses.data['age'];
+					let JDLight=[];
                     if(age!=undefined) {
+						
                         Object.keys(age).forEach((item) => {
-                            let temp = _this.light(_this.state.title.content, item, 'red', age[item]);
+							JDLight.push({
+								"title":"年龄",
+								"key":item,
+					            "value":age[item]
+							});
+							let av=item.trim();
+                            let temp = _this.light(_this.state.title.content, av, 'red', age[item]);
+							console.log(temp)
                             _this.setState({
                                 title: {
                                     jobName: _this.state.title.jobName,
@@ -106,7 +136,11 @@ class JDSearch extends React.Component {
                     let exp=responses.data['exp']
                     if(exp!=undefined){
                         Object.keys(exp).forEach((item) => {
-
+							JDLight.push({
+								"title":"经验",
+								"key":item,
+					            "value":exp[item]
+							});
                             //CC357960812J00349003502
                             let temp = _this.light(item, exp[item], 'yellow');
 
@@ -122,6 +156,9 @@ class JDSearch extends React.Component {
                     }else{
                         message.error("没有提取经验");
                     }
+					_this.setState({
+						JDLight:JDLight
+					})
                 })
             })
 
@@ -208,7 +245,7 @@ class JDSearch extends React.Component {
     render() {
 
         const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
-
+		const dataSource = ParamUtil.JDkeyword
         // Only show error after a field is touched.
         const usernameError = isFieldTouched('searchword1') && getFieldError('searchword1');
         return (
@@ -224,13 +261,19 @@ class JDSearch extends React.Component {
                                             initialValue:"CC201426236J90250807000",
                                             rules: [{ required: true, message: '请输入关键词1' }],
                                         })(
+										<AutoComplete
+										  style={{ width: 255 }}
+										  dataSource={dataSource}
+										  placeholder="请输入JD"
+										  >
                                             <Input
                                                 style={{width:'255px'}}
-                                                placeholder="请输入关键词1"
-                                            />,
+                                               
+                                            />
+										</AutoComplete>
                                         )}
                                     </Form.Item>
-                                    <Form.Item>
+                                    <Form.Item >
                                         <Button type="primary" htmlType="submit" icon="search" disabled={hasErrors(getFieldsError())}>
                                             Search
                                         </Button>
@@ -302,6 +345,28 @@ class JDSearch extends React.Component {
                                         <List.Item.Meta
 
                                         />{item.jobName1}  >>  {item.jobName2}  >>  {item.jobName3} >>  {item.score}
+                                    </List.Item>
+                                )}
+                            />
+                        </div>
+						<div style={{backgroundColor:'white',marginTop:120,display:this.state.displayName}}>
+                            <List
+                                itemLayout="vertical"
+                                size="large"
+                                dataSource={this.state.JDLight}
+                                header={
+                                    <div>
+                                        <b>提取内容</b>
+                                    </div>
+                                }
+                                renderItem={item => (
+                                    <List.Item
+                                        key={item.key}
+
+                                    >
+                                        <List.Item.Meta
+											title={item.title}
+                                        />{item.key}  >>  {item.value}  
                                     </List.Item>
                                 )}
                             />
