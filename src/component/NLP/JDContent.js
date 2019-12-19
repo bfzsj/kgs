@@ -22,9 +22,6 @@ class JDContent extends React.Component {
                 list:array
             })
         })
-        this.returnData("http://zpsearch.zhaopin.com/mg/job/list?access_token=551c619ef13c45debe92a64880f5e1cdlzJv&orgId=12001997&jobState=publish&page=1",(response) => {
-            console.log(response)
-        })
     }
     
     returnData(url,callback){

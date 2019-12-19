@@ -22,18 +22,16 @@ class JDSearch extends React.Component {
         list:[],
         ClassList:[],
         displayName:'none',
-		JDLight:[]
+		JDLight:[],
+        termWeight:{
+            kwTerm:[],
+            skillTerm:[],
+            titleTerm:[]
+        }
     }
 
     // 组件装载之后调用
     componentDidMount() {
-		axios.get("http://zpsearch.zhaopin.com/profilecenter/resumeServiceSvc/GetResumeByExtId?access_token=551c619ef13c45debe92a64880f5e1cdlzJv&versionNo=1&language=1",{
-			params:{
-			    "resumeNo":"JI119191358R90500000000"
-            }
-		}).then(function (response) {
-                console.log(JSON.parse(response.data.data))
-            })
 
     }
 	returnCaption(url,searchword1,callback){
@@ -70,6 +68,29 @@ class JDSearch extends React.Component {
 						},
 						displayName:'block'
 					})
+            axios.post("/termWeight",{
+                "title":_this.state.title.jobName,"desc":_this.state.title.content
+            }).then((responses)=>{
+                let temp={
+                    kwTerm:[],
+                    skillTerm:[],
+                    titleTerm:[]
+                }
+                let term=JSON.parse(responses.data);
+                Object.keys(term).forEach((items)=>{
+                    Object.keys(term[items]).forEach((item)=>{
+                        temp[items].push({
+                            title:item,
+                            value:term[items][item]
+                        })
+                    })
+                })
+                _this.setState({
+                    termWeight:temp
+                })
+
+            })
+            let JDLight=[];
 			axios.post("/getKw",{
 				"title":_this.state.title.jobName,"desc":_this.state.title.content
 			}).then(function (responses) {
@@ -105,13 +126,35 @@ class JDSearch extends React.Component {
                         }
                     })
                 }
-			}).then(()=> {
-                axios.post("/getJDLight",{
+			}).then(()=>{
+                return axios.post("/getCertAndMajor",{
+                    "title":_this.state.title.jobName,"desc":_this.state.title.content
+                }).then(function (responses) {
+                    let major=JSON.parse(responses.data)["major"];
+                    let cert=JSON.parse(responses.data)["cert"];
+                    if(major.length!=0){
+                        JDLight.push({
+                            "title":"专业用语",
+                            "key":"专业",
+                            "value":major.toString()
+                        });
+                    }
+
+                    if(cert!=undefined&&cert[0]!=""){
+                        JDLight.push({
+                            "title":"证书",
+                            "key":"证书",
+                            "value":cert.toString()
+                        });
+                    }
+                })
+            }).then(()=> {
+                return axios.post("/getJDLight",{
                     "content":_this.state.title.content
                 }).then(function (responses) {
 					console.log(responses)
                     let age=responses.data['age'];
-					let JDLight=[];
+
                     if(age!=undefined) {
 						
                         Object.keys(age).forEach((item) => {
@@ -135,12 +178,11 @@ class JDSearch extends React.Component {
                     }
                     let exp=responses.data['exp']
                     if(exp!=undefined){
-                        Object.keys(exp).forEach((item) => {
-							JDLight.push({
-								"title":"经验",
-								"key":item,
-					            "value":exp[item]
-							});
+                        let [key,value]=["",""]
+                        Object.keys(exp).forEach((item,index) => {
+                            key+=(item+",")
+                            value+=(exp[item]+",")
+
                             //CC357960812J00349003502
                             let temp = _this.light(item, exp[item], 'yellow');
 
@@ -153,6 +195,13 @@ class JDSearch extends React.Component {
                                 }
                             })
                         })
+                        if(key!="") {
+                            JDLight.push({
+                                "title": "经验",
+                                "key": key,
+                                "value": value
+                            });
+                        }
                     }else{
                         message.error("没有提取经验");
                     }
@@ -300,12 +349,113 @@ class JDSearch extends React.Component {
                             <Col span={20}>
                                 <div style={{backgroundColor:'white',display:this.state.displayName}}>
                                     <List
+                                        grid={{ gutter: 16, column: 4 }}
+                                        itemLayout="vertical"
+                                        size="large"
+                                        dataSource={this.state.termWeight.titleTerm}
+                                        header={
+                                            <div>
+                                                <b>Title Term Weight</b>
+                                            </div>
+                                        }
+                                        renderItem={item => (
+                                            <List.Item
+                                                key={item.title}
+
+                                            >
+                                                <List.Item.Meta
+                                                />
+                                                {item.title}  >>  {item.value}
+                                            </List.Item>
+                                        )}
+                                    />
+                                </div>
+                                <div style={{backgroundColor:'white',display:this.state.displayName}}>
+                                    <List
+                                        grid={{ gutter: 16, column: 4 }}
+                                        itemLayout="vertical"
+                                        size="large"
+                                        dataSource={this.state.termWeight.skillTerm}
+                                        header={
+                                            <div>
+                                                <b>Skill Term Weight</b>
+                                            </div>
+                                        }
+                                        renderItem={item => (
+                                            <List.Item
+                                                key={item.title}
+
+                                            >
+                                                <List.Item.Meta
+                                                />
+                                                {item.title}  >>  {item.value}
+                                            </List.Item>
+                                        )}
+                                    />
+                                </div>
+                                <div style={{backgroundColor:'white',display:this.state.displayName}}>
+                                    <List
+                                        grid={{ gutter: 16, column: 4 }}
+                                        itemLayout="vertical"
+                                        size="large"
+                                        dataSource={this.state.termWeight.kwTerm}
+                                        header={
+                                            <div>
+                                                <b>Keyword Term Weight</b>
+                                            </div>
+                                        }
+                                        renderItem={item => (
+                                            <List.Item
+                                                key={item.title}
+
+                                            >
+                                                <List.Item.Meta
+                                                />
+                                                {item.title}  >>  {item.value}
+                                            </List.Item>
+                                        )}
+                                    />
+                                </div>
+
+
+                               {/* <div style={{backgroundColor:'white',display:this.state.displayName}}>
+                                    <List
                                         itemLayout="vertical"
                                         size="large"
                                         dataSource={this.state.list}
                                         footer={
                                             <div>
                                                 <b>ant design</b> footer part
+                                            </div>
+                                        }
+                                        renderItem={item => (
+                                            <List.Item
+                                                key={item.title}
+
+                                            >
+                                                <List.Item.Meta
+                                                    title={<NavLink to={'/caption/'+item.title} target="_blank">{item.title}</NavLink>}
+                                                    description={item.description}
+                                                />
+                                                {item.content}
+                                            </List.Item>
+                                        )}
+                                    />
+                                </div>*/}
+                            </Col>
+                            <Col span={2}></Col>
+                        </Row>
+                        <Row>
+                            <Col span={2}></Col>
+                            <Col span={20}>
+                                <div style={{backgroundColor:'white',display:this.state.displayName,marginBottom:160}}>
+                                    <List
+                                        itemLayout="vertical"
+                                        size="large"
+                                        dataSource={this.state.list}
+                                        header={
+                                            <div>
+                                                <b>caption</b>
                                             </div>
                                         }
                                         renderItem={item => (
