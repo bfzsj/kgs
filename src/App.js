@@ -15,6 +15,8 @@ import PageHeader from './component/lib/PageHeader';
 import Caption from './component/lib/Caption'
 import captionRatio from './component/B端/captionRatio';
 import JDSearch from './component/NLP/JDSearch'
+import CVSearch from './component/NLP/CVSearch'
+import job from './component/NLP/job'
 import './css/lib/reset.css';
 import './css/lib/common.css';
 import './css/lib/pageheader.css';
@@ -28,58 +30,66 @@ const loadingComponent =()=>{
 }
 const PageAComponent = Loadable({
 	loader: () => import('./component/B端/PageA'),
-	loading: PageA,
+	loading: loadingComponent,
 });
 const PageBComponent = Loadable({
 	loader: () => import('./component/NLP/PageB'),
-	loading: PageB,
+	loading: loadingComponent,
 });
 const PageCComponent = Loadable({
 	loader: () => import('./component/B端/PageC'),
-	loading: PageC,
+	loading: loadingComponent,
 });
 const PageDComponent = Loadable({
     loader: () => import('./component/NLP/PageD'),
-    loading: PageD,
+    loading: loadingComponent,
 });
 const PageEComponent = Loadable({
     loader: () => import('./component/NLP/PageE'),
-    loading: PageE,
+    loading: loadingComponent,
 });
 const PageFComponent = Loadable({
     loader: () => import('./component/B端/PageF'),
-    loading: PageF,
+    loading: loadingComponent,
 });
 const CvListComponent = Loadable({
     loader: () => import('./component/NLP/CvList'),
-    loading: CvList,
+    loading: loadingComponent,
 });
 const WordbreakerComponent=Loadable({
 	loader:()=> import('./component/NLP/Wordbreaker'),
-	loading:Wordbreaker
+	loading:loadingComponent
 })
 const CaptionComponent=Loadable({
     loader:()=> import('./component/lib/Caption'),
-    loading:Caption
+    loading:loadingComponent
 })
 const JDContentComponent=Loadable({
     loader:()=> import('./component/NLP/JDContent'),
-    loading:JDContent
+    loading:loadingComponent
 })
 const captionRatioComponent=Loadable({
     loader:()=> import('./component/B端/captionRatio'),
-    loading:captionRatio
+    loading:loadingComponent
 })
 const JobTypeClassifierComponent=Loadable({
 	loader:()=> import('./component/NLP/JobTypeClassifier'),
-	loading:JobTypeClassifier
+	loading:loadingComponent
 })
 const JDSearchComponent=Loadable({
     loader:()=> import('./component/NLP/JDSearch'),
-    loading:JDSearch
+    loading:loadingComponent
 })
 const CVJDComponent=Loadable({
     loader:()=> import('./component/B端/CVJD'),
+    loading: loadingComponent
+})
+const CVSearchComponent=Loadable({
+    loader:()=> import('./component/NLP/CVSearch'),
+    loading: loadingComponent
+})
+const JobComponent=Loadable({
+    loader:()=> import('./component/NLP/job'),
     loading: loadingComponent
 })
 
@@ -161,6 +171,9 @@ class App extends Component {
 							<Route path='/JobTypeClassifier' component={JobTypeClassifierComponent}></Route>
 							<Route path='/JDSearch' component={JDSearchComponent}></Route>
 							<Route path='/CVJD' component={CVJDComponent}></Route>
+							<Route path='/CVSearch' component={CVSearchComponent}></Route>
+							<Route path='/Job' component={JobComponent}></Route>
+
 							<Redirect to={{
 								pathname: '/',
 								search: '?utm=your+face'

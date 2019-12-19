@@ -253,7 +253,7 @@ module.exports = function (webpackEnv) {
 					sourceMap: shouldUseSourceMap,
 				}),
 				// This is only used in production mode
-				new OptimizeCSSAssetsPlugin({
+				/*new OptimizeCSSAssetsPlugin({
 					cssProcessorOptions: {
 						parser: safePostCssParser,
 						map: shouldUseSourceMap
@@ -267,7 +267,7 @@ module.exports = function (webpackEnv) {
 							}
 							: false,
 					},
-				}),
+				}),*/
 			],
 			// Automatically split vendor and commons
 			// https://twitter.com/wSokra/status/969633336732905474
@@ -569,7 +569,7 @@ module.exports = function (webpackEnv) {
 				// Options similar to the same options in webpackOptions.output
 				// both options are optional
 				filename: 'static/css/[name].[contenthash:8].css',
-				chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
+				//chunkFilename: 'static/css/[name].[contenthash:8].chunk.css',
 			}),
 			// Generate a manifest file which contains a mapping of all asset filenames
 			// to their corresponding output file so that tools can pick it up without

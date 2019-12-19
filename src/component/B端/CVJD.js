@@ -30,13 +30,19 @@ class CVJD extends React.Component {
         });
         let {CVJDList}=val;
         CVJDList=CVJDList!==undefined?CVJDList:''
-        console.log(CVJDList)
         let list=CVJDList.split("\n");
         let [CV,JD,CVRequest,JDRequest]=[[],[],[],[]]
         list.forEach((item)=>{
-            let temp=item.split(" ")
-            JD.push(temp[0]);
+            let temp=item.split("\t")
+            JD.push(temp[0].trim());
+			temp[1]=temp[1].trim()
+			if(temp[1].indexOf("_")==-1){
+				temp[1]=temp[1]+"_1"
+			}
             CV.push(temp[1]);
+        })
+        this.setState({
+            JDList:[]
         })
         JD.forEach((item,index)=>{
             JDRequest.push(new Promise((resolve,reject)=>{
@@ -44,6 +50,8 @@ class CVJD extends React.Component {
                     params:{"id":item}
                 }).then(function (response) {
                     resolve(response.data.data.value);
+                }).catch(function (err) {
+                    reject(err)
                 })
             }))
             CVRequest.push(new Promise((resolve,reject)=>{
@@ -52,22 +60,29 @@ class CVJD extends React.Component {
                 }).then(function (response) {
                     if(response.data!="")
                     resolve(JSON.parse(response.data).data[0].value);
+                }).catch(function (err) {
+                    reject(err)
                 })
             }))
         })
         let that=this
         let temp=[]
-        Promise.all(CVRequest).then((values)=>{
-
+        Promise.all(CVRequest).then((values,err)=>{
+            console.log(err)
             if(values[0]!=null) {
+                message.info("请求成功")
                 values.forEach((item) => {
                     temp.push(this.returnCv(item))
                 })
+            }else{
+                message.error("请求失败")
             }
+
             console.log(1)
         }).then(function (response) {
             Promise.all(JDRequest).then((values)=>{
                 if(values[0]!=null) {
+                    message.info("请求成功")
                     values.forEach((item,index) => {
                         let v=that.returnJD(item);
                         Object.keys(v).forEach((items)=>{
@@ -75,6 +90,8 @@ class CVJD extends React.Component {
                         })
 
                     })
+                }else{
+                    message.error("请求失败")
                 }
                 console.log(2)
                 console.log(temp)
@@ -90,7 +107,6 @@ class CVJD extends React.Component {
     };
 
     returnCv(data) {
-        console.log(data.id)
         let tempData = ParamUtil.resume(data);
         tempData['CvSolrUrl'] = '#/main/detailPage?indexRid=' + data.id;
         tempData['CvAliSolrUrl'] = '#/main/detailPage?indexAliRid=' + data.id;

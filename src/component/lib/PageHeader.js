@@ -124,6 +124,12 @@ class PageHeader extends Component {
 					<Menu.Item key="JD查询">
 						<NavLink to="/JDSearch">JD查询</NavLink>
 					</Menu.Item>
+					<Menu.Item key="CV查询">
+						<NavLink to="/CVSearch">CV查询</NavLink>
+					</Menu.Item>
+					<Menu.Item key="职类查询">
+						<NavLink to="/Job">职类查询</NavLink>
+					</Menu.Item>
 					<Menu.Item key="CV_JD相似度">
 						<NavLink to="/page-b">CV_JD相似度</NavLink>
 					</Menu.Item>
@@ -145,6 +151,7 @@ class PageHeader extends Component {
 					<Menu.Item key="分类器">
 						<NavLink to="/JobTypeClassifier">JobTypeClassifier</NavLink>
 					</Menu.Item>
+
 
 				</SubMenu>
 			</Menu>
