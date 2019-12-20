@@ -6,7 +6,7 @@ import axios from 'axios';
 function hasErrors(fieldsError) {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
 }
-class job extends React.Component {
+class industry extends React.Component {
     constructor(props) {
         super(props)
     }
@@ -26,10 +26,11 @@ class job extends React.Component {
         let map=new Map();
         this.getJson((data)=>{
             for(let i=0;i<data.length;i++){
-                dataSource.push(data[i]["subtype_code"]);
-                dataSource.push(data[i]["subtype_name"]);
-                map.set(data[i]["subtype_code"],[data[i]]);
-                map.set(data[i]["subtype_name"],[data[i]])
+                console.log(data[i])
+                dataSource.push(""+data[i]["industry_code"]+"");
+                dataSource.push(data[i]["industry_name"]);
+                map.set(""+data[i]["industry_code"]+"",[data[i]]);
+                map.set(data[i]["industry_name"],[data[i]])
             }
             that.setState({
                 dataSource:dataSource,
@@ -54,7 +55,7 @@ class job extends React.Component {
             listData=this.state.HashMap.get(searchword1)
         }
         /*for(let i=0;i<this.state.searchData.length;i++){
-            if(this.state.searchData[i]["subtype_code"]==searchword1||this.state.searchData[i]["subtype_name"].indexOf(searchword1)>-1){
+            if(this.state.searchData[i]["industry_code"]==searchword1||this.state.searchData[i]["industry_name"].indexOf(searchword1)>-1){
                 listData.push(this.state.searchData[i]);
                 break;
             }
@@ -66,7 +67,7 @@ class job extends React.Component {
     };
 
     getJson(callback){
-        axios.get("./view_file.json")
+        axios.get("./industries_kw.json")
             .then(function (res) {
                 let data=res.data;
                 callback(data)
@@ -82,15 +83,15 @@ class job extends React.Component {
         const usernameError = isFieldTouched('searchword1') && getFieldError('searchword1');
         const columns = [
             {
-                title: '职类ID',
-                dataIndex: 'subtype_code',
-                key: 'subtype_code',
+                title: '行业ID',
+                dataIndex: 'industry_code',
+                key: 'industry_code',
 				/*render: text => <a>{text}</a>,*/
             },
             {
-                title: '职类名称',
-                dataIndex: 'subtype_name',
-                key: 'subtype_name',
+                title: '行业名称',
+                dataIndex: 'industry_name',
+                key: 'industry_name',
             },
             {
                 title: '关键词  >>  chi',
@@ -169,7 +170,7 @@ class job extends React.Component {
 
 					</Form.Item>
 				</Form>
-				<Table style={{marginTop:"20px",marginBottom:"80px"}} title={() => '职类查询'} bordered columns={columns} dataSource={this.state.list} pagination={false}/>
+				<Table style={{marginTop:"20px",marginBottom:"80px"}} title={() => '行业查询'} bordered columns={columns} dataSource={this.state.list} pagination={false}/>
 			</div>
         );
     }
@@ -180,4 +181,4 @@ class job extends React.Component {
     }
 }
 
-export default Form.create()(job);
+export default Form.create()(industry);

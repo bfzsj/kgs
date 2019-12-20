@@ -2,10 +2,15 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="f0aab331-9197-450d-ac7e-af1e6c543bdb" name="Default" comment="">
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/public/industries_kw.json" />
+      <change type="NEW" beforePath="" afterPath="$PROJECT_DIR$/src/component/NLP/industry.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/.idea/workspace.xml" afterPath="$PROJECT_DIR$/.idea/workspace.xml" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/index.html" afterPath="$PROJECT_DIR$/build/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/manifest.json" afterPath="$PROJECT_DIR$/build/manifest.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/service-worker.js" afterPath="$PROJECT_DIR$/build/service-worker.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/App.js" afterPath="$PROJECT_DIR$/src/App.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/component/NLP/job.js" afterPath="$PROJECT_DIR$/src/component/NLP/job.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/component/lib/PageHeader.js" afterPath="$PROJECT_DIR$/src/component/lib/PageHeader.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -20,14 +25,45 @@
   <component name="ExecutionTargetManager" SELECTED_TARGET="default_target" />
   <component name="FileEditorManager">
     <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
-      <file leaf-file-name="job.js" pinned="false" current-in-tab="true">
+      <file leaf-file-name="job.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/component/NLP/job.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="142">
-              <caret line="86" column="47" lean-forward="false" selection-start-line="86" selection-start-column="47" selection-end-line="86" selection-end-column="47" />
+            <state relative-caret-position="284">
+              <caret line="26" column="30" lean-forward="false" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
-                <marker date="1576810761552" expanded="true" signature="1965:2070" ph="{...}" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="industry.js" pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/component/NLP/industry.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="-190">
+              <caret line="63" column="25" lean-forward="true" selection-start-line="63" selection-start-column="25" selection-end-line="63" selection-end-column="25" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="PageHeader.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/component/lib/PageHeader.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="435">
+              <caret line="133" column="50" lean-forward="false" selection-start-line="133" selection-start-column="50" selection-end-line="133" selection-end-column="50" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="App.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/App.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="532">
+              <caret line="181" column="71" lean-forward="false" selection-start-line="181" selection-start-column="71" selection-end-line="181" selection-end-column="71" />
+              <folding>
+                <element signature="e#0#39#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -46,10 +82,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>html</find>
-      <find>http://zhiliankg-schema.zhaopin.com</find>
-      <find>zhi</find>
-      <find>getPositionIDsList</find>
       <find>resume</find>
       <find>list</find>
       <find>firstData</find>
@@ -76,6 +108,10 @@
       <find>replacePos</find>
       <find>\n</find>
       <find>证书</find>
+      <find>searchData</find>
+      <find>职类</find>
+      <find>subtype</find>
+      <find>getJson</find>
     </findStrings>
     <replaceStrings>
       <replace>'searchword2'</replace>
@@ -91,6 +127,7 @@
       <replace>fixed:'right'</replace>
       <replace>100px</replace>
       <replace>state.title[0]</replace>
+      <replace>industry</replace>
     </replaceStrings>
   </component>
   <component name="Git.Settings">
@@ -139,13 +176,14 @@
         <option value="$PROJECT_DIR$/src/component/NLP/例子.html" />
         <option value="$PROJECT_DIR$/src/component/B端/CVJD.js" />
         <option value="$PROJECT_DIR$/build/view_file.json" />
-        <option value="$PROJECT_DIR$/src/App.js" />
-        <option value="$PROJECT_DIR$/src/component/lib/PageHeader.js" />
         <option value="$PROJECT_DIR$/src/component/NLP/JDContent.js" />
         <option value="$PROJECT_DIR$/src/component/NLP/JDSearch.js" />
         <option value="$PROJECT_DIR$/src/utils/ParamUtil.js" />
         <option value="$PROJECT_DIR$/src/component/NLP/CVSearch.js" />
         <option value="$PROJECT_DIR$/src/component/NLP/job.js" />
+        <option value="$PROJECT_DIR$/src/App.js" />
+        <option value="$PROJECT_DIR$/src/component/lib/PageHeader.js" />
+        <option value="$PROJECT_DIR$/src/component/NLP/industry.js" />
       </list>
     </option>
   </component>
@@ -167,8 +205,8 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="310" />
-    <option name="y" value="346" />
+    <option name="x" value="509" />
+    <option name="y" value="164" />
     <option name="width" value="1682" />
     <option name="height" value="1022" />
   </component>
@@ -416,19 +454,19 @@
     <property name="DefaultHtmlFileTemplate" value="HTML File" />
   </component>
   <component name="RecentsManager">
-    <key name="MoveFile.RECENT_KEYS">
-      <recent name="D:\reactwork\kgs\public" />
-      <recent name="D:\reactwork\kgs\build\static" />
-      <recent name="D:\reactwork\kgs\src" />
-      <recent name="D:\reactwork\kgs\src\component\NLP" />
-      <recent name="D:\reactwork\kgs\src\component\B端" />
-    </key>
     <key name="CopyFile.RECENT_KEYS">
       <recent name="D:\reactwork\kgs\public" />
       <recent name="D:\reactwork\kgs\src\component\NLP" />
       <recent name="D:\reactwork\kgs\build" />
       <recent name="D:\reactwork\kgs\src\component\B端" />
       <recent name="D:\reactwork\kgs\src\component\lib" />
+    </key>
+    <key name="MoveFile.RECENT_KEYS">
+      <recent name="D:\reactwork\kgs\public" />
+      <recent name="D:\reactwork\kgs\build\static" />
+      <recent name="D:\reactwork\kgs\src" />
+      <recent name="D:\reactwork\kgs\src\component\NLP" />
+      <recent name="D:\reactwork\kgs\src\component\B端" />
     </key>
   </component>
   <component name="RunDashboard">
@@ -599,15 +637,15 @@
       <workItem from="1576653113537" duration="10083000" />
       <workItem from="1576725145227" duration="4230000" />
       <workItem from="1576735971297" duration="16537000" />
-      <workItem from="1576806752438" duration="4006000" />
+      <workItem from="1576806752438" duration="7169000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="295891000" />
+    <option name="totallyTimeSpent" value="299054000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="310" y="346" width="1682" height="1022" extended-state="0" />
+    <frame x="509" y="164" width="1682" height="1022" extended-state="0" />
     <editor active="true" />
     <layout>
       <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.18247299" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
@@ -643,20 +681,6 @@
     <watches-manager />
   </component>
   <component name="editorHistoryManager">
-    <entry file="file://$PROJECT_DIR$/node_modules/react-router-dom/index.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-222">
-          <caret line="3" column="188" lean-forward="false" selection-start-line="3" selection-start-column="184" selection-end-line="3" selection-end-column="188" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/public/index.html">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="760">
-          <caret line="40" column="7" lean-forward="false" selection-start-line="40" selection-start-column="7" selection-end-line="40" selection-end-column="7" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/write.json" />
     <entry file="file://$PROJECT_DIR$/public/write.json">
       <provider selected="true" editor-type-id="text-editor">
@@ -859,13 +883,6 @@
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/component/NLP/例子.html" />
-    <entry file="file://$PROJECT_DIR$/src/component/lib/PageHeader.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="606">
-          <caret line="130" column="47" lean-forward="false" selection-start-line="130" selection-start-column="47" selection-end-line="130" selection-end-column="47" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/component/B端/PageC.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="893">
@@ -884,13 +901,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="76">
           <caret line="4" column="4" lean-forward="false" selection-start-line="4" selection-start-column="4" selection-end-line="4" selection-end-column="4" />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/App.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2584">
-          <caret line="159" column="58" lean-forward="false" selection-start-line="159" selection-start-column="58" selection-end-line="159" selection-end-column="58" />
         </state>
       </provider>
     </entry>
@@ -995,12 +1005,45 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/component/NLP/job.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="142">
-          <caret line="86" column="47" lean-forward="false" selection-start-line="86" selection-start-column="47" selection-end-line="86" selection-end-column="47" />
+        <state relative-caret-position="284">
+          <caret line="26" column="30" lean-forward="false" selection-start-line="26" selection-start-column="30" selection-end-line="26" selection-end-column="30" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
-            <marker date="1576810761552" expanded="true" signature="1965:2070" ph="{...}" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/App.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="532">
+          <caret line="181" column="71" lean-forward="false" selection-start-line="181" selection-start-column="71" selection-end-line="181" selection-end-column="71" />
+          <folding>
+            <element signature="e#0#39#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/component/lib/PageHeader.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="435">
+          <caret line="133" column="50" lean-forward="false" selection-start-line="133" selection-start-column="50" selection-end-line="133" selection-end-column="50" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/public/industries_kw.json">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="0">
+          <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/component/NLP/industry.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="-190">
+          <caret line="63" column="25" lean-forward="true" selection-start-line="63" selection-start-column="25" selection-end-line="63" selection-end-column="25" />
+          <folding />
         </state>
       </provider>
     </entry>

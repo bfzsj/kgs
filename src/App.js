@@ -17,6 +17,8 @@ import captionRatio from './component/B端/captionRatio';
 import JDSearch from './component/NLP/JDSearch'
 import CVSearch from './component/NLP/CVSearch'
 import job from './component/NLP/job'
+import CVJD from './component/B端/CVJD'
+import industry from './component/NLP/industry'
 import './css/lib/reset.css';
 import './css/lib/common.css';
 import './css/lib/pageheader.css';
@@ -90,6 +92,10 @@ const CVSearchComponent=Loadable({
 })
 const JobComponent=Loadable({
     loader:()=> import('./component/NLP/job'),
+    loading: loadingComponent
+})
+const industryComponent=Loadable({
+    loader:()=> import('./component/NLP/industry'),
     loading: loadingComponent
 })
 
@@ -173,6 +179,7 @@ class App extends Component {
 							<Route path='/CVJD' component={CVJDComponent}></Route>
 							<Route path='/CVSearch' component={CVSearchComponent}></Route>
 							<Route path='/Job' component={JobComponent}></Route>
+							<Route path='/industry' component={industryComponent}></Route>
 
 							<Redirect to={{
 								pathname: '/',
