@@ -1,7 +1,7 @@
 import React from 'react';
 import '../../App.css';
 import '../../css/lib/reset.css'
-import { Form, Input, Button ,Table,List,Card} from 'antd';
+import {AutoComplete , Form, Input, Button ,Table,List,Card} from 'antd';
 import axios from 'axios';
 function hasErrors(fieldsError) {
     return Object.keys(fieldsError).some(field => fieldsError[field]);
@@ -12,11 +12,29 @@ class job extends React.Component {
     }
 
     state={
-        list:[]
+        list:[],
+        dataSource:[],
+        displayName:false,
+        searchData:[],
+        search:""
     }
     // 组件装载之后调用
     componentDidMount() {
         this.props.form.validateFields();
+        let dataSource=[]
+        let listData=[]
+        let that=this;
+        this.getJson((data)=>{
+            for(let i=0;i<data.length;i++){
+                listData.push(data[i])
+                dataSource.push(data[i]["subtype_code"]);
+                dataSource.push(data[i]["subtype_name"]);
+            }
+            that.setState({
+                dataSource:dataSource,
+                searchData:listData
+            })
+        })
     }
     handleSubmit = e => {
         e.preventDefault();
@@ -31,7 +49,16 @@ class job extends React.Component {
         console.log(searchword1)
         let that=this;
         let listData=[]
-        this.getJson((data)=>{
+        for(let i=0;i<this.state.searchData.length;i++){
+            if(this.state.searchData[i]["subtype_code"]==searchword1||this.state.searchData[i]["subtype_name"].indexOf(searchword1)>-1){
+                listData.push(this.state.searchData[i]);
+                break;
+            }
+        }
+        that.setState({
+            list:listData
+        })
+        /*this.getJson((data)=>{
             for(let i=0;i<data.length;i++){
                 if(data[i]["subtype_code"]==searchword1||data[i]["subtype_name"].indexOf(searchword1)>-1){
                     listData.push(data[i]);
@@ -42,7 +69,7 @@ class job extends React.Component {
             that.setState({
                 list:listData
             })
-        })
+        })*/
 
     };
 
@@ -57,8 +84,9 @@ class job extends React.Component {
     //渲染
     render() {
         const { getFieldDecorator, getFieldsError, getFieldError, isFieldTouched } = this.props.form;
-
+        const dataSource=this.state.dataSource;
         // Only show error after a field is touched.
+        let search=""
         const usernameError = isFieldTouched('searchword1') && getFieldError('searchword1');
         const columns = [
             {
@@ -97,10 +125,54 @@ class job extends React.Component {
                         {getFieldDecorator('searchword1', {
                             rules: [{ required: true, message: '请输入id或者name' }],
                         })(
-							<Input
-								style={{width:'255px'}}
-								placeholder="请输入id或者name"
-							/>,
+                            <AutoComplete
+                                style={{ width: 255 }}
+                                dataSource={dataSource}
+                                placeholder="请输入id或者name"
+                                open={this.state.displayName}
+                                filterOption={(inputValue, option) =>
+                                option.props.children.toUpperCase().indexOf(inputValue.toUpperCase()) !== -1
+                                }
+                                onSearch={(value)=>{
+                                    let bool= value !== "" ? true:false
+                                    this.setState({
+                                        displayName:bool,
+                                        search:value
+                                    })
+                                }}
+                                onChange={(value)=>{
+                                    let bool= value !== "" ? true:false
+                                    this.setState({
+                                        displayName:bool,
+                                        search:value
+                                    })
+                                }}
+                                onBlur={()=>{
+                                    this.setState({
+                                        displayName:false,
+                                    })
+                                }}
+                                onFocus={()=>{
+                                    let bool=this.state.search!==""?true:false
+                                    this.setState({
+                                        displayName:bool
+                                    })
+                                }}
+                                onSelect={(value)=>{
+                                    console.log(value)
+                                    let listData=[]
+                                    for(let i=0;i<this.state.searchData.length;i++){
+                                        if(this.state.searchData[i]["subtype_code"]==value||this.state.searchData[i]["subtype_name"].indexOf(value)>-1){
+                                            listData.push(this.state.searchData[i]);
+                                            break;
+                                        }
+                                    }
+                                    this.setState({
+                                        list:listData,
+                                        displayName:false
+                                    })
+                                }}
+                            />
                         )}
 					</Form.Item>
 
