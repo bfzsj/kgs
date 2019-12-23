@@ -405,7 +405,13 @@ class CVSearch extends React.Component {
                                     </div>
                                     {
                                         that.state.EducationExperience.map((item,index)=>{
-                                            return <p style={{display:that.state.displayName}} dangerouslySetInnerHTML={{__html:item.SchoolName+"-"+item.MajorName+"专业"}}></p>
+                                            return <div>
+                                                    {item.SchoolName}-{item.MajorName}专业
+                                                <span style={{float:"right"}}>
+                                                    {"开始时间:" +item.DateStart.substr(0,10)+"      结束时间:"+  item.DateEnd.substr(0,10)}
+                                                </span>
+                                            </div>
+                                            //<p style={{display:that.state.displayName}} dangerouslySetInnerHTML={{__html:item.SchoolName+"-"+item.MajorName+"专业"}}></p>
                                         })
                                     }
                                 </div>

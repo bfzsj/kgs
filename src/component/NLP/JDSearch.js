@@ -27,6 +27,12 @@ class JDSearch extends React.Component {
             kwTerm:[],
             skillTerm:[],
             titleTerm:[]
+        },
+        tuple:{
+            _1:[],
+            _2:[],
+            _3:[],
+            _4:[],
         }
     }
 
@@ -68,7 +74,7 @@ class JDSearch extends React.Component {
 						},
 						displayName:'block'
 					})
-            axios.post("/termWeight",{
+            axios.post("http://zhiliankg-schema.zhaopin.com/termWeight",{
                 "title":_this.state.title.jobName,"desc":_this.state.title.content
             }).then((responses)=>{
                 let temp={
@@ -91,7 +97,7 @@ class JDSearch extends React.Component {
 
             })
             let JDLight=[];
-			axios.post("/getKw",{
+			axios.post("http://zhiliankg-schema.zhaopin.com/getKw",{
 				"title":_this.state.title.jobName,"desc":_this.state.title.content
 			}).then(function (responses) {
 
@@ -127,7 +133,7 @@ class JDSearch extends React.Component {
                     })
                 }
 			}).then(()=>{
-                return axios.post("/getCertAndMajor",{
+                return axios.post("http://zhiliankg-schema.zhaopin.com/getCertAndMajor",{
                     "title":_this.state.title.jobName,"desc":_this.state.title.content
                 }).then(function (responses) {
                     let major=JSON.parse(responses.data)["major"];
@@ -149,7 +155,7 @@ class JDSearch extends React.Component {
                     }
                 })
             }).then(()=> {
-                return axios.post("/getJDLight",{
+                return axios.post("http://zhiliankg-schema.zhaopin.com/getJDLight",{
                     "content":_this.state.title.content
                 }).then(function (responses) {
 					console.log(responses)
@@ -205,13 +211,19 @@ class JDSearch extends React.Component {
                     }else{
                         message.error("没有提取经验");
                     }
+                    let tuple=responses.data['tuple'];
+                    if(tuple!=undefined){
+                        _this.setState({
+                            tuple:tuple
+                        })
+                    }
 					_this.setState({
 						JDLight:JDLight
 					})
                 })
             })
 
-            axios.post("/JobTypeClassifier",{
+            axios.post("http://zhiliankg-schema.zhaopin.com/JobTypeClassifier",{
                 "title":_this.state.title.jobName,"desc":_this.state.title.content
             }).then(function (responses) {
                 if(responses.data!=undefined&&responses.data!=='') {
@@ -267,7 +279,7 @@ class JDSearch extends React.Component {
     get_cv_list(searchword1){
         let _this=this;
         console.log(searchword1)
-        this.returnData("/get_CVList",searchword1,(response)=>{
+        this.returnData("http://zhiliankg-schema.zhaopin.com/get_CVList",searchword1,(response)=>{
            /* _this.setState({
                 list:response.data
             })*/
@@ -337,10 +349,68 @@ class JDSearch extends React.Component {
                             <Col span={20}>
                                 <div className="cvList-page-header" style={{display:this.state.displayName}}>
                                     <h1 style={{fontSize:'36px'}}><span dangerouslySetInnerHTML={{__html:this.state.title.jobName}}></span>
-                                        <small style={{float: 'right',marginRight: '1em'}}><Button type="primary" htmlType="button" onClick={this.get_cv_list.bind(this,this.state.search)}>推荐</Button></small>
+
                                     </h1>
                                 </div>
+                            </Col>
+                            <Col span={1}></Col>
+                        </Row>
+                        <Row>
+                            <Col span={2}></Col>
+                            <Col span={9}>
                                 <p style={{display:this.state.displayName}} dangerouslySetInnerHTML={{__html:( this.state.title.content+'   <span style="color: black">(绿色是关键字，红色是年龄，黄色是经验)</span>')}}></p>
+                            </Col>
+                            <Col span={1}></Col>
+                            <Col span={10} style={{display:this.state.displayName}}>
+                                <div>
+									<div style={{fontSize:12,color:'blue'}}>
+										岗位职责 {this.state.tuple._1.length==0?"（数据为空）":""}
+									</div>
+									{
+										this.state.tuple._1.map((item,index)=>{
+											return <div style={{fontSize:12}}>
+												{item}
+											</div>
+										})
+									}
+								</div>
+								
+                                <div>
+									<div style={{fontSize:12,color:'blue'}}>
+										任职要求 {this.state.tuple._2.length==0?"（数据为空）":""}
+									</div>
+									{
+										this.state.tuple._2.map((item,index)=>{
+											return <div style={{fontSize:12}}>
+												{item}
+											</div>
+										})
+									}
+								</div>
+                                <div>
+									<div style={{fontSize:12,color:'blue'}}>
+										招聘方向 {this.state.tuple._3.length==0?"（数据为空）":""}
+									</div>
+									{
+										this.state.tuple._3.map((item,index)=>{
+											return <div style={{fontSize:12}}>
+												{item}
+											</div>
+										})
+									}
+								</div>
+                                <div>
+									<div style={{fontSize:12,color:'blue'}}>
+										其他剩余字段 {this.state.tuple._4.length==0?"（数据为空）":""}
+									</div>
+									{
+										this.state.tuple._4.map((item,index)=>{
+											return <div style={{fontSize:12}}>
+												{item}
+											</div>
+										})
+									}
+								</div>
                             </Col>
                             <Col span={2}></Col>
                         </Row>
