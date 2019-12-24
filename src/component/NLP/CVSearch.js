@@ -23,14 +23,18 @@ class CVSearch extends React.Component {
         termWeight:[],
         CommentContent:'',
         EducationExperience:[],
-        ProjectExperience:[]
+        ProjectExperience:[],
+        ProfessionnalSkill:[],
+        LanguageSkill:[],
+        AchieveCertificate:[],
+        Other:[]
     }
 
     // 组件装载之后调用
     componentDidMount() {
         axios.get("http://zpsearch.zhaopin.com/profilecenter/resumeServiceSvc/GetResumeByExtId?access_token=551c619ef13c45debe92a64880f5e1cdlzJv&versionNo=1&language=1&resumeNo=JI465130935R90500000000")
             .then(function (response) {
-                console.log(JSON.parse(response.data.data))
+                console.log(response)
             })
     }
 	returnCaption(url,searchword1,callback){
@@ -74,7 +78,11 @@ class CVSearch extends React.Component {
 						title:title,
 						displayName:'block',
                         EducationExperience:resData["EducationExperience"],
-                        ProjectExperience:resData["ProjectExperience"]
+                        ProjectExperience:resData["ProjectExperience"],
+                        ProfessionnalSkill:resData["ProfessionnalSkill"],
+                        LanguageSkill:resData["LanguageSkill"],
+                        AchieveCertificate:resData["AchieveCertificate"],
+                        Other:resData["Other"]
 					})
             let termWeightRequest=[]
 
@@ -138,7 +146,8 @@ class CVSearch extends React.Component {
             let JDLight=[];
             let getKw=[];
             let getKwTitle=_this.state.title;
-            _this.state.title.forEach((p1)=>{
+            let set=new Set();
+            _this.state.title.forEach((p1,p2)=>{
                 getKw.push(new Promise((resolve,reject)=>{
                     axios.post("http://zhiliankg-schema.zhaopin.com/getKw",{
                         "title":p1.jobName,"desc":p1.content
@@ -147,96 +156,6 @@ class CVSearch extends React.Component {
                             let data=JSON.parse(responses.data);
                             resolve(data);
                         }
-                    }).then(()=>{
-                        let getCert=[];
-                        _this.state.title.forEach((item,index)=>{
-                            getCert.push(new Promise((resolves,reject)=>{
-                                axios.post("http://zhiliankg-schema.zhaopin.com/getCertAndMajor",{
-                                    "title":item.jobName,"desc":item.content
-                                }).then(function (responses) {
-                                    resolves(responses.data);
-                                })
-                            }))
-                        })
-                        return Promise.all(getCert).then((values)=>{
-                            values.forEach((item)=>{
-                                let major=JSON.parse(item)["major"];
-                                let cert=JSON.parse(item)["cert"];
-                                if(major.length!=0){
-                                    JDLight.push({
-                                        "title":"专业用语",
-                                        "key":"专业",
-                                        "value":major.toString()
-                                    });
-                                }
-                                if(cert!=undefined&&cert.length!=0){
-                                    JDLight.push({
-                                        "title":"证书",
-                                        "key":"证书",
-                                        "value":cert.toString()
-                                    });
-                                }
-                            })
-                        })
-                    }).then(()=> {
-                        //getCertAndMajor
-                        let getJD=[]
-                        _this.state.title.forEach((item,index)=>{
-                            getJD.push(new Promise((resolves,reject)=>{
-                                axios.post("http://zhiliankg-schema.zhaopin.com/getJDLight",{
-                                    "content":item.content
-                                }).then(function (responses) {
-                                    resolves(responses.data);
-                                })
-                            }))
-                        })
-                        return Promise.all(getJD).then((values)=>{
-                            let title=_this.state.title;
-                            values.forEach((items,index)=>{
-                                let age=items['age'];
-                                let exp=items['exp']
-                                if(age!=undefined) {
-                                    Object.keys(age).forEach((item) => {
-                                        JDLight.push({
-                                            "title":"年龄",
-                                            "key":item,
-                                            "value":age[item]
-                                        });
-                                        let av=item.trim();
-                                        title[index].content = _this.light(title[index].content, av, 'red', age[item]);
-                                    })
-                                }else{
-                                    message.error("没有提取年龄");
-                                }
-
-                                if(exp!=undefined){
-                                    let [key,value]=["",""]
-                                    Object.keys(exp).forEach((item) => {
-                                        key+=(item+",")
-                                        value+=(exp[item]+",")
-
-                                        //CC357960812J00349003502
-                                        let temp = _this.light(item, exp[item], 'yellow');
-
-                                        title[index].content=_this.relight(title[index].content,item,temp);
-                                    })
-                                    if(key!="") {
-                                        JDLight.push({
-                                            "title": "经验",
-                                            "key": key,
-                                            "value": value
-                                        });
-                                    }
-                                }else{
-                                    message.error("没有提取经验");
-                                }
-                            })
-                            _this.setState({
-                                title:title,
-                                JDLight:JDLight
-                            })
-                        })
-
                     })
                 }))
             })
@@ -262,6 +181,93 @@ class CVSearch extends React.Component {
                 _this.setState({
                     title: getKwTitle
                 })
+            }).then(()=>{
+                let [title,content]=["",""]
+                _this.state.title.forEach((item,index)=>{
+                    title=title+item.jobName+"";
+                    content=content+item.content+","
+                })
+                return axios.post("http://zhiliankg-schema.zhaopin.com/getCertAndMajor",{
+                    "title":title,"desc":content
+                }).then(function (responses) {
+                    let major=JSON.parse(responses.data)["major"];
+                    let cert=JSON.parse(responses.data)["cert"];
+                    if(major.length!=0){
+                        JDLight.push({
+                            "title":"专业用语",
+                            "key":"专业",
+                            "value":major.toString()
+                        });
+                    }
+                    if(cert!=undefined&&cert.length!=0){
+
+                        JDLight.push({
+                            "title":"证书",
+                            "key":"证书",
+                            "value":cert.toString()
+                        });
+
+                    }
+                })
+            }).then(()=> {
+                //getCertAndMajor
+                let getJD=[]
+                _this.state.title.forEach((item,index)=>{
+                    getJD.push(new Promise((resolves,reject)=>{
+                        axios.post("http://zhiliankg-schema.zhaopin.com/getJDLight",{
+                            "content":item.content
+                        }).then(function (responses) {
+                            resolves(responses.data);
+                        })
+                    }))
+                })
+                return Promise.all(getJD).then((values)=>{
+                    let title=_this.state.title;
+                    values.forEach((items,index)=>{
+                        let age=items['age'];
+                        let exp=items['exp']
+                        if(age!=undefined) {
+                            Object.keys(age).forEach((item) => {
+                                JDLight.push({
+                                    "title":"年龄",
+                                    "key":item,
+                                    "value":age[item]
+                                });
+                                let av=item.trim();
+                                title[index].content = _this.light(title[index].content, av, 'red', age[item]);
+                            })
+                        }else{
+                            message.error("没有提取年龄");
+                        }
+
+                        if(exp!=undefined){
+                            let [key,value]=["",""]
+                            Object.keys(exp).forEach((item) => {
+                                key+=(item+",")
+                                value+=(exp[item]+",")
+
+                                //CC357960812J00349003502
+                                let temp = _this.light(item, exp[item], 'yellow');
+
+                                title[index].content=_this.relight(title[index].content,item,temp);
+                            })
+                            if(key!="") {
+                                JDLight.push({
+                                    "title": "经验",
+                                    "key": key,
+                                    "value": value
+                                });
+                            }
+                        }else{
+                            message.error("没有提取经验");
+                        }
+                    })
+                    _this.setState({
+                        title:title,
+                        JDLight:JDLight
+                    })
+                })
+
             })
 
             let JobType=[];
@@ -368,7 +374,7 @@ class CVSearch extends React.Component {
                                 <Form layout="inline" style={{textAlign:'center'}} onSubmit={this.handleSubmit}>
                                     <Form.Item validateStatus={usernameError ? 'error' : ''} help={usernameError || ''}>
                                         {getFieldDecorator('searchword1', {
-                                            initialValue:"JI465130935R90500000000",
+                                            initialValue:"JI583773433R90500000000",
                                             rules: [{ required: true, message: '请输入CV' }],
                                         })(
 										<AutoComplete
@@ -397,9 +403,9 @@ class CVSearch extends React.Component {
                             <Col span={2}></Col>
                             <Col span={20}>
 
-                                <div>
-                                    <div className="cvList-page-header" style={{display:that.state.displayName}}>
-                                        <h1 style={{fontSize:'36px'}}><span dangerouslySetInnerHTML={{__html:"教育经历"}}></span>
+                                <div style={{backgroundColor:'white',borderBottom: "1px solid #eaedf1",padding:"32px 25px 30px 25px",display:that.state.displayName}}>
+                                    <div className="cvList-page-header" >
+                                        <h1 style={{fontSize:'24px',color:"#333"}}><span dangerouslySetInnerHTML={{__html:"教育经历"}}></span>
 
                                         </h1>
                                     </div>
@@ -408,58 +414,149 @@ class CVSearch extends React.Component {
                                             return <div>
                                                     {item.SchoolName}-{item.MajorName}专业
                                                 <span style={{float:"right"}}>
-                                                    {"开始时间:" +item.DateStart.substr(0,10)+"      结束时间:"+  item.DateEnd.substr(0,10)}
+                                                    {item.DateStart.substr(0,4)+"."+item.DateStart.substr(5,2)+"-"+item.DateEnd.substr(0,4)+"."+item.DateEnd.substr(5,2)}
                                                 </span>
                                             </div>
                                             //<p style={{display:that.state.displayName}} dangerouslySetInnerHTML={{__html:item.SchoolName+"-"+item.MajorName+"专业"}}></p>
                                         })
                                     }
                                 </div>
-                                <div>
-                                    <div className="cvList-page-header" style={{display:that.state.displayName}}>
-                                        <h1 style={{fontSize:'36px'}}><span dangerouslySetInnerHTML={{__html:"项目经验"}}></span>
+                                <div style={{backgroundColor:'white',borderBottom: "1px solid #eaedf1",padding:"32px 25px 30px 25px",display:that.state.displayName}}>
+                                    <div className="cvList-page-header" >
+                                        <h1 style={{fontSize:'24px',color:"#333"}}><span dangerouslySetInnerHTML={{__html:"技能"}}></span>
+
+                                        </h1>
+                                    </div>
+                                    {
+                                        that.state.ProfessionnalSkill.map((item,index)=>{
+                                            return <div>
+                                                <h3 ><span>{item.SkillName} </span>
+                                                     <span style={{float:"right",width:150,textAlign:"left"}}> 使用时长：{item.UsedMonths} 月</span>
+                                                </h3>
+                                                <p style={{display:that.state.displayName}} dangerouslySetInnerHTML={{__html:"掌握程度: "+item.MasterDegree+""}}></p>
+                                            </div>
+                                            //<p style={{display:that.state.displayName}} dangerouslySetInnerHTML={{__html:item.SchoolName+"-"+item.MajorName+"专业"}}></p>
+                                        })
+                                    }
+                                </div>
+                                <div style={{backgroundColor:'white',borderBottom: "1px solid #eaedf1",padding:"32px 25px 30px 25px",display:that.state.displayName}}>
+                                    <div className="cvList-page-header" >
+                                        <h1 style={{fontSize:'24px',color:"#333"}}><span dangerouslySetInnerHTML={{__html:"奖项"}}></span>
+
+                                        </h1>
+                                    </div>
+                                    {
+                                        that.state.AchieveCertificate.map((item,index)=>{
+                                            return <div style={{margin:"5px 0"}}>
+                                                {item.CertificateName}
+                                                <span style={{float:"right",fontSize:12,color:"#999"}}>
+                                                     {item.AchieveDate.substr(0,4)+"."+item.AchieveDate.substr(5,2)}
+                                                </span>
+                                            </div>
+                                            //<p style={{display:that.state.displayName}} dangerouslySetInnerHTML={{__html:item.SchoolName+"-"+item.MajorName+"专业"}}></p>
+                                        })
+                                    }
+                                </div>
+
+                                <div style={{backgroundColor:'white',borderBottom: "1px solid #eaedf1",padding:"32px 25px 30px 25px",display:that.state.displayName}}>
+                                    <div className="cvList-page-header" >
+                                        <h1 style={{fontSize:'24px',color:"#333"}}><span dangerouslySetInnerHTML={{__html:"语言"}}></span>
+
+                                        </h1>
+                                    </div>
+                                    {
+                                        that.state.LanguageSkill.map((item,index)=>{
+                                            return <div>
+                                                <h3 ><span>语种： {item.LanguageName} </span>
+
+                                                </h3>
+                                                <p style={{display:that.state.displayName}} dangerouslySetInnerHTML={{__html:"听说能力: "+item.HearSpeakSkill+";"+" 读写能力: "+item.ReadWriteSkill+""}}></p>
+                                            </div>
+                                            //<p style={{display:that.state.displayName}} dangerouslySetInnerHTML={{__html:item.SchoolName+"-"+item.MajorName+"专业"}}></p>
+                                        })
+                                    }
+                                </div>
+                                <div style={{backgroundColor:'white',borderBottom: "1px solid #eaedf1",padding:"32px 25px 30px 25px",display:that.state.displayName}}>
+                                    <div className="cvList-page-header" style={{display:that.state.displayName,marginBottom:40}}>
+                                        <h1 style={{fontSize:'24px',color:"#333"}}><span dangerouslySetInnerHTML={{__html:"项目经验"}}></span>
                                         </h1>
                                     </div>
                                     {
                                         that.state.ProjectExperience.map((item,index)=>{
-                                            return <div>
-                                                <h3 ><span>项目名称： </span>
-                                                    {item.ProjectName}
+                                            return <div style={{marginBottom:40}}>
+                                                <h3 style={{fontSize:18,color:"#333"}}>
+                                                    {item.ProjectName} <span style={{float:"right",fontSize:12,color:"#999"}}>
+                                                    {item.DateStart.substr(0,4)+"."+item.DateStart.substr(5,2)+"-"+item.DateEnd.substr(0,4)+"."+item.DateEnd.substr(5,2)}
+                                                    </span>
                                                 </h3>
-                                                <p style={{display:that.state.displayName}} dangerouslySetInnerHTML={{__html:item.ProjectDescription+""}}></p>
+                                                <p style={{display:that.state.displayName,color:"#999"}} >
+                                                    <pre>项目描述</pre>
+                                                </p>
+                                                <p style={{display:that.state.displayName}} >
+                                                    <pre style={{overflow:"hidden",whiteSpace:"break-spaces"}}>{item.ProjectDescription}</pre>
+                                                </p>
                                             </div>
                                         })
                                     }
                                 </div>
-                                <div>
+                                <div style={{backgroundColor:'white',borderBottom: "1px solid #eaedf1",padding:"32px 25px 30px 25px",display:that.state.displayName}}>
                                     <div className="cvList-page-header" style={{display:that.state.displayName}}>
-                                        <h1 style={{fontSize:'36px'}}><span dangerouslySetInnerHTML={{__html:"自我评价"}}></span>
+                                        <h1 style={{fontSize:'24px',color:"#333"}}><span dangerouslySetInnerHTML={{__html:"自我评价"}}></span>
 
                                         </h1>
                                     </div>
                                     <p style={{display:that.state.displayName}} dangerouslySetInnerHTML={{__html:that.state.CommentContent}}></p>
                                 </div>
+                                <div style={{backgroundColor:'white',borderBottom: "1px solid #eaedf1",padding:"32px 25px 30px 25px",display:that.state.displayName}}>
+                                    <div className="cvList-page-header" >
+                                        <h1 style={{fontSize:'24px',color:"#333"}}><span dangerouslySetInnerHTML={{__html:"其他"}}></span>
+
+                                        </h1>
+                                    </div>
+                                    {
+                                        that.state.Other.map((item,index)=>{
+                                            return <div>
+                                                <h3 ><span>{item.Name} </span>
+
+                                                </h3>
+                                                <p style={{display:that.state.displayName}} dangerouslySetInnerHTML={{__html:"详情: "+item.Description}}></p>
+                                            </div>
+                                            //<p style={{display:that.state.displayName}} dangerouslySetInnerHTML={{__html:item.SchoolName+"-"+item.MajorName+"专业"}}></p>
+                                        })
+                                    }
+                                </div>
                             </Col>
                             <Col span={2}></Col>
 
                         </Row>
+                        <Row>
+                            <Col span={2}></Col>
+                            <Col span={20}>
+                                <div className="cvList-page-header" style={{display:that.state.displayName}}>
+                                    <h1 style={{fontSize:'24px',color:"#333"}}><span dangerouslySetInnerHTML={{__html:"工作经验"}}></span>
+
+                                    </h1>
+                                </div>
+                            </Col>
+                            <Col span={2}></Col>
+                        </Row>
                         {
                             this.state.title.map((item,index)=>{
-                                return <div style={{borderTop:index!=0?"1px solid black":0,marginBottom:20}}>
+                                return <div style={{marginBottom:20}}>
                                     <Row>
                                         <Col span={2}></Col>
-                                        <Col span={8}>
+                                        <Col span={8} style={{borderTop:"1px solid black"}}>
                                             <div>
                                                 <div className="cvList-page-header" style={{display:that.state.displayName}}>
-                                                    <h1 style={{fontSize:'36px'}}><span dangerouslySetInnerHTML={{__html:item.jobName}}></span>
+                                                    <h2 ><span dangerouslySetInnerHTML={{__html:"("+(index+1)+")"+item.jobName}}></span>
 
-                                                    </h1>
+                                                    </h2>
                                                 </div>
                                                 <p style={{display:that.state.displayName}} dangerouslySetInnerHTML={{__html:(item.content+'   <span style="color: black">(绿色是关键字，红色是年龄，黄色是经验)</span>')}}></p>
                                             </div>
                                         </Col>
-                                        <Col span={2}></Col>
-                                        <Col span={10}>
+                                        <Col span={2} style={{borderTop:"1px solid black"}}></Col>
+                                        <Col span={10} style={{borderTop:"1px solid black"}}>
                                             <div style={{backgroundColor:'white',marginTop:75,marginBottom:20,display:that.state.displayName}}>
                                                 <List
                                                     itemLayout="vertical"
