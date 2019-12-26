@@ -27,7 +27,8 @@ class CVSearch extends React.Component {
         ProfessionnalSkill:[],
         LanguageSkill:[],
         AchieveCertificate:[],
-        Other:[]
+        Other:[],
+        BirthYear:""
     }
 
     // 组件装载之后调用
@@ -82,8 +83,10 @@ class CVSearch extends React.Component {
                         ProfessionnalSkill:resData["ProfessionnalSkill"],
                         LanguageSkill:resData["LanguageSkill"],
                         AchieveCertificate:resData["AchieveCertificate"],
-                        Other:resData["Other"]
+                        Other:resData["Other"],
+                        BirthYear:(new Date().getFullYear()-resData["BirthYear"])
 					})
+
             let termWeightRequest=[]
 
             axios.post("http://zhiliankg-schema.zhaopin.com/getKw",{
@@ -146,7 +149,7 @@ class CVSearch extends React.Component {
             let JDLight=[];
             let getKw=[];
             let getKwTitle=_this.state.title;
-            let set=new Set();
+
             _this.state.title.forEach((p1,p2)=>{
                 getKw.push(new Promise((resolve,reject)=>{
                     axios.post("http://zhiliankg-schema.zhaopin.com/getKw",{
@@ -188,19 +191,12 @@ class CVSearch extends React.Component {
                     content=content+item.content+","
                 })
                 return axios.post("http://zhiliankg-schema.zhaopin.com/getCertAndMajor",{
-                    "title":title,"desc":content
+                    "title":title,"desc":content+_this.state.CommentContent
                 }).then(function (responses) {
-                    let major=JSON.parse(responses.data)["major"];
                     let cert=JSON.parse(responses.data)["cert"];
-                    if(major.length!=0){
-                        JDLight.push({
-                            "title":"专业用语",
-                            "key":"专业",
-                            "value":major.toString()
-                        });
-                    }
                     if(cert!=undefined&&cert.length!=0){
-
+                        let set=new Set(cert);
+                        cert=Array.from(set)
                         JDLight.push({
                             "title":"证书",
                             "key":"证书",
@@ -209,65 +205,69 @@ class CVSearch extends React.Component {
 
                     }
                 })
-            }).then(()=> {
-                //getCertAndMajor
-                let getJD=[]
+            }).then(()=>{
+                let [title,content]=["",""]
                 _this.state.title.forEach((item,index)=>{
-                    getJD.push(new Promise((resolves,reject)=>{
-                        axios.post("http://zhiliankg-schema.zhaopin.com/getJDLight",{
-                            "content":item.content
-                        }).then(function (responses) {
-                            resolves(responses.data);
-                        })
-                    }))
+                    title=title+item.jobName+"";
                 })
-                return Promise.all(getJD).then((values)=>{
+                _this.state.EducationExperience.forEach((item,index)=>{
+                    content=content+item.MajorName+""
+                })
+                return axios.post("http://zhiliankg-schema.zhaopin.com/getCertAndMajor",{
+                    "title":title,"desc":content
+                }).then(function (responses) {
+                    let major=JSON.parse(responses.data)["major"];
+                    if(major.length!=0){
+                        JDLight.push({
+                            "title":"专业用语",
+                            "key":"专业",
+                            "value":major.toString()
+                        });
+                    }
+                })
+            }).then(()=>{
+                return JDLight.push({
+                    "title":"年龄",
+                    "key":"年龄",
+                    "value":_this.state.BirthYear
+                })
+            }).then(()=>{
+                let [title,content]=["",_this.state.CommentContent]
+                _this.state.title.forEach((item,index)=>{
+                    content=content+item.content+","
+                })
+                axios.post("http://zhiliankg-schema.zhaopin.com/getJDLight",{
+                    "content":content
+                }).then(function (responses) {
+                    console.log(responses.data);
                     let title=_this.state.title;
-                    values.forEach((items,index)=>{
-                        let age=items['age'];
-                        let exp=items['exp']
-                        if(age!=undefined) {
-                            Object.keys(age).forEach((item) => {
-                                JDLight.push({
-                                    "title":"年龄",
-                                    "key":item,
-                                    "value":age[item]
-                                });
-                                let av=item.trim();
-                                title[index].content = _this.light(title[index].content, av, 'red', age[item]);
-                            })
-                        }else{
-                            message.error("没有提取年龄");
+                    let exp=responses.data['exp']
+                    if(exp!=undefined){
+                        let [key,value]=["",""]
+                        Object.keys(exp).forEach((item) => {
+                            key+=(item+",")
+                            value+=(exp[item]+",")
+
+                            //CC357960812J00349003502
+                            let temp = _this.light(item, exp[item], 'yellow');
+
+                           /* title[index].content=_this.relight(title[index].content,item,temp);*/
+                        })
+                        if(key!="") {
+                            JDLight.push({
+                                "title": "经验",
+                                "key": key,
+                                "value": value
+                            });
                         }
-
-                        if(exp!=undefined){
-                            let [key,value]=["",""]
-                            Object.keys(exp).forEach((item) => {
-                                key+=(item+",")
-                                value+=(exp[item]+",")
-
-                                //CC357960812J00349003502
-                                let temp = _this.light(item, exp[item], 'yellow');
-
-                                title[index].content=_this.relight(title[index].content,item,temp);
-                            })
-                            if(key!="") {
-                                JDLight.push({
-                                    "title": "经验",
-                                    "key": key,
-                                    "value": value
-                                });
-                            }
-                        }else{
-                            message.error("没有提取经验");
-                        }
-                    })
+                    }else{
+                        message.error("没有提取经验");
+                    }
                     _this.setState({
                         title:title,
                         JDLight:JDLight
                     })
                 })
-
             })
 
             let JobType=[];
@@ -486,7 +486,7 @@ class CVSearch extends React.Component {
                                             return <div style={{marginBottom:40}}>
                                                 <h3 style={{fontSize:18,color:"#333"}}>
                                                     {item.ProjectName} <span style={{float:"right",fontSize:12,color:"#999"}}>
-                                                    {item.DateStart.substr(0,4)+"."+item.DateStart.substr(5,2)+"-"+item.DateEnd.substr(0,4)+"."+item.DateEnd.substr(5,2)}
+                                                    {item.DateStart.substr(0,4)+"."+item.DateStart.substr(5,2)+"-"+(item.DateEnd!=""?(item.DateEnd.substr(0,4)+"."+item.DateEnd.substr(5,2)):"至今")}
                                                     </span>
                                                 </h3>
                                                 <p style={{display:that.state.displayName,color:"#999"}} >
@@ -552,7 +552,7 @@ class CVSearch extends React.Component {
 
                                                     </h2>
                                                 </div>
-                                                <p style={{display:that.state.displayName}} dangerouslySetInnerHTML={{__html:(item.content+'   <span style="color: black">(绿色是关键字，红色是年龄，黄色是经验)</span>')}}></p>
+                                                <p style={{display:that.state.displayName}} dangerouslySetInnerHTML={{__html:(item.content)}}></p>
                                             </div>
                                         </Col>
                                         <Col span={2} style={{borderTop:"1px solid black"}}></Col>

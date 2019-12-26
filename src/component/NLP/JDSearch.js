@@ -74,6 +74,7 @@ class JDSearch extends React.Component {
 						},
 						displayName:'block'
 					})
+            let initContent=response.data.data.value.jobDescription
             axios.post("http://zhiliankg-schema.zhaopin.com/termWeight",{
                 "title":_this.state.title.jobName,"desc":_this.state.title.content
             }).then((responses)=>{
@@ -146,7 +147,7 @@ class JDSearch extends React.Component {
                         });
                     }
 
-                    if(cert!=undefined&&cert[0]!=""){
+                    if(cert!=undefined&&cert.length!=0){
                         JDLight.push({
                             "title":"证书",
                             "key":"证书",
@@ -156,7 +157,7 @@ class JDSearch extends React.Component {
                 })
             }).then(()=> {
                 return axios.post("http://zhiliankg-schema.zhaopin.com/getJDLight",{
-                    "content":_this.state.title.content
+                    "content":initContent
                 }).then(function (responses) {
 					console.log(responses)
                     let age=responses.data['age'];
@@ -167,11 +168,10 @@ class JDSearch extends React.Component {
 							JDLight.push({
 								"title":"年龄",
 								"key":item,
-					            "value":age[item]
+					            "value":"("+age[item].toString()+")"
 							});
 							let av=item.trim();
                             let temp = _this.light(_this.state.title.content, av, 'red', age[item]);
-							console.log(temp)
                             _this.setState({
                                 title: {
                                     jobName: _this.state.title.jobName,
@@ -216,6 +216,23 @@ class JDSearch extends React.Component {
                         _this.setState({
                             tuple:tuple
                         })
+                    }
+                    let JobExp=responses.data['JobExp'];
+                    if(JobExp!=undefined){
+                        let content=JSON.parse(JobExp)
+                        let str=''
+
+                        //CC428011313J00177778811
+                        str=ParamUtil.syntaxHighlight(JSON.stringify(content.sentenceAndExperiences))
+
+                        if(content.sentenceAndExperiences.length!=0){
+                            JDLight.push({
+                                "title": "有年限经验",
+                                "key": '经验',
+                                "value":"<pre style='white-space: break-spaces'>"+str+"</pre>"
+                            });
+                        }
+
                     }
 					_this.setState({
 						JDLight:JDLight
@@ -586,7 +603,7 @@ class JDSearch extends React.Component {
                                     >
                                         <List.Item.Meta
 											title={item.title}
-                                        />{item.key}  >>  {item.value}  
+                                        />{item.key}  >>  <span dangerouslySetInnerHTML={{__html:item.value}}></span>
                                     </List.Item>
                                 )}
                             />
