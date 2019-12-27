@@ -223,7 +223,7 @@ class JDSearch extends React.Component {
                         let str=''
 
                         //CC428011313J00177778811
-                        str=ParamUtil.syntaxHighlight(JSON.stringify(content.sentenceAndExperiences))
+                        /*str=ParamUtil.syntaxHighlight(JSON.stringify(content.sentenceAndExperiences))
 
                         if(content.sentenceAndExperiences.length!=0){
                             JDLight.push({
@@ -231,16 +231,54 @@ class JDSearch extends React.Component {
                                 "key": '经验',
                                 "value":"<pre style='white-space: break-spaces'>"+str+"</pre>"
                             });
+                        }*/
+                        if(content.sentenceAndExperiences.length!=0){
+                            str=<List
+
+                                itemLayout="vertical"
+                                size="small"
+                                dataSource={content.sentenceAndExperiences}
+                                renderItem={item => (
+                                    <List.Item
+                                        key={item.experiences}
+
+                                    >
+                                        <div>{'描述： '+item.sentence}</div>
+                                        <div>{'经验： '+item.experiences.toString()}</div>
+                                        <div>{'年限： '+ item.year.toString()}</div>
+                                    </List.Item>
+                                )}
+                            />
+
+                            JDLight.push({
+                                "title": "有年限经验",
+                                "key": '经验',
+                                "value":str
+                            });
                         }
 
                     }
-					_this.setState({
-						JDLight:JDLight
-					})
+                })
+            }).then(()=>{
+                return axios.post("http://zhiliankg-schema.zhaopin.com/getKgApi?get=getEducation",{
+                    "title":_this.state.title.jobName,"desc":initContent
+                }).then(function (responses) {
+                    console.log(responses.data)
+                    let data = responses.data==""?"":JSON.parse(responses.data)
+                    if(data!=""){
+                        JDLight.push({
+                            "title": "学历",
+                            "key": data.text,
+                            "value":"("+data.low+","+data.high+")"
+                        });
+                    }
+
+                    _this.setState({
+                        JDLight:JDLight
+                    })
                 })
             })
-
-            axios.post("http://zhiliankg-schema.zhaopin.com/JobTypeClassifier",{
+            axios.post("http://zhiliankg-schema.zhaopin.com/getKgApi?get=getJobType",{ //http://zhiliankg-schema.zhaopin.com/JobTypeClassifier
                 "title":_this.state.title.jobName,"desc":_this.state.title.content
             }).then(function (responses) {
                 if(responses.data!=undefined&&responses.data!=='') {
@@ -250,6 +288,7 @@ class JDSearch extends React.Component {
                     })
                 }
             })
+
         })
         this.get_cv_list(searchword1)
        // http://industryjobclassify.zpidc.com/KgApi/nlp?content=%E8%B7%9F%E5%8D%95%E6%95%99%E7%AE%A1%E7%85%A7%E6%8A%A4%E5%90%A7%E5%91%98java%E5%BC%80%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88
@@ -603,7 +642,7 @@ class JDSearch extends React.Component {
                                     >
                                         <List.Item.Meta
 											title={item.title}
-                                        />{item.key}  >>  <span dangerouslySetInnerHTML={{__html:item.value}}></span>
+                                        />{item.key}  >>  {item.value}
                                     </List.Item>
                                 )}
                             />
