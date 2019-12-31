@@ -6,8 +6,8 @@
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/index.html" afterPath="$PROJECT_DIR$/build/index.html" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/manifest.json" afterPath="$PROJECT_DIR$/build/manifest.json" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/build/service-worker.js" afterPath="$PROJECT_DIR$/build/service-worker.js" />
-      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/scripts/start.js" afterPath="$PROJECT_DIR$/scripts/start.js" />
       <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/component/NLP/JDSearch.js" afterPath="$PROJECT_DIR$/src/component/NLP/JDSearch.js" />
+      <change type="MODIFICATION" beforePath="$PROJECT_DIR$/src/utils/ParamUtil.js" afterPath="$PROJECT_DIR$/src/utils/ParamUtil.js" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -35,7 +35,7 @@
       <file leaf-file-name="start.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/start.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="331">
+            <state relative-caret-position="817">
               <caret line="43" column="59" lean-forward="false" selection-start-line="43" selection-start-column="59" selection-end-line="43" selection-end-column="59" />
               <folding />
             </state>
@@ -45,13 +45,31 @@
       <file leaf-file-name="JDSearch.js" pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/component/NLP/JDSearch.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="227">
-              <caret line="247" column="59" lean-forward="false" selection-start-line="247" selection-start-column="59" selection-end-line="247" selection-end-column="59" />
+            <state relative-caret-position="-25">
+              <caret line="268" column="46" lean-forward="false" selection-start-line="268" selection-start-column="46" selection-end-line="268" selection-end-column="46" />
               <folding>
-                <marker date="1577443828928" expanded="true" signature="8545:8557" ph="..." />
-                <marker date="1577443828928" expanded="true" signature="8545:8570" ph="..." />
-                <marker date="1577443828928" expanded="true" signature="16360:16372" ph="..." />
+                <marker date="1577698210905" expanded="true" signature="17143:17155" ph="..." />
               </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="CVSearch.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/component/NLP/CVSearch.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="317">
+              <caret line="241" column="27" lean-forward="false" selection-start-line="241" selection-start-column="27" selection-end-line="241" selection-end-column="27" />
+              <folding />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file leaf-file-name="ParamUtil.js" pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/src/utils/ParamUtil.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="266">
+              <caret line="473" column="34" lean-forward="false" selection-start-line="473" selection-start-column="34" selection-end-line="473" selection-end-column="34" />
+              <folding />
             </state>
           </provider>
         </entry>
@@ -59,28 +77,8 @@
       <file leaf-file-name="build.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/scripts/build.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-285">
+            <state relative-caret-position="0">
               <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="webpack.config.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/webpack.config.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="222">
-              <caret line="563" column="73" lean-forward="false" selection-start-line="563" selection-start-column="72" selection-end-line="563" selection-end-column="73" />
-              <folding />
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file leaf-file-name="webpackDevServer.config.js" pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/config/webpackDevServer.config.js">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-1233">
-              <caret line="10" column="43" lean-forward="false" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
               <folding />
             </state>
           </provider>
@@ -89,7 +87,7 @@
       <file leaf-file-name="package.json" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/package.json">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-10">
+            <state relative-caret-position="475">
               <caret line="25" column="26" lean-forward="false" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="26" />
               <folding />
             </state>
@@ -109,7 +107,7 @@
       <file leaf-file-name="App.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/App.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="658">
+            <state relative-caret-position="2964">
               <caret line="181" column="71" lean-forward="false" selection-start-line="181" selection-start-column="71" selection-end-line="181" selection-end-column="71" />
               <folding />
             </state>
@@ -119,7 +117,7 @@
       <file leaf-file-name="serviceWorker.js" pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/serviceWorker.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="275">
+            <state relative-caret-position="304">
               <caret line="17" column="31" lean-forward="false" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
               <folding />
             </state>
@@ -139,13 +137,6 @@
   </component>
   <component name="FindInProjectRecents">
     <findStrings>
-      <find>isEnvProduction</find>
-      <find>state.title</find>
-      <find>ClassList</find>
-      <find>replacePos</find>
-      <find>\n</find>
-      <find>searchData</find>
-      <find>职类</find>
       <find>subtype</find>
       <find>getJson</find>
       <find>console</find>
@@ -169,6 +160,13 @@
       <find>console.log</find>
       <find>desc</find>
       <find>8082</find>
+      <find>JI496114596R90500000000</find>
+      <find>JR123595767R90000001000</find>
+      <find>JI569223425R90500000000</find>
+      <find>tuple</find>
+      <find>CVSearch.js:39</find>
+      <find>244</find>
+      <find>responsibility</find>
     </findStrings>
     <replaceStrings>
       <replace>'searchword2'</replace>
@@ -238,9 +236,9 @@
         <option value="$PROJECT_DIR$/src/App.js" />
         <option value="$PROJECT_DIR$/src/component/lib/PageHeader.js" />
         <option value="$PROJECT_DIR$/src/component/NLP/industry.js" />
-        <option value="$PROJECT_DIR$/src/component/NLP/CVSearch.js" />
-        <option value="$PROJECT_DIR$/src/utils/ParamUtil.js" />
         <option value="$PROJECT_DIR$/scripts/start.js" />
+        <option value="$PROJECT_DIR$/src/utils/ParamUtil.js" />
+        <option value="$PROJECT_DIR$/src/component/NLP/CVSearch.js" />
         <option value="$PROJECT_DIR$/src/component/NLP/JDSearch.js" />
       </list>
     </option>
@@ -263,10 +261,10 @@
     <handled-path value="$PROJECT_DIR$/node_modules" />
   </component>
   <component name="ProjectFrameBounds">
-    <option name="x" value="437" />
-    <option name="y" value="100" />
-    <option name="width" value="1380" />
-    <option name="height" value="1192" />
+    <option name="x" value="-75" />
+    <option name="y" value="361" />
+    <option name="width" value="1936" />
+    <option name="height" value="1176" />
   </component>
   <component name="ProjectView">
     <navigator currentView="ProjectPane" proportions="" version="1">
@@ -284,7 +282,6 @@
     </navigator>
     <panes>
       <pane id="Scratches" />
-      <pane id="Scope" />
       <pane id="ProjectPane">
         <subPane>
           <PATH>
@@ -493,6 +490,7 @@
           </PATH>
         </subPane>
       </pane>
+      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -703,21 +701,22 @@
       <workItem from="1577345269830" duration="9125000" />
       <workItem from="1577414417166" duration="2627000" />
       <workItem from="1577440916419" duration="9000" />
-      <workItem from="1577441886573" duration="2261000" />
+      <workItem from="1577441886573" duration="3918000" />
+      <workItem from="1577690901114" duration="5769000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="346088000" />
+    <option name="totallyTimeSpent" value="353514000" />
   </component>
   <component name="ToolWindowManager">
-    <frame x="437" y="100" width="1380" height="1192" extended-state="1" />
+    <frame x="-75" y="361" width="1936" height="1176" extended-state="0" />
     <layout>
-      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.2228739" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
+      <window_info id="Project" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.15833333" sideWeight="0.5" order="0" side_tool="false" content_ui="combo" />
       <window_info id="TODO" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="6" side_tool="false" content_ui="tabs" />
       <window_info id="Event Log" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.3295238" sideWeight="0.5" order="7" side_tool="true" content_ui="tabs" />
       <window_info id="Version Control" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
-      <window_info id="Run" active="true" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="true" show_stripe_button="true" weight="0.31515712" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
+      <window_info id="Run" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.31988743" sideWeight="0.5" order="2" side_tool="false" content_ui="tabs" />
       <window_info id="npm" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="2" side_tool="true" content_ui="tabs" />
       <window_info id="Structure" active="false" anchor="left" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.25" sideWeight="0.5" order="1" side_tool="false" content_ui="tabs" />
       <window_info id="Terminal" active="false" anchor="bottom" auto_hide="false" internal_type="DOCKED" type="DOCKED" visible="false" show_stripe_button="true" weight="0.33" sideWeight="0.5" order="7" side_tool="false" content_ui="tabs" />
@@ -988,9 +987,6 @@
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1387">
           <caret line="78" column="28" lean-forward="false" selection-start-line="78" selection-start-column="28" selection-end-line="78" selection-end-column="28" />
-          <folding>
-            <element signature="e#0#31#0" expanded="false" />
-          </folding>
         </state>
       </provider>
     </entry>
@@ -1010,33 +1006,16 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/utils/ParamUtil.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="4959">
-          <caret line="261" column="6" lean-forward="false" selection-start-line="261" selection-start-column="6" selection-end-line="261" selection-end-column="6" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/component/NLP/CVSearch.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="3021">
-          <caret line="164" column="47" lean-forward="false" selection-start-line="164" selection-start-column="47" selection-end-line="164" selection-end-column="47" />
-          <folding />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/config/paths.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="-29">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
-          <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/config/webpack.config.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="222">
+        <state relative-caret-position="10697">
           <caret line="563" column="73" lean-forward="false" selection-start-line="563" selection-start-column="72" selection-end-line="563" selection-end-column="73" />
           <folding />
         </state>
@@ -1044,7 +1023,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/config/webpackDevServer.config.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-1233">
+        <state relative-caret-position="190">
           <caret line="10" column="43" lean-forward="false" selection-start-line="10" selection-start-column="43" selection-end-line="10" selection-end-column="43" />
           <folding />
         </state>
@@ -1052,7 +1031,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/package.json">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-10">
+        <state relative-caret-position="475">
           <caret line="25" column="26" lean-forward="false" selection-start-line="25" selection-start-column="26" selection-end-line="25" selection-end-column="26" />
           <folding />
         </state>
@@ -1060,7 +1039,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/serviceWorker.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="275">
+        <state relative-caret-position="304">
           <caret line="17" column="31" lean-forward="false" selection-start-line="17" selection-start-column="31" selection-end-line="17" selection-end-column="31" />
           <folding />
         </state>
@@ -1076,7 +1055,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/App.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="658">
+        <state relative-caret-position="2964">
           <caret line="181" column="71" lean-forward="false" selection-start-line="181" selection-start-column="71" selection-end-line="181" selection-end-column="71" />
           <folding />
         </state>
@@ -1092,7 +1071,7 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/build.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-285">
+        <state relative-caret-position="0">
           <caret line="0" column="0" lean-forward="false" selection-start-line="0" selection-start-column="0" selection-end-line="0" selection-end-column="0" />
           <folding />
         </state>
@@ -1100,20 +1079,34 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/scripts/start.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="331">
+        <state relative-caret-position="817">
           <caret line="43" column="59" lean-forward="false" selection-start-line="43" selection-start-column="59" selection-end-line="43" selection-end-column="59" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/utils/ParamUtil.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="266">
+          <caret line="473" column="34" lean-forward="false" selection-start-line="473" selection-start-column="34" selection-end-line="473" selection-end-column="34" />
+          <folding />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/component/NLP/CVSearch.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="317">
+          <caret line="241" column="27" lean-forward="false" selection-start-line="241" selection-start-column="27" selection-end-line="241" selection-end-column="27" />
           <folding />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/component/NLP/JDSearch.js">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="227">
-          <caret line="247" column="59" lean-forward="false" selection-start-line="247" selection-start-column="59" selection-end-line="247" selection-end-column="59" />
+        <state relative-caret-position="-25">
+          <caret line="268" column="46" lean-forward="false" selection-start-line="268" selection-start-column="46" selection-end-line="268" selection-end-column="46" />
           <folding>
-            <marker date="1577443828928" expanded="true" signature="8545:8557" ph="..." />
-            <marker date="1577443828928" expanded="true" signature="8545:8570" ph="..." />
-            <marker date="1577443828928" expanded="true" signature="16360:16372" ph="..." />
+            <marker date="1577698210905" expanded="true" signature="17143:17155" ph="..." />
           </folding>
         </state>
       </provider>

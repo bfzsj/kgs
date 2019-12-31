@@ -23,16 +23,17 @@ class JDSearch extends React.Component {
         ClassList:[],
         displayName:'none',
 		JDLight:[],
+        eduName:'',
         termWeight:{
             kwTerm:[],
             skillTerm:[],
             titleTerm:[]
         },
         tuple:{
-            _1:[],
-            _2:[],
-            _3:[],
-            _4:[],
+            responsibility:[],
+            requirements:[],
+            direction:[],
+            other:[],
         }
     }
 
@@ -70,10 +71,12 @@ class JDSearch extends React.Component {
             _this.setState({
 						title:{
 							jobName:response.data.data.value.jobName,
-							content:response.data.data.value.jobDescription
+							content:response.data.data.value.jobDescription,
 						},
-						displayName:'block'
+						displayName:'block',
+                        eduName:response.data.data.value.eduLevel.name
 					})
+            console.log(_this.state.eduName)
             let initContent=response.data.data.value.jobDescription
             axios.post("http://zhiliankg-schema.zhaopin.com/termWeight",{
                 "title":_this.state.title.jobName,"desc":_this.state.title.content
@@ -163,7 +166,7 @@ class JDSearch extends React.Component {
                     let age=responses.data['age'];
 
                     if(age!=undefined) {
-						
+
                         Object.keys(age).forEach((item) => {
 							JDLight.push({
 								"title":"年龄",
@@ -211,12 +214,13 @@ class JDSearch extends React.Component {
                     }else{
                         message.error("没有提取经验");
                     }
-                    let tuple=responses.data['tuple'];
+                   /* let tuple=responses.data['tuple'];
                     if(tuple!=undefined){
+                        console.log(tuple)
                         _this.setState({
                             tuple:tuple
                         })
-                    }
+                    }*/
                     let JobExp=responses.data['JobExp'];
                     if(JobExp!=undefined){
                         let content=JSON.parse(JobExp)
@@ -260,6 +264,17 @@ class JDSearch extends React.Component {
                     }
                 })
             }).then(()=>{
+                return axios.post("http://zhiliankg-schema.zhaopin.com/getKgApi?get=getSplitJd",{
+                    "desc":initContent
+                }).then(function (responses) {
+                    let tuple=JSON.parse(responses.data);
+                    if(tuple!=undefined){
+                        _this.setState({
+                            tuple:tuple
+                        })
+                    }
+                })
+            }).then(()=>{
                 return axios.post("http://zhiliankg-schema.zhaopin.com/getKgApi?get=getEducation",{
                     "title":_this.state.title.jobName,"desc":initContent
                 }).then(function (responses) {
@@ -268,8 +283,8 @@ class JDSearch extends React.Component {
                     if(data!=""){
                         JDLight.push({
                             "title": "学历",
-                            "key": data.text,
-                            "value":"("+data.low+","+data.high+")"
+                            "key": data.text,//"("+data.low+","+data.high+")"+
+                            "value":<span>{"("+data.low+","+data.high+")"}<span style={{marginLeft:30}}>{'HR: '+_this.state.eduName}</span></span>
                         });
                     }
 
@@ -420,10 +435,10 @@ class JDSearch extends React.Component {
                             <Col span={10} style={{display:this.state.displayName}}>
                                 <div>
 									<div style={{fontSize:12,color:'blue'}}>
-										岗位职责 {this.state.tuple._1.length==0?"（数据为空）":""}
+										岗位职责 {this.state.tuple.responsibility.length==0?"（数据为空）":""}
 									</div>
 									{
-										this.state.tuple._1.map((item,index)=>{
+										this.state.tuple.responsibility.map((item,index)=>{
 											return <div style={{fontSize:12}}>
 												{item}
 											</div>
@@ -433,10 +448,10 @@ class JDSearch extends React.Component {
 								
                                 <div>
 									<div style={{fontSize:12,color:'blue'}}>
-										任职要求 {this.state.tuple._2.length==0?"（数据为空）":""}
+										任职要求 {this.state.tuple.requirements.length==0?"（数据为空）":""}
 									</div>
 									{
-										this.state.tuple._2.map((item,index)=>{
+										this.state.tuple.requirements.map((item,index)=>{
 											return <div style={{fontSize:12}}>
 												{item}
 											</div>
@@ -445,10 +460,10 @@ class JDSearch extends React.Component {
 								</div>
                                 <div>
 									<div style={{fontSize:12,color:'blue'}}>
-										招聘方向 {this.state.tuple._3.length==0?"（数据为空）":""}
+										招聘方向 {this.state.tuple.direction.length==0?"（数据为空）":""}
 									</div>
 									{
-										this.state.tuple._3.map((item,index)=>{
+										this.state.tuple.direction.map((item,index)=>{
 											return <div style={{fontSize:12}}>
 												{item}
 											</div>
@@ -457,10 +472,10 @@ class JDSearch extends React.Component {
 								</div>
                                 <div>
 									<div style={{fontSize:12,color:'blue'}}>
-										其他剩余字段 {this.state.tuple._4.length==0?"（数据为空）":""}
+										其他剩余字段 {this.state.tuple.other.length==0?"（数据为空）":""}
 									</div>
 									{
-										this.state.tuple._4.map((item,index)=>{
+										this.state.tuple.other.map((item,index)=>{
 											return <div style={{fontSize:12}}>
 												{item}
 											</div>
