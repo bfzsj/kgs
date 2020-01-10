@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../App.css';
-import { AutoComplete ,message,Form, Avatar,List, Input, Button,Row, Col ,Tag} from 'antd';
+import { AutoComplete ,Card,Badge,message,Form, Avatar,List, Input, Button,Row, Col ,Tag} from 'antd';
 import {NavLink} from 'react-router-dom'
 import axios from 'axios';
 import {ParamUtil} from '../../utils/ParamUtil'
@@ -34,7 +34,8 @@ class JDSearch extends React.Component {
             requirements:[],
             direction:[],
             other:[],
-        }
+        },
+        superJopID:""
     }
 
     // 组件装载之后调用
@@ -68,15 +69,16 @@ class JDSearch extends React.Component {
             search:searchword1
         })
         this.returnCaption("http://zpsearch.zhaopin.com/caption/captionService/get?type=jobsCampuslist&",searchword1,(response)=>{
+            let superJobType=response.data.data.value.superJobType
             _this.setState({
 						title:{
 							jobName:response.data.data.value.jobName,
 							content:response.data.data.value.jobDescription,
 						},
 						displayName:'block',
-                        eduName:response.data.data.value.eduLevel.name
+                        eduName:response.data.data.value.eduLevel.name,
+                        superJopID:superJobType.thirdLevel!=undefined?superJobType.thirdLevel.id.toString():superJobType.secondLevel.id.toString()
 					})
-            console.log(_this.state.eduName)
             let initContent=response.data.data.value.jobDescription
             axios.post("http://zhiliankg-schema.zhaopin.com/termWeight",{
                 "title":_this.state.title.jobName,"desc":_this.state.title.content
@@ -275,6 +277,56 @@ class JDSearch extends React.Component {
                     }
                 })
             }).then(()=>{
+                return axios.post("http://zhiliankg-schema.zhaopin.com/getKgApi?get=getTeacherKw",{
+                    typeid:_this.state.superJopID,"title":_this.state.title.jobName,"desc":initContent
+                }).then(function (responses) {
+
+                    let data = responses.data==""?"":JSON.parse(responses.data)
+                    console.log(data)
+                    let arr=[
+                        {
+                            title:"title: "+_this.stringify(data["title_group"]),
+                            value:_this.stringify(data["title_group_norm"])
+                        },
+                        {
+                            title:"title: "+_this.stringify(data["title_direction"]),
+                            value:_this.stringify(data["title_direction_norm"])
+                        },
+                        {
+                            title:"desc: "+_this.stringify(data["desc_group"]),
+                            value:_this.stringify(data["desc_group_norm"])
+                        },
+                        {
+                            title:"desc: "+_this.stringify(data["desc_direction"]),
+                            value:_this.stringify(data["desc_direction_norm"])
+                        }
+                    ]
+                    let flag=0;
+                    arr.forEach((item,index)=>{
+                        if(item.value!=""){
+                            flag++;
+                        }
+                    })
+                    if(flag!=0){
+                        JDLight.push({
+                            "title":data["name"],
+                            "key":null,
+                            "value":<List
+                                itemLayout="vertical"
+                                size="small"
+                                dataSource={arr}
+                                renderItem={item => (
+                                    <List.Item
+                                        key={item.title}
+                                    >
+                                        {item.title} -> {item.value}
+                                    </List.Item>
+                                )}
+                            />
+                        })
+                    }
+                })
+            }).then(()=>{
                 return axios.post("http://zhiliankg-schema.zhaopin.com/getKgApi?get=getEducation",{
                     "title":_this.state.title.jobName,"desc":initContent
                 }).then(function (responses) {
@@ -308,6 +360,12 @@ class JDSearch extends React.Component {
         this.get_cv_list(searchword1)
        // http://industryjobclassify.zpidc.com/KgApi/nlp?content=%E8%B7%9F%E5%8D%95%E6%95%99%E7%AE%A1%E7%85%A7%E6%8A%A4%E5%90%A7%E5%91%98java%E5%BC%80%E5%8F%91%E5%B7%A5%E7%A8%8B%E5%B8%88
     };
+
+    stringify(data){
+        let str=JSON.stringify(data);
+        str=str.substring(1,str.length-1);
+        return str;
+    }
 
     replacePos(strObj, start,end, replacetext) {
         var str = strObj.substr(0, start) + replacetext + strObj.substring(end, strObj.length);
@@ -360,7 +418,7 @@ class JDSearch extends React.Component {
                 let keys = Object.keys(item);
                 let temp=[];
                 item[keys[0]].forEach((tesxd)=>{
-                    temp.push(<Tag color="magenta">{tesxd}</Tag>)
+                    temp.push(<Tag color="cyan">{tesxd}</Tag>)
                 })
                 listData.push({
                     title:keys[0],
@@ -383,7 +441,7 @@ class JDSearch extends React.Component {
         return (
             <div>
                 <Row>
-                    <Col span={16}>
+                    <Col span={15}>
                         <Row>
                             <Col span={2}></Col>
                             <Col span={20}>
@@ -416,8 +474,7 @@ class JDSearch extends React.Component {
                             <Col span={2}></Col>
                         </Row>
                         <Row>
-                            <Col span={2}></Col>
-                            <Col span={20}>
+                            <Col span={23}>
                                 <div className="cvList-page-header" style={{display:this.state.displayName}}>
                                     <h1 style={{fontSize:'36px'}}><span dangerouslySetInnerHTML={{__html:this.state.title.jobName}}></span>
 
@@ -427,76 +484,79 @@ class JDSearch extends React.Component {
                             <Col span={1}></Col>
                         </Row>
                         <Row>
-                            <Col span={2}></Col>
-                            <Col span={9}>
-                                <p style={{display:this.state.displayName}} dangerouslySetInnerHTML={{__html:( this.state.title.content+'   <span style="color: black">(绿色是关键字，红色是年龄，黄色是经验)</span>')}}></p>
+                            <Col span={12}>
+                                <div style={{border:"2px solid #d6e9c6",borderRadius:"6px",display:this.state.displayName}}>
+                                    <div style={{fontSize:16,color:'#3c763d',backgroundColor: "#dff0d8",padding:5,borderTopRightRadius:6,borderTopLeftRadius:6}}>
+                                        正文
+                                    </div>
+                                    <p style={{padding:"1px 5px"}} dangerouslySetInnerHTML={{__html:( this.state.title.content+'   <span style="color: black">(绿色是关键字，红色是年龄，黄色是经验)</span>')}}></p>
+                                </div>
                             </Col>
-                            <Col span={1}></Col>
-                            <Col span={10} style={{display:this.state.displayName}}>
-                                <div>
-									<div style={{fontSize:12,color:'blue'}}>
+                            <Col span={12} style={{display:this.state.displayName}}>
+                                <div style={{border:"2px solid #d6e9c6",borderRadius:"6px"}}>
+									<div style={{fontSize:16,color:'#3c763d',backgroundColor: "#dff0d8",padding:5,borderTopRightRadius:6,borderTopLeftRadius:6}}>
 										岗位职责 {this.state.tuple.responsibility.length==0?"（数据为空）":""}
 									</div>
 									{
 										this.state.tuple.responsibility.map((item,index)=>{
-											return <div style={{fontSize:12}}>
+											return <div style={{fontSize:12,padding:"1px 5px"}}>
 												{item}
 											</div>
 										})
 									}
 								</div>
 								
-                                <div>
-									<div style={{fontSize:12,color:'blue'}}>
+                                <div style={{border:"2px solid #d6e9c6",borderRadius:"6px",marginTop:4}}>
+									<div style={{fontSize:16,color:'#3c763d',backgroundColor: "#dff0d8",padding:5,borderTopRightRadius:6,borderTopLeftRadius:6}}>
 										任职要求 {this.state.tuple.requirements.length==0?"（数据为空）":""}
 									</div>
 									{
 										this.state.tuple.requirements.map((item,index)=>{
-											return <div style={{fontSize:12}}>
+											return <div style={{fontSize:12,padding:"1px 5px"}}>
 												{item}
 											</div>
 										})
 									}
 								</div>
-                                <div>
-									<div style={{fontSize:12,color:'blue'}}>
+                                <div style={{border:"2px solid #d6e9c6",borderRadius:"6px",marginTop:4}}>
+									<div style={{fontSize:16,color:'#3c763d',backgroundColor: "#dff0d8",padding:5,borderTopRightRadius:6,borderTopLeftRadius:6}}>
 										招聘方向 {this.state.tuple.direction.length==0?"（数据为空）":""}
 									</div>
 									{
 										this.state.tuple.direction.map((item,index)=>{
-											return <div style={{fontSize:12}}>
+											return <div style={{fontSize:12,padding:"1px 5px"}}>
 												{item}
 											</div>
 										})
 									}
 								</div>
-                                <div>
-									<div style={{fontSize:12,color:'blue'}}>
+                                <div style={{border:"2px solid #d6e9c6",borderRadius:"6px",marginTop:4}}>
+									<div style={{fontSize:16,color:'#3c763d',backgroundColor: "#dff0d8",padding:5,borderTopRightRadius:6,borderTopLeftRadius:6}}>
 										其他剩余字段 {this.state.tuple.other.length==0?"（数据为空）":""}
 									</div>
 									{
 										this.state.tuple.other.map((item,index)=>{
-											return <div style={{fontSize:12}}>
+											return <div style={{fontSize:12,padding:"1px 5px"}}>
 												{item}
 											</div>
 										})
 									}
 								</div>
                             </Col>
-                            <Col span={2}></Col>
                         </Row>
-                        <Row>
-                            <Col span={2}></Col>
-                            <Col span={20}>
-                                <div style={{backgroundColor:'white',display:this.state.displayName}}>
+                        <Row style={{marginTop:4}}>
+                            <Col span={24}>
+                                <div style={{backgroundColor:'white',display:this.state.displayName,border:"2px solid white",borderTopRightRadius:"6px",borderTopLeftRadius:"6px"}}>
                                     <List
                                         grid={{ gutter: 16, column: 4 }}
                                         itemLayout="vertical"
-                                        size="large"
                                         dataSource={this.state.termWeight.titleTerm}
+                                        locale={{emptyText: '暂无数据'}}
                                         header={
                                             <div>
-                                                <b>Title Term Weight</b>
+                                                <Badge count={this.state.termWeight.titleTerm.length}>
+                                                    <b style={{padding:"12px 12px 12px 0"}}>Title Term Weight</b>
+                                                </Badge>
                                             </div>
                                         }
                                         renderItem={item => (
@@ -504,22 +564,23 @@ class JDSearch extends React.Component {
                                                 key={item.title}
 
                                             >
-                                                <List.Item.Meta
-                                                />
-                                                {item.title}  >>  {item.value}
+
+                                                <Tag color="cyan" style={{fontSize:14,marginTop:2}}>{item.title}：{item.value}</Tag>
                                             </List.Item>
                                         )}
                                     />
                                 </div>
-                                <div style={{backgroundColor:'white',display:this.state.displayName}}>
+                                <div style={{backgroundColor:'white',display:this.state.displayName,border:"2px solid white"}}>
                                     <List
                                         grid={{ gutter: 16, column: 4 }}
                                         itemLayout="vertical"
-                                        size="large"
                                         dataSource={this.state.termWeight.skillTerm}
+                                        locale={{emptyText: '暂无数据'}}
                                         header={
                                             <div>
-                                                <b>Skill Term Weight</b>
+                                                <Badge count={this.state.termWeight.skillTerm.length} showZero>
+                                                    <b style={{padding:"12px 12px 12px 0"}}>Skill Term Weight</b>
+                                                </Badge>
                                             </div>
                                         }
                                         renderItem={item => (
@@ -527,22 +588,23 @@ class JDSearch extends React.Component {
                                                 key={item.title}
 
                                             >
-                                                <List.Item.Meta
-                                                />
-                                                {item.title}  >>  {item.value}
+
+                                                <Tag color="cyan" style={{fontSize:14,marginTop:2}}>{item.title}：{item.value}</Tag>
                                             </List.Item>
                                         )}
                                     />
                                 </div>
-                                <div style={{backgroundColor:'white',display:this.state.displayName}}>
+                                <div style={{backgroundColor:'white',display:this.state.displayName,border:"2px solid white"}}>
                                     <List
                                         grid={{ gutter: 16, column: 4 }}
                                         itemLayout="vertical"
-                                        size="large"
                                         dataSource={this.state.termWeight.kwTerm}
+                                        locale={{emptyText: '暂无数据'}}
                                         header={
                                             <div>
-                                                <b>Keyword Term Weight</b>
+                                                <Badge style={{ backgroundColor: '#52c41a' }} count={this.state.termWeight.kwTerm.length}>
+                                                    <b style={{padding:"12px 16px 12px 0"}}>Keyword Term Weight</b>
+                                                </Badge>
                                             </div>
                                         }
                                         renderItem={item => (
@@ -550,9 +612,8 @@ class JDSearch extends React.Component {
                                                 key={item.title}
 
                                             >
-                                                <List.Item.Meta
-                                                />
-                                                {item.title}  >>  {item.value}
+
+                                                <Tag color="cyan" style={{fontSize:14,marginTop:2}}>{item.title}：{item.value}</Tag>
                                             </List.Item>
                                         )}
                                     />
@@ -584,25 +645,24 @@ class JDSearch extends React.Component {
                                     />
                                 </div>*/}
                             </Col>
-                            <Col span={2}></Col>
                         </Row>
                         <Row>
-                            <Col span={2}></Col>
-                            <Col span={20}>
-                                <div style={{backgroundColor:'white',display:this.state.displayName,marginBottom:160}}>
+                            <Col span={24}>
+                                <div style={{backgroundColor:'white',display:this.state.displayName,marginBottom:160,border:"2px solid white",borderBottomRightRadius:"6px",borderBottomLeftRadius:"6px"}}>
                                     <List
                                         itemLayout="vertical"
-                                        size="large"
                                         dataSource={this.state.list}
+                                        size="small"
                                         header={
                                             <div>
-                                                <b>caption</b>
+                                                <Badge count={this.state.list.length} showZero>
+                                                    <b style={{padding:"12px 16px 12px 0"}}>caption</b>
+                                                </Badge>
                                             </div>
                                         }
                                         renderItem={item => (
                                             <List.Item
                                                 key={item.title}
-
                                             >
                                                 <List.Item.Meta
                                                     title={<NavLink to={'/caption/'+item.title} target="_blank">{item.title}</NavLink>}
@@ -614,14 +674,14 @@ class JDSearch extends React.Component {
                                     />
                                 </div>
                             </Col>
-                            <Col span={2}></Col>
                         </Row>
                     </Col>
+                    <Col span={1}/>
                     <Col span={8}>
-                        <div style={{backgroundColor:'white',marginTop:120,display:this.state.displayName}}>
+                        <div style={{backgroundColor:'white',marginTop:120,display:this.state.displayName,border:"2px solid white",borderRadius:"6px"}}>
                             <List
                                 itemLayout="vertical"
-                                size="large"
+
                                 dataSource={this.state.ClassList}
                                 header={
                                     <div>
@@ -633,17 +693,15 @@ class JDSearch extends React.Component {
                                         key={item.jobId1}
 
                                     >
-                                        <List.Item.Meta
-
-                                        />{item.jobName1}  >>  {item.jobName2}  >>  {item.jobName3} >>  {item.score}
+                                        {item.jobName1}  >>  {item.jobName2}  >>  {item.jobName3} >>  {item.score}
                                     </List.Item>
                                 )}
                             />
                         </div>
-						<div style={{backgroundColor:'white',marginTop:120,display:this.state.displayName}}>
+						<div style={{backgroundColor:'white',marginTop:20,display:this.state.displayName,border:"2px solid white",borderRadius:"6px"}}>
                             <List
                                 itemLayout="vertical"
-                                size="large"
+
                                 dataSource={this.state.JDLight}
                                 header={
                                     <div>
@@ -655,9 +713,8 @@ class JDSearch extends React.Component {
                                         key={item.key}
 
                                     >
-                                        <List.Item.Meta
-											title={item.title}
-                                        />{item.key}  >>  {item.value}
+                                        <h4 style={{fontSize: 16,lineHeight: "24px"}}>{item.title}</h4>
+                                        {item.key==null?null:item.key+"  >>"}{item.value}
                                     </List.Item>
                                 )}
                             />

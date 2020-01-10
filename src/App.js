@@ -153,14 +153,14 @@ class App extends Component {
 						<PageHeader closeBrowser={true} title={'首页'} pfn={this.fn.bind(this)}></PageHeader>
 					</Sider>
 					<Layout>
-					<Header className="header" style={{ position: 'fixed', zIndex: 1, width: '100%',backgroundColor:'#ced0d3' }}>
+					<Header className="header" style={{ position: 'fixed', zIndex: 11, width: '100%',backgroundColor:'#ced0d3' }}>
 						<Breadcrumb style={{ margin: '16px 0',lineHeight:"32px" ,fontSize:"16px"}} separator=">">
 							<Breadcrumb.Item>ZTC</Breadcrumb.Item>
 							<Breadcrumb.Item>{this.state.group}</Breadcrumb.Item>
 							<Breadcrumb.Item>{this.state.title}</Breadcrumb.Item>
 						</Breadcrumb>
 					</Header>
-					<Content style={{ padding: '0 50px' , marginTop: 64 }}>
+					<Content style={{ padding: '0 30px' , marginTop: 64 }}>
 						<Switch>
 							<Route path='/' exact component={HomeComponent}></Route>
 							<Route path='/page-a' component={PageAComponent}></Route>
@@ -187,7 +187,7 @@ class App extends Component {
 							}}/>
 						</Switch>
 					</Content>
-					<Footer style={{background: '#ced0d3', textAlign: 'center',position: 'fixed', zIndex: 1, bottom:0,width:'100%' }}>ZhiLian Technology Center ©2018 Created by Sxd</Footer>
+					<Footer style={{background: '#ced0d3', textAlign: 'center',position: 'fixed', zIndex: 11, bottom:0,width:'100%' }}>ZhiLian Technology Center ©2018 Created by Sxd</Footer>
 					</Layout>
 				</Layout>
 			</div>
