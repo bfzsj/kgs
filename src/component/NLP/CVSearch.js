@@ -41,7 +41,7 @@ class CVSearch extends React.Component {
 	returnCaption(url,searchword1,callback){
         axios.get(url,{
             params:{
-                "resumeNo":searchword1,
+                "url":searchword1,//resumeNo
             }
         }).then(function (response) {
             callback(response);
@@ -64,7 +64,7 @@ class CVSearch extends React.Component {
         this.setState({
             search:searchword1
         })
-        this.returnCaption("http://zpsearch.zhaopin.com/profilecenter/resumeServiceSvc/GetResumeByExtId?access_token=551c619ef13c45debe92a64880f5e1cdlzJv&versionNo=1&language=1",searchword1,(response)=>{
+        this.returnCaption("http://zhiliankg-schema.zhaopin.com/commonGet","http://zpsearch.zhaopin.com/profilecenter/resumeServiceSvc/GetResumeByExtId?access_token=551c619ef13c45debe92a64880f5e1cdlzJv&versionNo=1&language=1&resumeNo="+searchword1,(response)=>{
             let resData=JSON.parse(response.data.data)
             let title=[]
             console.log(resData)

@@ -45,7 +45,7 @@ class JDSearch extends React.Component {
 	returnCaption(url,searchword1,callback){
         axios.get(url,{
             params:{
-                "id":searchword1,
+                "url":searchword1,
             }
         }).then(function (response) {
             callback(response);
@@ -68,7 +68,8 @@ class JDSearch extends React.Component {
         this.setState({
             search:searchword1
         })
-        this.returnCaption("http://zpsearch.zhaopin.com/caption/captionService/get?type=jobsCampuslist&",searchword1,(response)=>{
+        this.returnCaption("http://zhiliankg-schema.zhaopin.com/commonGet","http://s-dp-caption.zpidc.com/caption/captionService/get?type=jobsCampuslist&id="+searchword1,(response)=>{
+            console.log(response)
             let superJobType=response.data.data.value.superJobType
             _this.setState({
 						title:{

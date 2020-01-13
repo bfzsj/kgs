@@ -46,8 +46,8 @@ class CVJD extends React.Component {
         })
         JD.forEach((item,index)=>{
             JDRequest.push(new Promise((resolve,reject)=>{
-                axios.get("http://zpsearch.zhaopin.com/caption/captionService/get?type=jobs&format=list&",{
-                    params:{"id":item}
+                axios.get("http://zhiliankg-schema.zhaopin.com/commonGet",{
+                    params:{"url":"http://s-dp-caption.zpidc.com/caption/captionService/get?type=jobs&format=list&id="+item}
                 }).then(function (response) {
                     resolve(response.data.data.value);
                 }).catch(function (err) {

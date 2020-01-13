@@ -26,7 +26,7 @@ class captionRatio extends React.Component {
 
     // 组件装载之后调用
     componentDidMount() {
-        this.returnData("http://zpsearch.zhaopin.com/mg/job/list?access_token=551c619ef13c45debe92a64880f5e1cdlzJv&orgId=12001997&jobState=publish&page=1",{},(response) => {
+        this.returnData("http://zhiliankg-schema.zhaopin.com/commonGet",{url:"http://zpsearch.zhaopin.com/mg/job/list?access_token=551c619ef13c45debe92a64880f5e1cdlzJv&orgId=12001997&jobState=publish&page=1"},(response) => {
             console.log(response.data.data.dataList)
             this.getPositionIDsList(response.data.data.dataList)
         })
@@ -48,12 +48,12 @@ class captionRatio extends React.Component {
     getURLParamsObj(positionInfo,gray) {
         // 入参
         let paramsObj={}
-        paramsObj.S_EXCLUSIVE_COMPANY = positionInfo.orgName!==undefined ?positionInfo.orgName:'智联招聘';
+        paramsObj.S_EXCLUSIVE_COMPANY =this.UrlEncode( positionInfo.orgName!==undefined ?positionInfo.orgName:'智联招聘');
         paramsObj.UserId = '1024416334';
         paramsObj.CompanyId = positionInfo.companyId!==undefined?positionInfo.companyId:'12001997';
         paramsObj.DepartmentId = '12001997';
         paramsObj.S_DISCLOSURE_LEVEL = '2';
-        paramsObj.S_KEYWORD = positionInfo.jobTitle.replace('-', '').replace('/', '');
+        paramsObj.S_KEYWORD = this.UrlEncode(positionInfo.jobTitle.replace('-', '').replace('/', ''));
         paramsObj.jobNumber = positionInfo.jobNumber;
         paramsObj.rows = 30;
         paramsObj.solrDebug = false;
@@ -67,9 +67,60 @@ class captionRatio extends React.Component {
         paramsObj.client = 'zpsearch';
         paramsObj.gray_router = gray;
         paramsObj.useCtr = 1;
-        return paramsObj;
+        /*let str=""
+        Object.keys(paramsObj).forEach((item,index)=>{
+            str=str+item+"="+paramsObj[item]+"&"
+        })*/
+        return this.getUrl("",paramsObj);
     }
-    
+
+    UrlEncode(str)
+    {
+        return this.transform(str);
+    }
+    transform(s)
+    {
+        var hex=''
+        var i,j,t
+
+        j=0
+        for (i=0; i<s.length; i++)
+        {
+            t = this.hexfromdec( s.charCodeAt(i) );
+            if (t=='25')
+            {
+                t='';
+            }
+            hex += '%' + t;
+        }
+        return hex;
+    }
+
+    hexfromdec(num) {
+        if (num > 65535) { return ("err!") }
+        let first = Math.round(num/4096 - .5);
+        let temp1 = num - first * 4096;
+        let second = Math.round(temp1/256 -.5);
+        let temp2 = temp1 - second * 256;
+        let third = Math.round(temp2/16 - .5);
+        let fourth = temp2 - third * 16;
+        return (""+this.getletter(third)+this.getletter(fourth));
+    }
+
+    getletter(num) {
+        if (num < 10) {
+            return num;
+        }
+        else {
+            if (num == 10) { return "A" }
+            if (num == 11) { return "B" }
+            if (num == 12) { return "C" }
+            if (num == 13) { return "D" }
+            if (num == 14) { return "E" }
+            if (num == 15) { return "F" }
+        }
+    }
+
     getPositionIDsList(positionList) {
         // 区分是否是通过职位id进行的精确查询
         this.setState({
@@ -124,7 +175,8 @@ class captionRatio extends React.Component {
             tempObj:data
         })
         let firstDataObj=this.getURLParamsObj(data,this.state.first)
-        this.returnData("http://zpsearch.zhaopin.com/talents?",firstDataObj,(response) => {
+        this.returnData("http://zhiliankg-schema.zhaopin.com/commonGet?",{url:"http://zpsearch.zhaopin.com/talents?"+firstDataObj},(response) => {
+            console.log(response)
             let temp=[]
             for (let i = 0; i < response.data.results.length; i++) {
                 let dataObj = ParamUtil.resume(response.data.results[i]);
@@ -137,7 +189,7 @@ class captionRatio extends React.Component {
             })
         })
         let secondDataObj=this.getURLParamsObj(data,this.state.second)
-        this.returnData("http://zpsearch.zhaopin.com/talents?",secondDataObj,(response) => {
+        this.returnData("http://zhiliankg-schema.zhaopin.com/commonGet?",{url:"http://zpsearch.zhaopin.com/talents?"+secondDataObj},(response) => {
             let temp=[]
             for (let i = 0; i < response.data.results.length; i++) {
                 let dataObj = ParamUtil.resume(response.data.results[i]);
@@ -153,7 +205,7 @@ class captionRatio extends React.Component {
 
     handleChange(num,value) {
         let DataObj=this.getURLParamsObj(this.state.tempObj,value);
-        this.returnData("http://zpsearch.zhaopin.com/talents?",DataObj,(response) => {
+        this.returnData("http://zhiliankg-schema.zhaopin.com/commonGet?",{url:"http://zpsearch.zhaopin.com/talents?"+DataObj},(response) => {
             if(num==="first"){
                 this.setState({
                     first:value,
@@ -171,7 +223,7 @@ class captionRatio extends React.Component {
     handleSubmit = e => {
         let jobName=(e.target[0].value)
         let arr=[]
-        this.returnData("http://zpsearch.zhaopin.com/caption/captionService/get?type=jobs&format=list&",{"id":jobName},(response) => {
+        this.returnData("http://zhiliankg-schema.zhaopin.com/commonGet",{"url":"http://s-dp-caption.zpidc.com/caption/captionService/get?type=jobs&format=list&id="+jobName},(response) => {
             let data=response.data;
             if (data.code === 200) {
                 if (data.data.status === 'NOT_FOUND') {
@@ -247,8 +299,10 @@ class captionRatio extends React.Component {
     }
 
     handleUrl(num,e){
-        console.log(e.target[0].value)
-        this.returnData(e.target[0].value,{},(response) => {
+        let str=e.target[0].value
+        str=str.replace("http://zhiliankg-schema.zhaopin.com/commonGet?url=http://zpsearch.zhaopin.com/talents?","")
+        console.log(str)
+        this.returnData("http://zhiliankg-schema.zhaopin.com/commonGet?",{url:"http://zpsearch.zhaopin.com/talents?"+str},(response) => {
             let temp=[]
             for (let i = 0; i < response.data.results.length; i++) {
                 let dataObj = ParamUtil.resume(response.data.results[i]);
