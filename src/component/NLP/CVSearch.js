@@ -1,6 +1,6 @@
 import React from 'react';
 import '../../App.css';
-import { AutoComplete ,message,Form, Avatar,List, Input, Button,Row, Col ,Tag} from 'antd';
+import { AutoComplete ,Badge,message,Form, Avatar,List, Input, Button,Row, Col ,Tag} from 'antd';
 import {NavLink} from 'react-router-dom'
 import axios from 'axios';
 import {ParamUtil} from '../../utils/ParamUtil'
@@ -119,7 +119,7 @@ class CVSearch extends React.Component {
                     axios.post("http://zhiliankg-schema.zhaopin.com/termWeight",{
                         "title":item.jobName,"desc":item.content
                     }).then((responses)=>{
-                        let term=JSON.parse(responses.data);
+                        let term=responses.data!=""?JSON.parse(responses.data):{};
                         resolve(term);
                     })
                 }))
@@ -547,12 +547,12 @@ class CVSearch extends React.Component {
                                         <Col span={2}></Col>
                                         <Col span={8} style={{borderTop:"1px solid black"}}>
                                             <div>
-                                                <div className="cvList-page-header" style={{display:that.state.displayName}}>
-                                                    <h2 ><span dangerouslySetInnerHTML={{__html:"("+(index+1)+")"+item.jobName}}></span>
-
-                                                    </h2>
+                                                <div className="cvList-page-header" style={{border:"2px solid #d6e9c6",borderRadius:"6px",display:that.state.displayName,marginTop:4}}>
+                                                    <div style={{fontSize:16,color:'#3c763d',backgroundColor: "#dff0d8",padding:5,borderTopRightRadius:6,borderTopLeftRadius:6}}>
+                                                        <span dangerouslySetInnerHTML={{__html:"("+(index+1)+")"+item.jobName}}></span>
+                                                    </div>
+                                                    <p style={{padding:"1px 5px",display:that.state.displayName}} dangerouslySetInnerHTML={{__html:(item.content)}}></p>
                                                 </div>
-                                                <p style={{display:that.state.displayName}} dangerouslySetInnerHTML={{__html:(item.content)}}></p>
                                             </div>
                                         </Col>
                                         <Col span={2} style={{borderTop:"1px solid black"}}></Col>
@@ -585,7 +585,7 @@ class CVSearch extends React.Component {
                                     <Row>
                                         <Col span={2}></Col>
                                         <Col span={20}>
-                                            <div>
+                                            <div style={{border:"2px solid white",borderRadius:"6px",}}>
                                                 {
                                                     that.state.termWeight[index]!=undefined?Object.keys(that.state.termWeight[index]).map((term,number)=>{
                                                         let curr=that.state.termWeight[index];
@@ -594,11 +594,13 @@ class CVSearch extends React.Component {
                                                                 <List
                                                                     grid={{ gutter: 16, column: 4 }}
                                                                     itemLayout="vertical"
-                                                                    size="large"
                                                                     dataSource={curr[term]}
+                                                                    locale={{emptyText: '暂无数据'}}
                                                                     header={
                                                                         <div>
-                                                                            <b>{Weight[number]}</b>
+                                                                            <Badge count={curr[term].length}>
+                                                                                <b style={{padding:"12px 12px 12px 0"}}>{Weight[number]}</b>
+                                                                            </Badge>
                                                                         </div>
                                                                     }
                                                                     renderItem={termItem => (
@@ -608,7 +610,7 @@ class CVSearch extends React.Component {
                                                                         >
                                                                             <List.Item.Meta
                                                                             />
-                                                                            {termItem.title}  >>  {termItem.value}
+                                                                            <Tag color="cyan" style={{fontSize:14,marginTop:2}}>{termItem.title}：{termItem.value}</Tag>
                                                                         </List.Item>
                                                                     )}
                                                                 />
@@ -623,7 +625,7 @@ class CVSearch extends React.Component {
                                 </div>
                             })
                         }
-
+                    <div style={{marginBottom:160}}></div>
                     </Col>
                     <Col span={8}>
 
