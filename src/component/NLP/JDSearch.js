@@ -42,6 +42,11 @@ class JDSearch extends React.Component {
     componentDidMount() {
 
     }
+
+    componentWillReceiveProps(){
+        console.log("componentWillReceiveProps")
+    }
+
 	returnCaption(url,searchword1,callback){
         axios.get(url,{
             params:{
@@ -265,6 +270,20 @@ class JDSearch extends React.Component {
                         }
 
                     }
+                })
+            }).then(()=>{
+                return axios.post("http://zhiliankg-schema.zhaopin.com/getSchool",{
+                    "content":initContent
+                }).then((response)=>{
+                    console.log(response)
+                    if(response.data.allSchool._1.length!=0||response.data.allSchool._2.length!=0){
+                        JDLight.push({
+                            "title":"学校",
+                            "key":null,
+                            "value":<span>{'学校 >> ['+response.data.allSchool._1.toString().replace(",","，")+"]"}<span style={{marginLeft:30}}></span>{'类型 >> ['+response.data.allSchool._2.toString().replace(",","，")+"]"}</span>
+                        })
+                    }
+
                 })
             }).then(()=>{
                 return axios.post("http://zhiliankg-schema.zhaopin.com/getKgApi?get=getSplitJd",{
